@@ -2,10 +2,10 @@
 Smart Trip Application
 
 ### Team Members
-* Başak ÜNAL
-* Münteha Nur YAVUZ
-* Sena Simay YAŞAR
-* Umut Berkay ÜNAL
+* [Başak ÜNAL](https://github.com/BasakUnal) - 201811060
+* [Münteha Nur YAVUZ](https://github.com/muntehayvz) - 201811064
+* [Sena Simay Yaşar](https://github.com/simayasar) - 201811062
+* [Umut Berkay ÜNAL](https://github.com/umutberkayunal) - 201911066
 
 ***
 
