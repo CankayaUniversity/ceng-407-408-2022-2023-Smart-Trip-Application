@@ -18,3 +18,4 @@ Smart Trip Application
 * [Work Plan](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/CENG407-Work-Plan)
 * [Literature Review](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/Literature-Review)
 * [Software Requirement Specification](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/Software-Requirement-Specification-(SRS))
+* [Project Web Page](https://ysenasimay.wixsite.com/smart-trip)
