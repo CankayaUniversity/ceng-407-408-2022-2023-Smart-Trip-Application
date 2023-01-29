@@ -21,7 +21,7 @@ Smart Trip Application
 * [Software Design Description](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/Software-Design-Description-(SDD))
 * [Project Report](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/CENG-407-Project-Report)
 * [Project Web Page](https://ysenasimay.wixsite.com/smart-trip)
-* [407 Project Presentation](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/CENG407-Project-Presentation)
+* [407 Project Presentation](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/CENG-407-Project-Presentation)
 
 
 
