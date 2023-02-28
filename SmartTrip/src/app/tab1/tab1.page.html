@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title style="text-align: center">
+        Smart Trip
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-explore-container name="Tab 1 page"></app-explore-container>
+</ion-content>-->
+
+<ion-content color="default" class="ion-padding">
+  <form #form="ngForm">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="ion-justify-content-center" size-md="6" size-lg="5" size-xs="12">
+          <div style="text-align: center">
+            <h3>Sign in </h3>
+
+          </div>
+          <div>
+            <ion-item>
+              <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Sign in</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
