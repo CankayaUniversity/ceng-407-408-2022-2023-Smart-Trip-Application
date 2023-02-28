@@ -1,0 +1,7 @@
+{
+  "name": "SmartTrip",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
