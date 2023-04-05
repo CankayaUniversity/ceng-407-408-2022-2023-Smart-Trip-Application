@@ -22,6 +22,7 @@ Smart Trip Application
 * [Project Report](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/CENG-407-Project-Report)
 * [Project Web Page](https://ysenasimay.wixsite.com/smart-trip)
 * [407 Project Presentation](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/CENG-407-Project-Presentation)
+* [Test Plan](https://github.com/CankayaUniversity/ceng-407-408-2022-2023-Smart-Trip-Application/wiki/CENG-408-Test-Plan)
 
 
 
