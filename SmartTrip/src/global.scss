@@ -24,3 +24,30 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+  font-family: "Aller Display";
+  src: url("assets/fonts/AllerDisplay.ttf");
+}
+
+@font-face {
+  font-family: "Aller Bold";
+  src: url("assets/fonts/Aller_Bd.ttf");
+}
+
+.button{
+  width: 153px;
+  height: 44px;
+  font-family: 'Aller Bold', sans-serif;
+}
+
+.background1{
+  background-image: url(assets/images/background1.svg);
+  background-size: cover;
+  background-position: center;
+  height: 74vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}

@@ -1,28 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title style="text-align: center">
-        Smart Trip
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- Sign in Screen -->
 
-<!--<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>-->
-
-<ion-content color="default" class="ion-padding">
+<ion-content color="default" class="background1">
   <form #form="ngForm">
     <ion-grid>
       <ion-row class="ion-justify-content-center">
         <ion-col class="ion-justify-content-center" size-md="6" size-lg="5" size-xs="12">
-          <div style="text-align: center">
-            <h3>Sign in </h3>
+          <div style="text-align: center;">
+            <h3>Smart Trip</h3>
 
           </div>
           <div>
@@ -34,7 +18,7 @@
             </ion-item>
           </div>
           <div>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Sign in</ion-button>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block" (click)="goToHomePage()">Sign in</ion-button>
           </div>
         </ion-col>
       </ion-row>
