@@ -30,3 +30,4 @@ Smart Trip Application
 ***
 
 * [Constantly updated work plan 407](https://docs.google.com/spreadsheets/d/1OS4JeJ3lSZCJMEdpg03wOm8Tn4W1zhGLGlerUC7p2as/edit#gid=1402875486)
+* [Constantly updated work plan 408](https://docs.google.com/spreadsheets/d/19pevA6xjY2fEecfJ0andgAh6paQsH3S-8YpkaSyI33A/edit#gid=0)
