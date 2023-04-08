@@ -51,3 +51,24 @@
   right: 0;
   left: 0;
 }
+
+.background2{
+  background-image: url(assets/images/background2.svg);
+  background-size: cover;
+  background-position: center;
+  height: 74vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.input_box{
+  background-color: white;
+  width: 345px;
+  height: 45px;
+  border-radius: 10px;
+  margin-left: 22px;
+}
+
+
