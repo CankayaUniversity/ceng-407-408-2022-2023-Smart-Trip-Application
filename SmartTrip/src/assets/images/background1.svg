@@ -1,0 +1,13 @@
+<svg id="smart_trip" data-name="smart trip" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="435.182" height="703.201" viewBox="0 0 435.182 703.201">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.133" y1="-0.133" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#00ffbe"/>
+      <stop offset="0.507" stop-color="#00a5ff"/>
+      <stop offset="1" stop-color="#423cb5"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1.133" y1="-0.133" x2="0" y2="1" xlink:href="#linear-gradient"/>
+  </defs>
+  <path id="Path_502" data-name="Path 502" d="M0,215.918c89.517,89.517,250.918,74.515,304.825,62.632s115.047-9.741,130.358,16.778V0H0Z" transform="translate(0 407.873)" opacity="0.489" fill="url(#linear-gradient)"/>
+  <path id="Path_501" data-name="Path 501" d="M435.182,495.6s-.026,42.558-.026,77.828C374.5,584.993,354.9,526.238,299.071,525.3c-52.9.81-105.845,33.716-177.6,27.464S68.939,608.493,0,625.2V0H435.182Z" transform="translate(0 66.777)" opacity="0.489" fill="url(#linear-gradient-2)"/>
+  <path id="Path_500" data-name="Path 500" d="M0,397.976s60.635,84.112,133.69,92.833,112.283-23.3,169.046-23.3,83.475,66.914,132.447,66.914V-101.143H0Z" transform="translate(0 101.143)" fill="url(#linear-gradient)"/>
+</svg>
