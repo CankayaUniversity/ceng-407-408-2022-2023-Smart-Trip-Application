@@ -14,4 +14,11 @@ export class Tab1Page {
     this.navCtrl.navigateForward('tab2');
   }
 
+  goToOpenPage(){
+    this.navCtrl.navigateForward('');
+  }
+  goToPasswordPage(){
+    this.navCtrl.navigateForward('');
+  }
+
 }

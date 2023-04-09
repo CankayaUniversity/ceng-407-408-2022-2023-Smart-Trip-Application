@@ -1,27 +1,38 @@
 <!-- Sign in Screen -->
 
-<ion-content color="default" class="background1">
+<ion-content>
   <form #form="ngForm">
-    <ion-grid>
-      <ion-row class="ion-justify-content-center">
-        <ion-col class="ion-justify-content-center" size-md="6" size-lg="5" size-xs="12">
-          <div style="text-align: center;">
-            <h3>Smart Trip</h3>
+  <div class="background1 ion-justify-content-center">
+      <div style="text-align: center; color: white; font-family: 'Aller Display', sans-serif;">
+        <p style="font-size: 60px; margin-bottom: 0px; margin-top: 72px;">smart</p>
+        <p style="font-size: 60px; margin-top: 0px;margin-bottom: 89px">trip</p>
+      </div>
+  </div>
 
-          </div>
-          <div>
-            <ion-item>
-              <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block" (click)="goToHomePage()">Sign in</ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+      <div>
+        <ion-input class="input_box" style="margin-top: 283px;"  name="email" type="email" placeholder=" email" ngModel required></ion-input>
+      </div>
+      <div>
+        <ion-input class="input_box" style="margin-top: 33px;" name="password" type="password" placeholder=" password" ngModel required>
+          <ion-icon src="assets/icon/lock-solid.svg" name="lock-solid" style="width: 36px; height: 22px;"></ion-icon>
+        </ion-input>
+        <ion-header style="margin-top:25px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif " (click)="goToPasswordPage()"shape="round">forgot your password? </ion-header>
+      </div>
   </form>
+
+  <div style="display: flex; margin-left:136px; margin-top:252px" >
+    <ion-toggle></ion-toggle>
+    <label style="margin-left: 4px; margin-top:8px">Remember me</label>
+  </div>
+
+    <div class="button text-end ">
+      <h1 style="color: white; "></h1>
+      <ion-button style="--ion-color-primary: #0b457c;margin-left: 38px; margin-top: 48px;" (click)="goToOpenPage()" shape="round">back</ion-button>
+    </div>
+
+    <div class="button  ion-text-right">
+      <h1 style="color: white; "></h1>
+      <ion-button style="margin-left:224px; margin-top:-16px" (click)="goToHomePage()"shape="round">log in</ion-button>
+    </div>
+
 </ion-content>
