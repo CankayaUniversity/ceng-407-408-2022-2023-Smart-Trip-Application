@@ -17,7 +17,11 @@ const routes: Routes = [
   {
     path: 'tab3',
     loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule)
+  },  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
+
 ];
 @NgModule({
   imports: [
