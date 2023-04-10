@@ -18,7 +18,7 @@ export class Tab1Page {
     this.navCtrl.navigateForward('');
   }
   goToPasswordPage(){
-    this.navCtrl.navigateForward('');
+    this.navCtrl.navigateForward('forgot-password');
   }
 
 }

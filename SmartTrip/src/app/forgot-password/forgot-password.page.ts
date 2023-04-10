@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NavController} from "@ionic/angular";
 
 @Component({
   selector: 'app-forgot-password',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordPage implements OnInit {
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
+  }
+
+  goToSignInPage(){
+    this.navCtrl.navigateForward('tab1');
   }
 
 }
