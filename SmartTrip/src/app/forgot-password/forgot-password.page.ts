@@ -17,4 +17,8 @@ export class ForgotPasswordPage implements OnInit {
     this.navCtrl.navigateForward('tab1');
   }
 
+  goToPasswordSendPage(){
+    this.navCtrl.navigateForward('password-recovery');
+  }
+
 }
