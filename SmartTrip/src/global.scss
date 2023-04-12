@@ -39,6 +39,8 @@
   width: 153px;
   height: 44px;
   font-family: 'Aller Bold', sans-serif;
+  //box-shadow: 0 0px 4px rgba(255, 0, 0, 0.2);
+
 }
 
 .background1{
@@ -68,6 +70,17 @@
   background-size: cover;
   background-position: center;
   height: 80vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.background4{
+  background-image: url(assets/images/background1.svg);
+  background-size: cover;
+  background-position: bottom;
+  height: 65vh;
   position: fixed;
   top: 0;
   right: 0;
