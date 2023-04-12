@@ -1,9 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>profileSetup</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<!-- Profile Finalize Page -->
+<ion-content scroll-y="false" >
+  <div class="background5 ion-justify-content-center">
+    <div style="text-align: center; color: white; font-family:'Aller Display', sans-serif;">
+      <p style="font-size: 38px; margin-bottom: -13px; margin-top: 102px;">profile</p>
+      <p style="font-size: 38px; margin-top: 6px;margin-bottom: 89px">setup</p>
+    </div>
+  </div>
+  <div>
+    <ion-input class="circle"></ion-input>
+    <ion-header style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;">username </ion-header>
+  </div>
+  <div style="display: flex; margin-left:60px; margin-top:180px" >
+    <ion-toggle style="margin-top:-114px">
+    </ion-toggle>
+    <label style="margin-left: 20px; margin-top:-81px; font-family: 'Aller Bold', sans-serif; color: #66666687">allow access for camera</label>
+  </div>
+  <div style="display: flex; margin-left:60px; margin-top:180px" >
+    <ion-toggle style="margin-top:-305px">
+    </ion-toggle>
+    <label style="margin-left: 20px; margin-top:-214px; font-family: 'Aller Bold', sans-serif; color: #66666687">allow permission for your location</label>
+  </div>
+  <div style="display: flex; margin-left:60px; margin-top:180px" >
+    <ion-toggle style="margin-top:-498px">
+    </ion-toggle>
+    <label style="margin-left: 20px; margin-top:-349px; font-family: 'Aller Bold', sans-serif; color: #66666687">show my real name in comments</label>
+  </div>
+  <div>
+    <ion-button class="first_button" style="margin-left: 38px; margin-top: -544px;" shape="round" (click)="goToSignUpPage()">back</ion-button>
+    <ion-button class="second_button" style="margin-left:224px; margin-top:-580px" shape="round" (click)="goToHomePage()">start</ion-button>
+  </div>
 </ion-content>
