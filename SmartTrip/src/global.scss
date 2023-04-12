@@ -39,8 +39,16 @@
   width: 153px;
   height: 44px;
   font-family: 'Aller Bold', sans-serif;
-  //box-shadow: 0 0px 4px rgba(255, 0, 0, 0.2);
+  font-size: 18px;
+}
 
+.first_button{
+  --ion-color-primary: #443db8;
+  filter: drop-shadow(0px 10px 10px rgba(92, 87, 199, 0.5));
+}
+.second_button{
+  --ion-color-primary: #39A6FF;
+  filter: drop-shadow(0px 10px 10px rgba(57, 166, 255, 0.5));
 }
 
 .background1{
@@ -95,4 +103,11 @@
   margin-left: 32px;
 }
 
+ion-toggle{
+  zoom:0.7;
+}
+
+ion-toggle.toggle-checked::part(track) {
+  background: #443db8;
+}
 
