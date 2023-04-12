@@ -39,7 +39,7 @@
   width: 153px;
   height: 44px;
   font-family: 'Aller Bold', sans-serif;
-  font-size: 18px;
+
 }
 
 .first_button{
@@ -95,12 +95,33 @@
   left: 0;
 }
 
+.background5{
+  background-image: url(assets/images/background1.svg);
+  background-size: cover;
+  background-position: bottom;
+  height: 62vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
 .input_box{
   background-color: white;
   width: 345px;
   height: 45px;
   border-radius: 10px;
   margin-left: 32px;
+}
+
+.circle {
+  width: 196px;
+  height: 192px;
+  border-radius: 50%;
+  --border-width: 0;
+  border: 10px solid white;
+  margin-top: 301px;
+  margin-left: 110px;
 }
 
 ion-toggle{
