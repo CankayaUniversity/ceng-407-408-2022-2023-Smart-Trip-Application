@@ -51,6 +51,11 @@
   filter: drop-shadow(0px 10px 10px rgba(57, 166, 255, 0.5));
 }
 
+.confirm_button{
+  --ion-color-primary: #39A6FF;
+  filter: drop-shadow(0px 10px 10px rgba(57, 166, 255, 0.5));
+}
+
 .background1{
   background-image: url(assets/images/background1.svg);
   background-size: cover;
@@ -131,4 +136,3 @@ ion-toggle{
 ion-toggle.toggle-checked::part(track) {
   background: #443db8;
 }
-
