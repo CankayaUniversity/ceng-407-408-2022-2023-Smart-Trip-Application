@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   google_maps_api_key: '',
-  serverRoot: 'http://locahost:8080',
-  value: 0
+  serverRoot: 'https://apigateway...',
+  value: 1
 };
 
 /*
