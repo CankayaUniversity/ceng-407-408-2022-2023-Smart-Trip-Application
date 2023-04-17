@@ -64,6 +64,20 @@
               "sourceMap": true,
               "namedChunks": true
             },
+            "amazon": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.amazon.ts"
+                }
+              ]
+            },
             "ci": {
               "progress": false
             }
@@ -78,6 +92,9 @@
             },
             "development": {
               "browserTarget": "app:build:development"
+            },
+            "amazon": {
+              "browserTarget": "app:build:amazon"
             },
             "ci": {
               "progress": false
