@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="450" height="724" viewBox="0 0 450 724">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" y1="1" x2="0" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#423cb5"/>
+      <stop offset="0.793" stop-color="#00a5ff"/>
+      <stop offset="1" stop-color="#00e9cd"/>
+    </linearGradient>
+    <filter id="Rectangle_94" x="0" y="0" width="450" height="724" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feFlood flood-opacity="0.502"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_94)">
+    <path id="Rectangle_94-2" data-name="Rectangle 94" d="M20,0H370a20,20,0,0,1,20,20V664a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z" transform="translate(30 28)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>
