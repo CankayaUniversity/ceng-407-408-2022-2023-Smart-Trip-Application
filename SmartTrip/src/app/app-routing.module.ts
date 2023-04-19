@@ -37,6 +37,14 @@ const routes: Routes = [
     path: 'password-recovery',
     loadChildren: () => import('./password-recovery/password-recovery.module').then( m => m.PasswordRecoveryPageModule)
   },
+  {
+    path: 'facility-review',
+    loadChildren: () => import('./facility-review/facility-review.module').then( m => m.FacilityReviewPageModule)
+  },
+  {
+    path: 'write-review',
+    loadChildren: () => import('./write-review/write-review.module').then( m => m.WriteReviewPageModule)
+  },
 
 ];
 @NgModule({

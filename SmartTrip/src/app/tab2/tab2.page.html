@@ -1,1 +1,33 @@
-<capacitor-google-map #map></capacitor-google-map>
+<ion-content fullscreen>
+  <ion-toolbar class="searchBar" slot="fixed" color="translucent" >
+    <ion-searchbar search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
+  </ion-toolbar>
+  <div #map id="map">
+  </div>
+
+  <div>
+    <ion-toolbar class="bottomMenu" slot="fixed" color="translucent">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-fab-button style="margin-left: 30px" color="secondary">
+              <ion-icon name="search"></ion-icon>
+            </ion-fab-button>
+          </ion-col>
+          <ion-col>
+            <ion-fab-button style="margin-left: 15px" color="secondary">
+              <ion-icon style="margin-top: 3px; margin-right: 2px" name="navigate-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-col>
+          <ion-col>
+            <ion-fab-button style="margin-right: 120px" color="secondary" (click)="goToProfileSetupPage()">
+            </ion-fab-button>
+            <div style="margin-top: -1rem; margin-left: 2.5rem; scale: 1.2">
+              <ion-icon style="color: white" name="settings"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </div>
+</ion-content>

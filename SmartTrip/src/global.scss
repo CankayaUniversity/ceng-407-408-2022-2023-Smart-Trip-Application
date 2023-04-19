@@ -111,6 +111,19 @@
   left: 0;
 }
 
+.background6{
+  background-image: url(assets/images/background3.png);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
 .input_box{
   background-color: white;
   width: 345px;
@@ -135,4 +148,24 @@ ion-toggle{
 
 ion-toggle.toggle-checked::part(track) {
   background: #443db8;
+}
+
+ion-modal{
+  --backdrop-opacity: 0;
+  backdrop-filter: blur(2px);
+  --border-radius:30px;
+  --height: 90%;
+  --width: 90%;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));
+}
+
+.ion-color.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios{
+  border-radius: 50px;
+  text-align: center;
+}
+ion-toolbar.ion-color.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios, ion-toolbar.ion-color .sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios {
+  color: #39A6FF;
+  opacity: 0.6;
+  scale: 1.4;
+  margin-left: 3px;
 }
