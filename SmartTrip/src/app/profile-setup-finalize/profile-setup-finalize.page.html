@@ -8,25 +8,31 @@
     </div>
   </div>
   <div>
-    <ion-input class="circle"></ion-input>
-    <ion-header style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;">username </ion-header>
+    <ion-avatar class="profilepicture">
+        <img src="assets/images/defaultprofilepicture.png">
+      <ion-header style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;">username</ion-header>
+    </ion-avatar>
   </div>
-  <div style="display: flex; margin-left:60px; margin-top:180px" >
-    <ion-toggle style="margin-top:-114px">
-    </ion-toggle>
-    <label style="margin-left: 20px; margin-top:-81px; font-family: 'Aller Bold', sans-serif; color:grey">allow access for camera</label>
+  <div class ="othercontent">
+    <div style="display: flex; margin-left:60px; margin-top:180px" >
+      <ion-toggle style="margin-top:-114px">
+      </ion-toggle>
+      <label style="margin-left: 20px; margin-top:-81px; font-family: 'Aller Bold', sans-serif; color:grey">allow access for camera</label>
+    </div>
+    <div style="display: flex; margin-left:60px; margin-top:180px" >
+      <ion-toggle style="margin-top:-305px">
+      </ion-toggle>
+      <label style="margin-left: 20px; margin-top:-214px; font-family: 'Aller Bold', sans-serif; color:grey">allow permission for your location</label>
+    </div>
+    <div style="display: flex; margin-left:60px; margin-top:180px" >
+      <ion-toggle style="margin-top:-498px">
+      </ion-toggle>
+      <label style="margin-left: 20px; margin-top:-349px; font-family: 'Aller Bold', sans-serif; color:grey">show my real name in comments</label>
+    </div>
+    <div>
+      <ion-button class="confirm_button" style="margin-left:125px; margin-top:-540px" shape="round" (click)="goToHomePage()">confirm</ion-button>
+    </div>
+
   </div>
-  <div style="display: flex; margin-left:60px; margin-top:180px" >
-    <ion-toggle style="margin-top:-305px">
-    </ion-toggle>
-    <label style="margin-left: 20px; margin-top:-214px; font-family: 'Aller Bold', sans-serif; color:grey">allow permission for your location</label>
-  </div>
-  <div style="display: flex; margin-left:60px; margin-top:180px" >
-    <ion-toggle style="margin-top:-498px">
-    </ion-toggle>
-    <label style="margin-left: 20px; margin-top:-349px; font-family: 'Aller Bold', sans-serif; color:grey">show my real name in comments</label>
-  </div>
-  <div>
-    <ion-button class="confirm_button" style="margin-left:125px; margin-top:-520px" shape="round" (click)="goToHomePage()">confirm</ion-button>
-  </div>
+
 </ion-content>
