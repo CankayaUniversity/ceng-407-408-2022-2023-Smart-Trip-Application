@@ -4,7 +4,8 @@ import { environment } from 'src/environments/environment';
 import { ModalController} from "@ionic/angular";
 import { FacilityReviewPage } from "../facility-review/facility-review.page";
 import {NavController} from "@ionic/angular";
-import {WriteReviewPage} from "../write-review/write-review.page";
+import { MenuController } from "@ionic/angular";
+import * as url from "url";
 
 @Component({
   selector: 'app-tab2',
@@ -16,12 +17,12 @@ export class Tab2Page {
   @ViewChild('map')  mapRef: ElementRef<HTMLElement>;
   newMap: GoogleMap;
   center: any = {
-    lat: 39.0876459,
-    lng: 35.1777724,
+    lat: 39.8336837,
+    lng: 32.5844109,
   };
   markerId:string;
 
-  constructor(public modalController: ModalController, public navCtrl: NavController ) {}
+  constructor(private menu: MenuController, public modalController: ModalController, public navCtrl: NavController ) {}
 
   ngAfterViewInit(){
     this.createMap();
@@ -35,7 +36,7 @@ export class Tab2Page {
         apiKey: environment.google_maps_api_key,
         config: {
           center: this.center,
-          zoom: 10,
+          zoom: 13,
           streetViewControl: false,
           disableDefaultUI: true,
           mapId:'558f75b3b5a5e8bd'
@@ -100,8 +101,48 @@ export class Tab2Page {
     });
   }
 
+  openEnd() {
+    this.menu.close();
+
+  }
   goToProfileSetupPage(){
     this.navCtrl.navigateForward('profile-setup-finalize');
   }
 
+  public toilet = 'assets/icon/toilet.png';
+  public disabled = 'assets/icon/disabled.png';
+  public babycare = 'assets/icon/babycare.png';
+  public mosque = 'assets/icon/mosque.png';
+  selectToilet(){
+    if(this.toilet=='assets/icon/toilet.png')
+    {
+      this.toilet='assets/icon/toiletWhite.png';
+    }else{
+      this.toilet = 'assets/icon/toilet.png';
+    }
+  }
+  selectDisabled(){
+    if(this.disabled=='assets/icon/disabled.png')
+    {
+      this.disabled='assets/icon/disabledWhite.png';
+    }else{
+      this.disabled = 'assets/icon/disabled.png';
+    }
+  }
+  selectBabycare(){
+    if(this.babycare=='assets/icon/babycare.png')
+    {
+      this.babycare='assets/icon/babycareWhite.png';
+    }else{
+      this.babycare = 'assets/icon/babycare.png';
+    }
+  }
+  selectMosque(){
+    if(this.mosque=='assets/icon/mosque.png')
+    {
+      this.mosque='assets/icon/mosqueWhite.png';
+    }else{
+      this.mosque = 'assets/icon/mosque.png';
+    }
+  }
 }
