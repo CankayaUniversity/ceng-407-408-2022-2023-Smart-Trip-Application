@@ -1,4 +1,4 @@
-<ion-content fullscreen>
+<ion-content fullscreen scroll-y="false">
   <ion-toolbar class="searchBar" slot="fixed" color="translucent" >
     <ion-searchbar search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
   </ion-toolbar>
@@ -10,9 +10,13 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-fab-button style="margin-left: 30px" color="secondary">
-              <ion-icon name="search"></ion-icon>
-            </ion-fab-button>
+            <div id="main-content" >
+              <ion-fab-button style="margin-left: 30px" color="secondary">
+                <ion-menu-button>
+                  <ion-icon name="search"></ion-icon>
+                </ion-menu-button>
+              </ion-fab-button>
+            </div>
           </ion-col>
           <ion-col>
             <ion-fab-button style="margin-left: 15px" color="secondary">
@@ -29,5 +33,21 @@
         </ion-row>
       </ion-grid>
     </ion-toolbar>
+  </div>
+  <div>
+    <ion-menu contentId="main-content">
+      <ion-content class="filterMenu" scroll-y="false">
+        <div class="toilet" style="position: fixed;" >
+          <img src="{{toilet}}" (click)="selectToilet();" style="margin-left: 10%">
+          <img src="{{disabled}}" (click)="selectDisabled();" style="margin-left: 35%">
+          <img src="{{babycare}}" (click)="selectBabycare();" style="margin-left: 55%">
+          <img src="{{mosque}}" (click)="selectMosque();" style="margin-left: 75%">
+        </div>
+        <div>
+          <ion-button class="first_button" style="margin-left: 30px; margin-top: 110px; " shape="round" (click)="openEnd()">back</ion-button>
+          <ion-button class="second_button" style="margin-left: 10px; margin-top: 110px;" shape="round">filter</ion-button>
+        </div>
+      </ion-content>
+   </ion-menu>
   </div>
 </ion-content>

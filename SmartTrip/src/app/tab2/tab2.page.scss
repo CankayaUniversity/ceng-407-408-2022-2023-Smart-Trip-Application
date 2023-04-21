@@ -30,6 +30,35 @@ ion-fab-button{
   height: 45px;
   margin-top: 1%;
   color: #43c9e6;
+}
+
+ion-menu-button{
+  --color:white;
+}
+
+ion-menu::part(backdrop) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+ion-menu::part(container) {
+  height: 20%;
+  width: 380px;
+  color: rgba(10, 0, 0, 0);
+  margin-top: 680px;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 0px 0px 10px rgba(57, 91, 114, 0.61);
+}
+
+ion-content .filterMenu{
+  --background: url("~src/assets/images/filterBackground.png") no-repeat 100% 30%;
 
 }
 
+.toilet{
+  img{
+    margin-top: 25px;
+    margin-left: 30px;
+    padding: 10px;
+    position: fixed;
+  }
+}
