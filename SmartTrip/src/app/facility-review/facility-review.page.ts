@@ -31,4 +31,5 @@ export class FacilityReviewPage implements OnInit {
     return this.modalController.dismiss(null, 'cancel');
     const { data, role } = await modal.onWillDismiss();
   }
+
 }
