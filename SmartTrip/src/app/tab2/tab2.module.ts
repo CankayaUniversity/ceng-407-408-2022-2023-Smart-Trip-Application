@@ -7,6 +7,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -17,6 +19,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     ExploreContainerComponentModule,
     Tab2PageRoutingModule
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page],
+  providers: [
+    Geolocation
+  ]
 })
 export class Tab2PageModule {}

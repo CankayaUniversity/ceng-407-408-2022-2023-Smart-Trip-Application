@@ -15,6 +15,14 @@
         <ion-textarea class="commentArea" placeholder="was it clean? tell us..."></ion-textarea>
       </ion-item>
     </ion-card>
+    <div>
+      <div class="cont">
+        <div class="stars">
+          <ngx-star-rating [(ngModel)]="rating3" [id]="'rating3'" ></ngx-star-rating >
+          <!--<div>{{ rating3 }}</div>-->
+        </div>
+      </div>
+    </div>
     <div class="toilet" style="position: fixed; margin-top: 40px;">
       <img src="{{toilet}}" (click)="selectToilet();" style="margin-left: 10%">
       <img src="{{disabled}}" (click)="selectDisabled();" style="margin-left: 35%">

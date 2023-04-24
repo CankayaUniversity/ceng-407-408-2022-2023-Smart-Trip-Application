@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {NavController} from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 import { ModalController } from '@ionic/angular';
-import {WriteReviewPage} from "../write-review/write-review.page";
+import { WriteReviewPage } from "../write-review/write-review.page";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-facility-review',
@@ -10,7 +11,15 @@ import {WriteReviewPage} from "../write-review/write-review.page";
 })
 export class FacilityReviewPage implements OnInit {
 
-  constructor(private modalController: ModalController, public navCtrl: NavController) { }
+  rating3: number;
+  public form: FormGroup;
+  constructor(private fb: FormBuilder, private modalController: ModalController, public navCtrl: NavController) {
+    this.rating3 = 0;
+    this.form = this.fb.group({
+      rating1: ['', Validators.required],
+      rating2: [4]
+    });
+  }
 
   ngOnInit() {
   }

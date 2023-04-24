@@ -11,6 +11,8 @@
   filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4));
   width: 80%;
   margin-left: 40px;
+  --ion-item-background: rgba(88, 194, 254,0.4);
+  --ion-text-color: #4440b9;
 }
 
 .bottomMenu{
@@ -62,3 +64,10 @@ ion-content .filterMenu{
     position: fixed;
   }
 }
+
+ion-list{
+  margin-top: -10px;
+  border-radius: 10px;
+}
+
+
