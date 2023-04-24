@@ -1,9 +1,24 @@
 <ion-content fullscreen scroll-y="false">
   <ion-toolbar class="searchBar" slot="fixed" color="translucent" >
-    <ion-searchbar search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
+    <ion-list [hidden]="autocompleteItems.length == 0">
+      <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+        {{ item.description }}
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="nearbyItems.length > 0 && toggled">
+      <ion-item *ngFor="let place of nearbyItems" tappable (click)="selectFacility(place); showDefaultBar();">
+        <h2>{{place.name}}</h2>
+        <p>{{place.vicinity}}</p>
+        <p>Rating {{place.rating}}</p>
+      </ion-item>
+    </ion-list>
   </ion-toolbar>
-  <div #map id="map">
-  </div>
+<!--  <ion-toolbar class="searchBar" slot="fixed" color="translucent" >
+    <ion-searchbar search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
+  </ion-toolbar>-->
+  <div id='map'></div>
+
 
   <div>
     <ion-toolbar class="bottomMenu" slot="fixed" color="translucent">
