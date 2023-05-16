@@ -39,9 +39,6 @@ export class Tab2Page {
   }
 
   ionViewDidEnter(){
-    // let infoWindow = new google.maps.InfoWindow({map: map});
-    //Set latitude and longitude of some place
-    //this.tryGeolocation();
     var mapOptions = {
       zoom: 13,
       center: {lat: 39.8336837, lng: 32.5844109},
@@ -50,10 +47,10 @@ export class Tab2Page {
       mapId:'558f75b3b5a5e8bd'
     };
     this.map = new google.maps.Map(document.getElementById('map')!, mapOptions);
-    //this.addListeners();
+    this.tryGeolocation();
   }
 
-/*  tryGeolocation(){
+  tryGeolocation() {
     this.geolocation.getCurrentPosition().then((resp) => {
       let pos = {
         lat: resp.coords.latitude,
@@ -63,16 +60,14 @@ export class Tab2Page {
         position: pos,
         map: this.map,
         title: 'I am here!',
-
       });
 
       this.markers.push(marker);
       this.map.setCenter(pos);
-      this.initMap(marker);
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-  }*/
+  }
 
   updateSearchResults() {
     if (this.autocomplete.input === '') {
@@ -96,9 +91,11 @@ export class Tab2Page {
     this.geocoder.geocode({'placeId': item.place_id}, (results:any, status: string) => {
       if(status === 'OK' && results[0]){
         this.autocompleteItems = [];
+
+        const bounds = this.map.getBounds();
+
         this.GooglePlaces.nearbySearch({
-          location: results[0].geometry.location,
-          radius: '500',
+          bounds: bounds,
           types: ['gas_station'],
         }, (near_places:any) => {
           this.zone.run(() => {
@@ -132,8 +129,13 @@ export class Tab2Page {
     this.toggled = false;
   }
 
+  showCurrentLocation() {
+    this.clearMarkers(); // Clear previous markers
+    this.tryGeolocation(); //show current location.
+  }
+
   zoomToFacility(marker:any) {
-     marker.addListener("click", () => {
+    marker.addListener("click", () => {
       this.onTriggerSheetClick();
       this.map.setZoom(15);
       marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -156,47 +158,6 @@ export class Tab2Page {
     const { data, role } = await modal.onWillDismiss();
   }
 
-/*
-  async addMarker(lat: any, lng: any){
-    if(this.markerId) this.removeMarker();
-    this.onTriggerSheetClick();
-    this.markerId = await this.map.addMarker({
-      coordinate:{
-        lat:lat,
-        lng:lng,
-      },
-      draggable:true
-    });
-  }
-
-  async removeMarker(id?: string) {
-    await this.map.removeMarker(id ? id : this.markerId);
-  }
-
-  async addListeners() {
-    // Handle marker click
-    await this.map.setOnMarkerClickListener((event:any) => {
-      console.log('setOnMarkerClickListener', event);
-      this.removeMarker(event.markerId);
-    });
-
-    await this.map.setOnMapClickListener((event:any) => {
-      console.log('setOnMapClickListener', event);
-      //this.onTriggerSheetClick();
-      this.addMarker(event.latitude, event.longitude);
-    });
-/!*
-    await this.newMap.setOnMyLocationButtonClickListener((event) => {
-      console.log('setOnMyLocationButtonClickListener', event);
-      this.addMarker(event.mapId, event.mapId);
-    });
-*!/
-    await this.map.setOnMyLocationClickListener((event:any) => {
-      console.log('setOnMyLocationClickListener', event);
-      this.addMarker(event.latitude, event.longitude);
-    });
-  }
-*/
 
   openEnd() {
     this.menu.close();

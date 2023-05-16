@@ -18,7 +18,11 @@
     <ion-searchbar search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
   </ion-toolbar>-->
   <div id='map'></div>
-
+  <div class="location-button-container">
+    <button class="location-button" (click)="showCurrentLocation()">
+      <ion-icon name="location-outline"></ion-icon>
+    </button>
+  </div>
 
   <div>
     <ion-toolbar class="bottomMenu" slot="fixed" color="translucent">
