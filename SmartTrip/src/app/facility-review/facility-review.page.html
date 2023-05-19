@@ -18,7 +18,16 @@
 
     <ion-header style="margin-top:38px;margin-left: 138px; color:white;font-size: 20px;">Opet Kocaman Akaryakıt </ion-header>
     <ion-header style="margin-top:8px;margin-left: 137px; color:white;font-size: 15px;">Yayalar, 06740 Çamlıdere/Ankara </ion-header>
-
+    <div>
+      <form [formGroup]="form">
+        <div class="cont">
+          <div class="stars">
+            <ngx-star-rating formControlName="rating2" [id]="'rating2'" [disabled] ="true"></ngx-star-rating>
+          </div>
+          <!--<div>Rating(Disabled): {{form.value.rating2}}</div>-->
+        </div>
+      </form>
+    </div>
   </div>
   <div style="position: absolute; display: flex ; top: 17% ;transform: translateY(-50%); scale: 86%">
     <img src="assets/icon/toiletWhite.png" style="margin-left: 90% ; margin-top: 42%">

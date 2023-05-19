@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from "@ionic/angular";
 import { ModalController } from '@ionic/angular';
-import {NavController} from "@ionic/angular";
-import {FacilityReviewPage} from "../facility-review/facility-review.page";
+import { FacilityReviewPage } from "../facility-review/facility-review.page";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-write-review',
@@ -9,8 +10,11 @@ import {FacilityReviewPage} from "../facility-review/facility-review.page";
   styleUrls: ['./write-review.page.scss'],
 })
 export class WriteReviewPage implements OnInit {
-
-  constructor(private modalController: ModalController, public navCtrl: NavController) { }
+  rating3: number;
+  public form: FormGroup;
+  constructor(private fb: FormBuilder, private modalController: ModalController, public navCtrl: NavController) {
+    this.rating3 = 0;
+  }
 
   ngOnInit() {
   }
