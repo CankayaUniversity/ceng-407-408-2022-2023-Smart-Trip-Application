@@ -18,6 +18,6 @@ public interface UserRepository {
 
     @NonNull
     String save(@NonNull @NotBlank String username,
-                @NonNull @NotBlank String mail,
+                @NonNull @NotBlank String email,
                 @NonNull @NotBlank String password);
 }

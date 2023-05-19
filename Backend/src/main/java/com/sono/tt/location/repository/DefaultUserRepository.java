@@ -25,7 +25,7 @@ public class DefaultUserRepository extends DynamoRepository<User> implements Use
     private static final Logger LOG = LoggerFactory.getLogger(DefaultUserRepository.class);
     private static final String ATTRIBUTE_ID = "id";
     private static final String ATTRIBUTE_USERNAME = "name";
-    private static final String ATTRIBUTE_MAIL = "mail";
+    private static final String ATTRIBUTE_EMAIL = "email";
     private static final String ATTRIBUTE_PASSWORD = "password";
 
     private final IdGenerator idGenerator;
@@ -39,9 +39,9 @@ public class DefaultUserRepository extends DynamoRepository<User> implements Use
     @Override
     @NonNull
     public String save(@NonNull @NotBlank String username,
-                @NonNull @NotBlank String mail, @NonNull @NotBlank String password) {
+                       @NonNull @NotBlank String email, @NonNull @NotBlank String password) {
         String id = idGenerator.generate();
-        save(new User(id, username, mail, password));
+        save(new User(id, username, email, password));
         return id;
     }
 
@@ -99,7 +99,7 @@ public class DefaultUserRepository extends DynamoRepository<User> implements Use
     private User userOf(@NonNull Map<String, AttributeValue> item) {
         return new User(item.get(ATTRIBUTE_ID).s(),
                 item.get(ATTRIBUTE_USERNAME).s(),
-                item.get(ATTRIBUTE_MAIL).s(),
+                item.get(ATTRIBUTE_EMAIL).s(),
                 item.get(ATTRIBUTE_PASSWORD).s());
     }
 
@@ -109,7 +109,7 @@ public class DefaultUserRepository extends DynamoRepository<User> implements Use
         Map<String, AttributeValue> result = super.item(user);
         result.put(ATTRIBUTE_ID, AttributeValue.builder().s(user.getId()).build());
         result.put(ATTRIBUTE_USERNAME, AttributeValue.builder().s(user.getUsername()).build());
-        result.put(ATTRIBUTE_MAIL, AttributeValue.builder().s(user.getMail()).build());
+        result.put(ATTRIBUTE_EMAIL, AttributeValue.builder().s(user.getEmail()).build());
         result.put(ATTRIBUTE_PASSWORD, AttributeValue.builder().s(user.getPassword()).build());
         return result;
     }

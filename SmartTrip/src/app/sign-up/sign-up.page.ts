@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NavController} from "@ionic/angular";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-sign-up',
@@ -8,7 +11,12 @@ import {NavController} from "@ionic/angular";
 })
 export class SignUpPage implements OnInit {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public http: HttpClient) {}
+  user = {
+    username: '',
+    email: '',
+    password: ''
+  };
 
   ngOnInit() {
   }
@@ -21,6 +29,13 @@ export class SignUpPage implements OnInit {
   }
   goToSignInPage(){
     this.navCtrl.navigateForward('tab1');
+  }
+  signUp(){
+    this.http.post(`${environment.serverRoot}/user`, this.user).pipe(
+      take(1)
+    ).subscribe(
+      response => console.log("Response:", JSON.stringify(response, undefined, '  '))
+    );
   }
 
 }
