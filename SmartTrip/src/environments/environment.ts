@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  google_maps_api_key: '',
-  serverRoot: 'http://locahost:8080',
+  google_maps_api_key: 'AIzaSyDxCcq_rhwetsv6t0hdy6giyJ41wN-oMic',
+  serverRoot: 'http://localhost:8080',
   value: 0
 };
 
