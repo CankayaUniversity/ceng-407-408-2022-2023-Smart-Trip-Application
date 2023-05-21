@@ -39,7 +39,8 @@ export class SignUpPage implements OnInit {
       response => {
         console.log("Response:", JSON.stringify(response, undefined, '  '));
         if(this.toggleValue){
-          this.navCtrl.navigateForward('profile-setup');
+          this.navCtrl.navigateForward(['profile-setup',
+            {data:this.user.username}]);
         }else{
           this.errorMessage = ' ';
           this.toggleError = true;

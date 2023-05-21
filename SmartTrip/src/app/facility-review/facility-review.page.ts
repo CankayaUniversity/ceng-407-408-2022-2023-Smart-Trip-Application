@@ -10,10 +10,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./facility-review.page.scss'],
 })
 export class FacilityReviewPage implements OnInit {
-
+  facilityTitle: string = '';
+  data: string;
   rating3: number;
   public form: FormGroup;
-  constructor(private fb: FormBuilder, private modalController: ModalController, public navCtrl: NavController) {
+  constructor(
+    private fb: FormBuilder,
+    private modalController: ModalController,
+    public navCtrl: NavController,
+  ) {
     this.rating3 = 0;
     this.form = this.fb.group({
       rating1: ['', Validators.required],
@@ -22,6 +27,7 @@ export class FacilityReviewPage implements OnInit {
   }
 
   ngOnInit() {
+    this.facilityTitle = this.data;
   }
 
   cancel() {

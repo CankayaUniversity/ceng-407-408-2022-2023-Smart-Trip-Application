@@ -17,10 +17,12 @@ export class Tab1Page {
     email: '',
     password: ''
   };
+
   errorMessage: string = '';
   ngOnInit() {}
 
   goToOpenPage(){
+    this.errorMessage = ' ';
     this.navCtrl.navigateForward('');
   }
   goToPasswordPage(){
