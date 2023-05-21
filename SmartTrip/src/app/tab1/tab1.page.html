@@ -10,12 +10,12 @@
   </div>
 
       <div>
-        <ion-input class="input_box" style="margin-top: 283px;"  name="email" type="email" placeholder=" email" ngModel required>
+        <ion-input class="input_box" style="margin-top: 283px;"  name="email" type="email" placeholder=" email" [(ngModel)] = "user.email" required>
           <ion-icon src="assets/icon/envelope-regular.svg" name="envelope-regular" style="width: 36px; height: 22px;"></ion-icon>
         </ion-input>
       </div>
       <div>
-        <ion-input class="input_box" style="margin-top: 33px;" name="password" type="password" placeholder=" password" ngModel required>
+        <ion-input class="input_box" style="margin-top: 33px;" name="password" type="password" placeholder=" password" [(ngModel)] = "user.password" required>
           <ion-icon src="assets/icon/lock-solid.svg" name="lock-solid" style="width: 36px; height: 22px;"></ion-icon>
         </ion-input>
         <ion-header style="margin-top:25px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif " (click)="goToPasswordPage()"shape="round">forgot your password? </ion-header>
@@ -34,7 +34,7 @@
 
     <div class="button  ion-text-right">
       <h1 style="color: white; "></h1>
-      <ion-button class="second_button" style="margin-left:224px; margin-top:-16px" (click)="goToHomePage()"shape="round">log in</ion-button>
+      <ion-button class="second_button" style="margin-left:224px; margin-top:-16px" (click)="signIn()"shape="round">log in</ion-button>
     </div>
 
 </ion-content>

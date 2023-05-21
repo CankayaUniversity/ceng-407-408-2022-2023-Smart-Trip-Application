@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { NavController} from "@ionic/angular";
+import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { HttpClient, HttpParams  } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -8,11 +11,14 @@ import { NavController} from "@ionic/angular";
 })
 export class Tab1Page {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,  public http: HttpClient) {}
 
-  goToHomePage(){
-    this.navCtrl.navigateForward('tab2');
-  }
+  user = {
+    email: '',
+    password: ''
+  };
+  errorMessage: string = '';
+  ngOnInit() {}
 
   goToOpenPage(){
     this.navCtrl.navigateForward('');
@@ -21,4 +27,37 @@ export class Tab1Page {
     this.navCtrl.navigateForward('forgot-password');
   }
 
+  signIn() {
+      this.http.get(`${environment.serverRoot}/user`).pipe(
+        take(1)
+      ).subscribe(
+        response => {
+          console.log('Response:', JSON.stringify(response, undefined, '  '));
+
+          const users = Object.values(response);
+          let foundUser = null;
+
+          for (const user of users) {
+            if (user.email === this.user.email && user.password === this.user.password) {
+              foundUser = user;
+              break;
+            }
+          }
+
+          if (foundUser) {
+            // Login successful
+            console.log('Login successful');
+            this.navCtrl.navigateForward('tab2');
+          } else {
+            // Invalid credentials
+            console.log('Invalid username or password');
+            this.errorMessage = 'Invalid username or password';
+          }
+        },
+        error => {
+          console.log('Error:', error);
+          this.errorMessage = 'An error occurred';
+        }
+      );
+    }
 }
