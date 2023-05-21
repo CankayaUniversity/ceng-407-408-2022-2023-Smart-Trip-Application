@@ -2,11 +2,8 @@ package com.sono.tt.location.model;
 
 import com.sono.tt.location.Identified;
 import io.micronaut.core.annotation.NonNull;
-import io.micronaut.http.annotation.RequestAttribute;
 import io.micronaut.serde.annotation.Serdeable;
 import javax.validation.constraints.NotBlank;
-
-import software.amazon.awssdk.services.dynamodb.model.AttributeDefinition;
 
 
 @Serdeable // <1>
@@ -16,17 +13,17 @@ public class User implements Identified {
     @NotBlank // <2>
     private final String id;
     private String username;
-    private String mail;
+    private String email;
     private String password;
 
 
     public User(@NonNull String id,
                 String username,
-                String mail,
+                String email,
                 String password) {
         this.id = id;
         this.username = username;
-        this.mail = mail;
+        this.email = email;
         this.password = password;
     }
 
@@ -36,8 +33,8 @@ public class User implements Identified {
         return id;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
     public String getUsername() {
@@ -45,4 +42,8 @@ public class User implements Identified {
     }
 
     public String getPassword() {return password;}
+
+    public void setUsername(String username){ this.username = username; }
+    public  void setEmail(String email){ this.email = email; }
+    public  void setPassword(String password){ this.password = password; }
 }

@@ -32,8 +32,9 @@ public class UsersController {
 
     @Post // <5>
     public HttpResponse<?> save(@Body("username") @NonNull @NotBlank String username, // <6>
-                             @Body("mail") @NonNull @NotBlank String mail, @Body("password") @NonNull @NotBlank String password) {
-        String id = userRepository.save(username, mail, password);
+                             @Body("email") @NonNull @NotBlank String email,
+                             @Body("password") @NonNull @NotBlank String password) {
+        String id = userRepository.save(username, email, password);
         return HttpResponse.created(UriBuilder.of("/user").path(id).build());
     }
 
