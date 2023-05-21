@@ -29,31 +29,27 @@ export class SignUpPage implements OnInit {
     this.toggleError = false;
     this.navCtrl.navigateForward('tab3');
   }
-  goToProfileSetup(){
-    this.navCtrl.navigateForward('profile-setup');
-  }
   goToSignInPage(){
     this.navCtrl.navigateForward('tab1');
   }
   signUp(){
-    if(this.toggleValue){
-      this.toggleError = false;
-      this.http.post(`${environment.serverRoot}/user`, this.user).pipe(
-        take(1)
-      ).subscribe(
-        response => {
-          console.log("Response:", JSON.stringify(response, undefined, '  '));
+    this.http.post(`${environment.serverRoot}/user`, this.user).pipe(
+      take(1)
+    ).subscribe(
+      response => {
+        console.log("Response:", JSON.stringify(response, undefined, '  '));
+        if(this.toggleValue){
           this.navCtrl.navigateForward('profile-setup');
-        },
-        error => {
-          console.log("Error:", error);
-          this.errorMessage = 'Please fill in the required fields!';
+        }else{
+          this.errorMessage = ' ';
+          this.toggleError = true;
+          return;
         }
-      );
-    }
-    if (!this.toggleValue) {
-      this.toggleError = true;
-      return;
-    }
+      },
+      error => {
+        console.log("Error:", error);
+        this.errorMessage = 'Please fill in the required fields!';
+      }
+    );
   }
 }
