@@ -17,11 +17,16 @@ export class SignUpPage implements OnInit {
     email: '',
     password: ''
   };
+  errorMessage: string = '';
+  toggleError: boolean = false;
+  toggleValue: boolean = false;
 
   ngOnInit() {
   }
 
   goToSignUpWith(){
+    this.errorMessage = ' ';
+    this.toggleError = false;
     this.navCtrl.navigateForward('tab3');
   }
   goToProfileSetup(){
@@ -31,11 +36,24 @@ export class SignUpPage implements OnInit {
     this.navCtrl.navigateForward('tab1');
   }
   signUp(){
-    this.http.post(`${environment.serverRoot}/user`, this.user).pipe(
-      take(1)
-    ).subscribe(
-      response => console.log("Response:", JSON.stringify(response, undefined, '  '))
-    );
+    if(this.toggleValue){
+      this.toggleError = false;
+      this.http.post(`${environment.serverRoot}/user`, this.user).pipe(
+        take(1)
+      ).subscribe(
+        response => {
+          console.log("Response:", JSON.stringify(response, undefined, '  '));
+          this.navCtrl.navigateForward('profile-setup');
+        },
+        error => {
+          console.log("Error:", error);
+          this.errorMessage = 'Please fill in the required fields!';
+        }
+      );
+    }
+    if (!this.toggleValue) {
+      this.toggleError = true;
+      return;
+    }
   }
-
 }
