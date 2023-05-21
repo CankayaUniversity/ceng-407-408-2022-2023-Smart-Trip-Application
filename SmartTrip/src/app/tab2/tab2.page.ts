@@ -3,7 +3,7 @@ import { GoogleMap } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
 import { ModalController} from "@ionic/angular";
 import { FacilityReviewPage } from "../facility-review/facility-review.page";
-import {NavController} from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 import { MenuController } from "@ionic/angular";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
@@ -123,6 +123,7 @@ export class Tab2Page {
       position: place.geometry.location,
       map: this.map,
       animation: google.maps.Animation.DROP,
+      title: place.name,
     });
     this.markers.push(marker);
     this.map.setCenter(place.geometry.location);
@@ -132,9 +133,10 @@ export class Tab2Page {
     this.toggled = false;
   }
 
+
   zoomToFacility(marker:any) {
     marker.addListener("click", () => {
-      this.onTriggerSheetClick();
+      this.onTriggerSheetClick(marker);
       this.map.setZoom(15);
       marker.setAnimation(google.maps.Animation.BOUNCE);
       this.map.setCenter(marker.position as google.maps.LatLng);
@@ -143,17 +145,21 @@ export class Tab2Page {
   ngAfterViewInit(){
 
   }
-
-  async onTriggerSheetClick(){
+  data1: string;
+  async onTriggerSheetClick(marker: any){
+    this.data1 = marker.title;
     const modal = await this.modalController.create(
       {
         component: FacilityReviewPage,
         initialBreakpoint: 0.8,
         breakpoints: [0, 0.8],
-        cssClass: 'facilityReview'
+        cssClass: 'facilityReview',
+        componentProps:{
+          data: this.data1,
+        }
       });
-    modal.present();
-    const { data, role } = await modal.onWillDismiss();
+    await modal.present();
+    //const { data, role } = await modal.onWillDismiss();
   }
 
   /*

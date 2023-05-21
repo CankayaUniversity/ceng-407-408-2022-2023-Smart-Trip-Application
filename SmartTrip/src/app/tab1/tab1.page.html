@@ -27,6 +27,8 @@
     <label style="margin-left: 10px; margin-top:1px; font-family: 'Aller Bold', sans-serif; color: #363636">remember me</label>
   </div>
 
+  <div class="error-message" *ngIf="errorMessage" style="color: red;font-weight: bold;text-align: center;margin-top: 33px;margin-bottom: -35px;">{{ errorMessage }}</div>
+
     <div class="button text-end ">
       <h1 style="color: white; "></h1>
       <ion-button class="first_button" style="margin-left: 38px; margin-top: 48px;" (click)="goToOpenPage()" shape="round">back</ion-button>
