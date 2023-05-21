@@ -22,17 +22,19 @@
         <ion-icon src="assets/icon/lock-solid.svg" name="lock-solid" style="width: 36px; height: 22px;"></ion-icon>
       </ion-input>
     </div>
-    <div style="display: flex; margin-left:60px; margin-top:150px" >
-      <ion-toggle></ion-toggle>
+    <div style="display: flex; margin-left:60px; margin-top:138px" >
+      <ion-toggle [(ngModel)]="toggleValue" name="toggle"></ion-toggle>
       <label style="margin-left: 20px; margin-top:-5px; font-family: 'Aller Bold', sans-serif; color: #363636">i agree to the Terms of Service <br> and Privacy Policy</label>
     </div>
+    <div class="error-message" *ngIf="toggleError" style="color: red;font-weight: bold;text-align: center;margin-top: 5px;margin-bottom: -35px;">Please accept the Terms of Service and Privacy Policy!</div>
+    <div class="error-message" *ngIf="errorMessage" style="color: red;font-weight: bold;text-align: center;margin-top: 33px;margin-bottom: -35px;">{{ errorMessage }}</div>
     <div>
       <ion-button class="first_button" style="margin-left: 38px; margin-top: 48px;" (click)="goToSignUpWith()" shape="round">back</ion-button>
       <ion-button class="second_button" style="margin-left:224px; margin-top:-79px" shape="round" (click)="signUp()">finalize</ion-button>
     </div>
   </form>
   <div>
-    <ion-header style="margin-top:25px; color:grey; text-align: center; font-family: 'Aller Bold', sans-serif "> already have an account? </ion-header>
+    <ion-header style="margin-top:10px; color:grey; text-align: center; font-family: 'Aller Bold', sans-serif "> already have an account? </ion-header>
     <ion-header style="margin-top:10px; color:#443DB8; text-align: center; font-family: 'Aller Bold', sans-serif " (click)="goToSignInPage()"> log in </ion-header>
   </div>
 
