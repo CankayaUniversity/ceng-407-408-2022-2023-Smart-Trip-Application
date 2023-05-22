@@ -6,6 +6,7 @@ import { FacilityReviewPage } from "../facility-review/facility-review.page";
 import { NavController } from "@ionic/angular";
 import { MenuController } from "@ionic/angular";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-tab2',
@@ -24,8 +25,14 @@ export class Tab2Page {
   autocompleteItems: any;
   nearbyItems: any = new Array<any>();
   toggled: boolean;
+  dataComing: any;
 
-  constructor(public zone: NgZone, public geolocation: Geolocation, private menu: MenuController, public modalController: ModalController, public navCtrl: NavController ) {
+  constructor(public zone: NgZone,
+              public geolocation: Geolocation,
+              private menu: MenuController,
+              public modalController: ModalController,
+              public navCtrl: NavController,
+              private route: ActivatedRoute) {
     this.toggled= true;
     this.geocoder = new google.maps.Geocoder;
     let elem = document.createElement("div")
@@ -36,6 +43,7 @@ export class Tab2Page {
     };
     this.autocompleteItems = [];
     this.markers = [];
+    this.dataComing = this.route.snapshot.params['data'];
   }
 
   ionViewDidEnter(){
@@ -209,7 +217,7 @@ export class Tab2Page {
 
   }
   goToProfileSetupPage(){
-    this.navCtrl.navigateForward('profile-setup-finalize');
+    this.navCtrl.navigateForward(['profile-setup-finalize', {data:this.dataComing}]);
   }
 
   public toilet = 'assets/icon/toilet.png';

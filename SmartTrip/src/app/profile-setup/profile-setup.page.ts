@@ -20,7 +20,7 @@ export class ProfileSetupPage implements OnInit {
   }
 
   goToHomePage(){
-    this.navCtrl.navigateForward('tab2');
+    this.navCtrl.navigateForward(['tab2', {data:this.dataComing}]);
   }
 
 }
