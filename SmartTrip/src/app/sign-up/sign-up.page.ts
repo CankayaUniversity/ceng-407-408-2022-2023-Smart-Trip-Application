@@ -3,6 +3,7 @@ import {NavController} from "@ionic/angular";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {take} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +12,8 @@ import {take} from "rxjs";
 })
 export class SignUpPage implements OnInit {
 
-  constructor(public navCtrl: NavController, public http: HttpClient) {}
+  constructor(public navCtrl: NavController,
+              public http: HttpClient) { }
   user = {
     username: '',
     email: '',
@@ -20,36 +22,60 @@ export class SignUpPage implements OnInit {
   errorMessage: string = '';
   toggleError: boolean = false;
   toggleValue: boolean = false;
-
   ngOnInit() {
   }
-
-  goToSignUpWith(){
+  goToOpenPage(){
     this.errorMessage = ' ';
     this.toggleError = false;
-    this.navCtrl.navigateForward('tab3');
+    this.navCtrl.navigateForward('');
   }
   goToSignInPage(){
     this.navCtrl.navigateForward('tab1');
   }
-  signUp(){
-    this.http.post(`${environment.serverRoot}/user`, this.user).pipe(
+  signUp() {
+    this.http.get(`${environment.serverRoot}/user`).pipe(
       take(1)
     ).subscribe(
-      response => {
-        console.log("Response:", JSON.stringify(response, undefined, '  '));
-        if(this.toggleValue){
-          this.navCtrl.navigateForward(['profile-setup',
-            {data:this.user.username}]);
-        }else{
-          this.errorMessage = ' ';
-          this.toggleError = true;
-          return;
+      (response) => {
+        this.errorMessage = ' ';
+        const users = Object.values(response);
+
+        const foundUserMail = users.find((user) => user.email === this.user.email);
+        const foundUserName = users.find((user) => user.username === this.user.username);
+
+        if (foundUserMail) {
+          // Sign up error
+          this.errorMessage = 'Email is already registered!';
+        }
+        else if(foundUserName) {
+          // Sign up error
+          this.errorMessage = 'Username is already registered!';
+        }
+        else {
+          // mail successful
+          if(this.toggleValue){
+            this.http.post(`${environment.serverRoot}/user`, this.user).pipe(
+              take(1)
+            ).subscribe(
+              (response) => {
+                console.log("Response:", JSON.stringify(response, undefined, '  '));
+                this.navCtrl.navigateForward(['profile-setup', { data: this.user.username }]);
+              },
+              (error) => {
+                console.log("Error:", error);
+                this.errorMessage = 'Please fill in the required fields!';
+              }
+            );
+          } else {
+            this.errorMessage = ' ';
+            this.toggleError = true;
+            return;
+          }
         }
       },
-      error => {
-        console.log("Error:", error);
-        this.errorMessage = 'Please fill in the required fields!';
+      (error) => {
+        console.log('Error:', error);
+        this.errorMessage = 'An error occurred';
       }
     );
   }

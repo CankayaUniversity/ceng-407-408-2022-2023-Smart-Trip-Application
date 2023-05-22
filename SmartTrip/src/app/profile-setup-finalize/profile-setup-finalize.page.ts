@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NavController} from "@ionic/angular";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-profile-setup-finalize',
@@ -7,14 +8,16 @@ import {NavController} from "@ionic/angular";
   styleUrls: ['./profile-setup-finalize.page.scss'],
 })
 export class ProfileSetupFinalizePage implements OnInit {
-
-  constructor(public navCtrl: NavController) { }
+  dataComing: any;
+  constructor(public navCtrl: NavController, private route: ActivatedRoute) {
+    this.dataComing = this.route.snapshot.params['data'];
+  }
 
   ngOnInit() {
   }
 
   goToHomePage(){
-    this.navCtrl.navigateForward('tab2');
+    this.navCtrl.navigateForward(['tab2', {data:this.dataComing}]);
   }
 
 }

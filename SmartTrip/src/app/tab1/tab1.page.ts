@@ -19,6 +19,8 @@ export class Tab1Page {
   };
 
   errorMessage: string = '';
+  private usernameData: any;
+
   ngOnInit() {}
 
   goToOpenPage(){
@@ -34,7 +36,7 @@ export class Tab1Page {
         take(1)
       ).subscribe(
         response => {
-          console.log('Response:', JSON.stringify(response, undefined, '  '));
+          //console.log('Response:', JSON.stringify(response, undefined, '  '));
 
           const users = Object.values(response);
           let foundUser = null;
@@ -42,6 +44,7 @@ export class Tab1Page {
           for (const user of users) {
             if (user.email === this.user.email && user.password === this.user.password) {
               foundUser = user;
+              this.usernameData = foundUser.username;
               break;
             }
           }
@@ -49,7 +52,7 @@ export class Tab1Page {
           if (foundUser) {
             // Login successful
             console.log('Login successful');
-            this.navCtrl.navigateForward('tab2');
+            this.navCtrl.navigateForward(['tab2', {data:this.usernameData}]);
           } else {
             // Invalid credentials
             console.log('Invalid username or password');

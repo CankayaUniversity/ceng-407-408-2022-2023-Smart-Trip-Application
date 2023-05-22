@@ -15,6 +15,6 @@ export class TabsPage {
   }
 
   goToSignUpPage(){
-    this.navCtrl.navigateForward('tab3');
+    this.navCtrl.navigateForward('sign-up');
   }
 }
