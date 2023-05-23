@@ -6,9 +6,8 @@
         <p style="font-size: 40px; margin-bottom: 0px; margin-top: 100px;">sign up</p>
       </div>
     </div>
-
     <div>
-      <ion-input class="input_box" style="margin-top: 283px;"  name="username" type="text" placeholder="username" [(ngModel)] = "user.username" required>
+      <ion-input class="input_box" style="margin-top: 200px;"  name="username" type="text" placeholder="username" [(ngModel)] = "user.username" required>
         <ion-icon src="assets/icon/username.svg" name="lock-solid" style="width: 36px; height: 22px;"></ion-icon>
       </ion-input>
     </div>
@@ -22,20 +21,30 @@
         <ion-icon src="assets/icon/lock-solid.svg" name="lock-solid" style="width: 36px; height: 22px;"></ion-icon>
       </ion-input>
     </div>
-    <div style="display: flex; margin-left:60px; margin-top:138px" >
+    <div>
+      <h1 style="font-family: 'Aller Display', sans-serif; color: white; margin-top: 20px; text-align: center; font-size: 25px; position: relative">or</h1>
+    </div>
+    <div>
+      <ion-button style="--ion-color-primary: #ff0000; width: 345px; margin-left: 32px; margin-top: 10px;" shape="round">sign up with google
+        <ion-icon src="assets/icon/google.svg" name="google" style="padding-left: 140px;"></ion-icon>
+      </ion-button>
+    </div>
+    <div style="display: flex; margin-left:60px; margin-top:108px" >
       <ion-toggle [(ngModel)]="toggleValue" name="toggle"></ion-toggle>
       <label style="margin-left: 20px; margin-top:-5px; font-family: 'Aller Bold', sans-serif; color: #363636">i agree to the Terms of Service <br> and Privacy Policy</label>
     </div>
-    <div class="error-message" *ngIf="toggleError" style="color: red;font-weight: bold;text-align: center;margin-top: 17px;margin-bottom: -53px;">Please accept the Terms of Service and Privacy Policy!</div>
+    <div class="error-message" *ngIf="toggleError" style="color: red;font-weight: bold;text-align: center;margin-top: 17px;margin-bottom: -22px;">Please accept the Terms of Service and Privacy Policy!</div>
     <div class="error-message" *ngIf="errorMessage" style="color: red;font-weight: bold;text-align: center;margin-top: 23px;margin-bottom: -32px;">{{ errorMessage }}</div>
-    <div>
-      <ion-button class="first_button" style="margin-left: 38px; margin-top: 55px;" (click)="goToSignUpWith()" shape="round">back</ion-button>
-      <ion-button class="second_button" style="margin-left:224px; margin-top:-76px" shape="round" (click)="signUp()">finalize</ion-button>
+    <div class="button-wrapper">
+      <ion-button class="first_button" style="margin-left: -10px; margin-top: 55px;" (click)="goToOpenPage()" shape="round">back</ion-button>
+      <ion-button class="second_button" style="margin-left:170px; margin-top:-76px" shape="round" (click)="signUp()">finalize</ion-button>
+      <div>
+        <ion-header style="margin-top:10px; color:grey; text-align: center; font-family: 'Aller Bold', sans-serif "> already have an account? </ion-header>
+        <ion-header style="margin-top:10px; color:#443DB8; text-align: center; font-family: 'Aller Bold', sans-serif " (click)="goToSignInPage()"> log in </ion-header>
+      </div>
+
     </div>
   </form>
-  <div>
-    <ion-header style="margin-top:10px; color:grey; text-align: center; font-family: 'Aller Bold', sans-serif "> already have an account? </ion-header>
-    <ion-header style="margin-top:10px; color:#443DB8; text-align: center; font-family: 'Aller Bold', sans-serif " (click)="goToSignInPage()"> log in </ion-header>
-  </div>
+
 
 </ion-content>

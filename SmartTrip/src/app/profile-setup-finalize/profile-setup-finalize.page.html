@@ -10,7 +10,7 @@
   <div>
     <ion-avatar class="profilepicture">
         <img src="assets/images/defaultprofilepicture.png">
-      <ion-header style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;">username</ion-header>
+      <ion-header *ngIf="dataComing" style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;"> {{dataComing}} </ion-header>
     </ion-avatar>
       <img class="profile-picture" src="assets/icon/settingsbutton.svg" alt="Settings button" />
       <ion-icon class="settings-button" name="settings-outline"></ion-icon>
