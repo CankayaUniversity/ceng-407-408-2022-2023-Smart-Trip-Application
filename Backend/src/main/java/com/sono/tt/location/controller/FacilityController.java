@@ -1,3 +1,4 @@
+/*
 package com.sono.tt.location.controller;
 import com.sono.tt.location.model.Location;
 import com.sono.tt.location.repository.LocationRepository;
@@ -45,6 +46,6 @@ public class FacilityController {
     public void delete(@PathVariable @NonNull @NotBlank String id) {
         locationRepository.delete(id);
     }
-}
+}*/
 
 
