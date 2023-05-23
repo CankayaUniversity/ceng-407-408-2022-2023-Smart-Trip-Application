@@ -48,7 +48,7 @@ public class DefaultLocationRepository extends DynamoRepository<Location> implem
         return id;
     }
 
-    protected void save(@NonNull @NotNull @Valid Location location) {
+    public String save(@NonNull @NotNull @Valid Location location) {
         PutItemResponse itemResponse = dynamoDbClient.putItem(PutItemRequest.builder()
                 .tableName(dynamoConfiguration.getTableName())
                 .item(item(location))
@@ -56,6 +56,7 @@ public class DefaultLocationRepository extends DynamoRepository<Location> implem
         if (LOG.isDebugEnabled()) {
             LOG.debug(itemResponse.toString());
         }
+        return null;
     }
 
     @Override
