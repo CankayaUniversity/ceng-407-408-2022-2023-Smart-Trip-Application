@@ -54,6 +54,7 @@ export class SignUpPage implements OnInit {
         else {
           // mail successful
           if(this.toggleValue){
+            this.toggleError = false;
             this.http.post(`${environment.serverRoot}/user`, this.user).pipe(
               take(1)
             ).subscribe(
