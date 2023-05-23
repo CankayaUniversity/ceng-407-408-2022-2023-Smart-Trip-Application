@@ -1,16 +1,35 @@
 package com.sono.tt.location.model;
 
-public class Location {
-    private String name;
-    private double latitude;
-    private double longitude;
+import com.sono.tt.location.Identified;
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.serde.annotation.Serdeable;
 
-    public Location(String name, double latitude, double longitude) {
+import javax.validation.constraints.NotBlank;
+
+@Serdeable
+public class Location implements Identified {
+
+    @NonNull
+    @NotBlank
+    private final String id;
+    private String name;
+    private String latitude;
+    private String longitude;
+    private String IsAvm;
+
+    public Location(@NonNull String id, String name, String latitude, String longitude, String isAvm) {
+        this.id = id;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.IsAvm = isAvm;
     }
 
+    @Override
+    @NonNull
+    public String getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }
@@ -19,20 +38,32 @@ public class Location {
         this.name = name;
     }
 
-    public double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+
+    public String getIsAvm() {
+        return IsAvm;
+    }
+
+    public void setIsAvm(String IsAvm) {
+        this.IsAvm = IsAvm;
+    }
+
+
+
+
 }
 

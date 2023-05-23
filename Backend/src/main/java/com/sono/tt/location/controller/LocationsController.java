@@ -1,10 +1,9 @@
 package com.sono.tt.location.controller;
+
 import com.sono.tt.location.model.Location;
 import com.sono.tt.location.repository.LocationRepository;
-
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.uri.UriBuilder;
 import io.micronaut.scheduling.TaskExecutors;
@@ -14,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Optional;
 
+@ExecuteOn(TaskExecutors.IO) // <1>
+@Controller("/location") // <2>
 public class LocationsController {
     private final LocationRepository locationRepository;
 
@@ -27,8 +28,12 @@ public class LocationsController {
     }
 
     @Post
-    public HttpResponse<?> save(@Body @NonNull Location location) {
-        String id = locationRepository.save(location);
+    public HttpResponse<?> save(@Body("name")  @NonNull String name,
+                                @Body("latitude")  @NonNull String latitude,
+                                @Body("longitude")  @NonNull String longitude,
+                                @Body("isAvm")  @NonNull String isAvm
+                                ) {
+        String id = locationRepository.save(name,latitude,longitude,isAvm);
         return HttpResponse.created(UriBuilder.of("/location").path(id).build());
     }
 
@@ -37,9 +42,4 @@ public class LocationsController {
         return locationRepository.findById(id);
     }
 
-    @Delete("/{id}")
-    @Status(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable @NonNull @NotBlank String id) {
-        locationRepository.delete(id);
-    }
 }
