@@ -20,4 +20,5 @@ public interface LocationRepository {
                 @NonNull @NotBlank String longitude,
                 @NonNull @NotBlank String isAvm);
 
+    String save(Location location);
 }
