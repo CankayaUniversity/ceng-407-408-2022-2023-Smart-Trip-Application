@@ -7,6 +7,8 @@ import { NavController } from "@ionic/angular";
 import { MenuController } from "@ionic/angular";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {ActivatedRoute} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-tab2',
@@ -32,7 +34,8 @@ export class Tab2Page {
               private menu: MenuController,
               public modalController: ModalController,
               public navCtrl: NavController,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public http: HttpClient) {
     this.toggled= true;
     this.geocoder = new google.maps.Geocoder;
     let elem = document.createElement("div")
@@ -45,6 +48,13 @@ export class Tab2Page {
     this.markers = [];
     this.dataComing = this.route.snapshot.params['data'];
   }
+
+  location = {
+    name: '',
+    latitude: '',
+    longitude: '',
+    isAvm: ''
+  };
 
   ionViewDidEnter(){
     // let infoWindow = new google.maps.InfoWindow({map: map});
@@ -153,9 +163,16 @@ export class Tab2Page {
   ngAfterViewInit(){
 
   }
-  data1: string;
+
   async onTriggerSheetClick(marker: any){
-    this.data1 = marker.title;
+    this.location.name = marker.title;
+    this.location.latitude = String(marker.getPosition()?.lat());
+    this.location.longitude = String(marker.getPosition()?.lng());
+    this.location.isAvm = "0";
+
+    console.log(this.location.name,this.location.latitude, this.location.longitude, this.location.isAvm);
+
+
     const modal = await this.modalController.create(
       {
         component: FacilityReviewPage,
@@ -163,9 +180,44 @@ export class Tab2Page {
         breakpoints: [0, 0.8],
         cssClass: 'facilityReview',
         componentProps:{
-          data: this.data1,
+          dataName: this.location.name,
+
         }
       });
+
+    this.http.get(`${environment.serverRoot}/location`).pipe(
+      take(1)
+    ).subscribe(
+      (response) => {
+        //this.errorMessage = ' ';
+        const locations = Object.values(response);
+
+        const foundLocation = locations.find((location) => location.latitude === this.location.latitude && location.longitude === this.location.longitude);
+
+        if (foundLocation) {
+
+          console.log(this.location.latitude, this.location.longitude,": this facility is in dataset");
+        }
+
+        else {
+            this.http.post(`${environment.serverRoot}/location`, this.location).pipe(
+              take(1)
+            ).subscribe(
+              (response) => {
+                console.log("Response:", JSON.stringify(response, undefined, '  '));
+              },
+              (error) => {
+                console.log("Error:", error);
+                //this.errorMessage = 'Please fill in the required fields!';
+              }
+            );
+        }
+      },
+      (error) => {
+        console.log('Error:', error);
+        //this.errorMessage = 'An error occurred';
+      }
+    );
     await modal.present();
     //const { data, role } = await modal.onWillDismiss();
   }
