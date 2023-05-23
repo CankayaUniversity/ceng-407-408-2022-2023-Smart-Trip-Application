@@ -40,6 +40,4 @@ public class FacilityController {
         return facilityRepository.findById(id);
     }
 
-}
-
 

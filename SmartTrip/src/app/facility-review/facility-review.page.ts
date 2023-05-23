@@ -3,6 +3,7 @@ import { NavController } from "@ionic/angular";
 import { ModalController } from '@ionic/angular';
 import { WriteReviewPage } from "../write-review/write-review.page";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-facility-review',
@@ -11,23 +12,26 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class FacilityReviewPage implements OnInit {
   facilityTitle: string = '';
-  data: string;
+  dataName: string;
   rating3: number;
   public form: FormGroup;
+  rating : number;
   constructor(
     private fb: FormBuilder,
     private modalController: ModalController,
     public navCtrl: NavController,
+    public http: HttpClient
   ) {
+    this.rating = 5;
     this.rating3 = 0;
     this.form = this.fb.group({
       rating1: ['', Validators.required],
-      rating2: [4]
+      rating2: [this.rating]
     });
   }
 
   ngOnInit() {
-    this.facilityTitle = this.data;
+    this.facilityTitle = this.dataName;
   }
 
   cancel() {
