@@ -23,5 +23,7 @@ $ ionic serve  #reload at localhost:4200
 
 ### If necessary, do not forget to update these dependencies below
 $ npm i ngx-star-rating –force
+
 $ npm install --save @ionic-native/geolocation –force
+
 $ ./gradlew shadowJar
