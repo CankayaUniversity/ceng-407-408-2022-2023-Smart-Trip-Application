@@ -16,14 +16,21 @@ Smart Trip Application
 
 
 ### Build Setup
+```
 $ npm install -g @ionic/cli #to install ionic
+```
 
 ### Use this if you cannot start the application using IDE
+```
 $ ionic serve  #reload at localhost:4200
+```
+
 
 ### If necessary, do not forget to update these dependencies below
+```
 $ npm i ngx-star-rating –force
 
 $ npm install --save @ionic-native/geolocation –force
 
 $ ./gradlew shadowJar
+```
