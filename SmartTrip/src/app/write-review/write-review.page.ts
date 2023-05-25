@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController } from "@ionic/angular";
 import { ModalController } from '@ionic/angular';
 import { FacilityReviewPage } from "../facility-review/facility-review.page";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {HttpClient} from "@angular/common/http";
+import { IonTextarea } from '@ionic/angular';
 
 @Component({
   selector: 'app-write-review',
@@ -10,31 +12,66 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./write-review.page.scss'],
 })
 export class WriteReviewPage implements OnInit {
+  @ViewChild('commentArea', { static: false }) commentArea: IonTextarea;
   rating3: number;
   public form: FormGroup;
-  constructor(private fb: FormBuilder, private modalController: ModalController, public navCtrl: NavController) {
+  dataLat: string;
+  dataLng: string;
+  comment: string = '';
+  items: string[];
+  constructor(private fb: FormBuilder,
+              private modalController: ModalController,
+              public navCtrl: NavController,
+              public http: HttpClient) {
+    this.items =
+      ['Tuvalet kağıdı ve sabun vardı.',
+        'Her şey iyiydi.',
+        'Sıcak soğuk su ayarı iyiydi.',
+        'Her şey temassızdı.',
+        'Daha iyi olabilirdi.',
+        'İdare eder.',
+        'Kötü kokuyordu.',
+        'Bok kokuyordu.'
+      ];
     this.rating3 = 0;
   }
-
+  facility: {
+    location: string,
+    user: string,
+    Timestamp: string,
+    rating: string,
+    AdditionalComment: string,
+    comments: string[]
+  } = {
+    location: '',
+    user: '',
+    Timestamp: '',
+    rating: '',
+    AdditionalComment: '',
+    comments: []
+  };
   ngOnInit() {
+    //this.facility.comments.push(this.dataLat);
   }
 
   cancel() {
     return this.modalController.dismiss(null, 'cancel');
   }
 
-  async onTriggerSheetClick(){
-    this.cancel();
-    const modal = await this.modalController.create(
-      {
-        component: FacilityReviewPage,
-        initialBreakpoint: 0.8,
-        breakpoints: [0, 0.8],
-        cssClass: 'facilityReview'
-      });
-    modal.present();
-    const { data, role } = await modal.onWillDismiss();
+   onTriggerSheetClick(){
+     this.logComment();
+     this.cancel();
   }
+  logComment() {
+    this.facility.comments.push(this.comment);
+    this.facility.comments.forEach(comment => {
+      console.log(comment);
+    });
+  }
+  setComment(item: string) {
+    this.comment = item;
+  }
+
 
   public toilet = 'assets/icon/toilet.png';
   public disabled = 'assets/icon/disabled.png';

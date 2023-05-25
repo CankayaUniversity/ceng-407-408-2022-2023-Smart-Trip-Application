@@ -4,15 +4,22 @@
       <p style="font-size: 25px; margin-bottom: 0px; margin-top: 30px;">write a review</p>
     </div>
 
-    <div class="rectangle">
-      <ion-button class="button button-clear" style="width: 35px; height: 32px; background-image: url(assets/icon/add-photo.svg); background-size: cover; position: absolute; bottom: 622px; left: 157px;"></ion-button>
-      <p style="font-family: 'Aller Bold', sans-serif; position: absolute; margin-top: 102px; margin-left: 116px; color: grey">add photo</p>
+    <div class="scrollable-container" style="position: relative; top: 23%; transform: translateY(-50%); overflow-y: scroll">
+      <ion-list style="background-color: transparent; align-items: center">
+        <ion-row>
+          <ion-col size="12" *ngFor="let item of items">
+            <ion-button class="commentButton" shape="round" (click)="setComment(item)">
+              {{ item }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
     </div>
 
     <ion-card class="commentCard">
-      <ion-item style="--border-style: none;">
-        <ion-icon src="assets/icon/comment.svg" name="comment" slot="start" style="margin-top: 16px; font-size: 26px;"></ion-icon>
-        <ion-textarea class="commentArea" placeholder="was it clean? tell us..."></ion-textarea>
+      <ion-item style="--border-style: none; display: flex; justify-content: center; align-items: center;">
+        <ion-icon src="assets/icon/comment.svg" name="comment" slot="start" style=" font-size: 26px;"></ion-icon>
+        <ion-textarea [(ngModel)]="comment" class="commentArea" style="color: rgb(126, 126, 127);" readonly></ion-textarea>
       </ion-item>
     </ion-card>
     <div>
@@ -23,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div class="toilet" style="position: fixed; margin-top: 40px;">
+    <div class="toilet" style="position: fixed; margin-top: 30px;">
       <img src="{{toilet}}" (click)="selectToilet();" style="margin-left: 10%">
       <img src="{{disabled}}" (click)="selectDisabled();" style="margin-left: 35%">
       <img src="{{babycare}}" (click)="selectBabycare();" style="margin-left: 55%">
@@ -32,7 +39,7 @@
   </div>
 
   <div>
-    <ion-button class="first_button" style="margin-left: 20px;" shape="round" (click)="onTriggerSheetClick()">back</ion-button>
-    <ion-button class="second_button" style="margin-left: 30px; " shape="round" (click)="cancel()">rate</ion-button>
+    <ion-button class="first_button" style="filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4)); margin-top: 640px; margin-left: 20px;" shape="round" (click)="cancel()">cancel</ion-button>
+    <ion-button class="second_button" style="filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4)); margin-top: 640px; margin-left: 30px; " shape="round" (click)="onTriggerSheetClick()">rate</ion-button>
   </div>
 </ion-content>

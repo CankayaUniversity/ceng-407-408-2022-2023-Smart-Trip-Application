@@ -5,6 +5,7 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.serde.annotation.Serdeable;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Serdeable
 public class Facility implements Identified {
@@ -12,21 +13,38 @@ public class Facility implements Identified {
     @NonNull
     @NotBlank
     private final String id;
-
-    private Location location;
-
-    private User user;
+    private String facilityName;
+    private String latitude;
+    private String longitude;
+    private String IsAvm;
+    private String userId;
     private String Timestamp;
-    private String Note;
     private String AdditionalComment;
+    private String rating;
+    private List<String> comments;
+    private String hasToilet;
+    private String hasDisabled;
+    private String hasBabycare;
+    private String hasMosque;
 
-    public Facility(@NonNull String id,Location location, User user, String Timestamp, String Note, String AdditionalComment) {
+    public Facility(@NonNull String id, String facilityName,String latitude, String longitude, String IsAvm, String userId, String Timestamp, String AdditionalComment,
+                    String rating, List<String> comments, String hasToilet, String hasDisabled, String hasBabycare, String hasMosque) {
+        //this.id = location;
+        //this.location = location;
         this.id = id;
-        this.location = location;
-        this.user = user;
+        this.facilityName = facilityName;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.IsAvm = IsAvm;
+        this.userId = userId;
         this.Timestamp = Timestamp;
-        this.Note = Note;
         this.AdditionalComment = AdditionalComment;
+        this.rating = rating;
+        this.comments = comments;
+        this.hasToilet = hasToilet;
+        this.hasDisabled = hasDisabled;
+        this.hasBabycare = hasBabycare;
+        this.hasMosque = hasMosque;
     }
     @Override
     @NonNull
@@ -34,45 +52,109 @@ public class Facility implements Identified {
         return id;
     }
 
-    public Location getLocation() {
-        return location;
+    public String getFacilityName() {
+        return facilityName;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setFacilityName(String facilityName) {
+        this.facilityName = facilityName;
     }
 
-    public User getUser() {
-        return user;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getIsAvm() {
+        return IsAvm;
+    }
+
+    public void setIsAvm(String isAvm) {
+        IsAvm = isAvm;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public String getTimestamp() {
         return Timestamp;
     }
 
-    public void setTimestamp(String name) {
-        this.Timestamp = Timestamp;
-    }
-
-    public String getNote() {
-        return Note;
-    }
-
-    public void setNote(String note) {
-        this.Note = Note;
+    public void setTimestamp(String timestamp) {
+        Timestamp = timestamp;
     }
 
     public String getAdditionalComment() {
         return AdditionalComment;
     }
 
-    public void setAdditionalComment(String AdditionalComment) {
-        this.AdditionalComment = AdditionalComment;
+    public void setAdditionalComment(String additionalComment) {
+        AdditionalComment = additionalComment;
     }
 
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
+
+    public String getHasToilet() {
+        return hasToilet;
+    }
+
+    public void setHasToilet(String hasToilet) {
+        this.hasToilet = hasToilet;
+    }
+
+    public String getHasDisabled() {
+        return hasDisabled;
+    }
+
+    public void setHasDisabled(String hasDisabled) {
+        this.hasDisabled = hasDisabled;
+    }
+
+    public String getHasBabycare() {
+        return hasBabycare;
+    }
+
+    public void setHasBabycare(String hasBabycare) {
+        this.hasBabycare = hasBabycare;
+    }
+
+    public String getHasMosque() {
+        return hasMosque;
+    }
+
+    public void setHasMosque(String hasMosque) {
+        this.hasMosque = hasMosque;
+    }
 
 }
 

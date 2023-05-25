@@ -1,6 +1,12 @@
-ion-button{
-  margin-top: 620px;
-  filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4));
+.commentButton{
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
+  width: fit-content !important;
+  height: 35px;
+  font-size: medium !important;
+  --background: white;
+  --color: #3a58cb;
+  display: flex !important;
+  //display: inline-flex !important;
 }
 
 .toilet{
@@ -12,31 +18,27 @@ ion-button{
   }
 }
 
-.rectangle{
-  width: 320px;
-  height: 198px;
+.scrollable-container {
+  width: 335px;
+  height: 295px;
   margin-left: 25px;
-  margin-top: 25px;
-  background-color: white;
-  border-radius: 20px;
 }
-
 .commentCard{
   width: 320px;
-  height: 125px;
+  height: 55px;
   margin-left: 25px;
   border-radius: 20px;
+  margin-top: 50px;
+
 }
 
 .commentArea{
-  --placeholder-color: black;
-  --placeholder-font-family: 'Aller Bold', sans-serif;
   border-radius: 20px;
-  margin-top: 6px;
+  --ion-font-family: "Aller Bold", sans-serif;
 }
 
 .cont {
-  width: 93%;
+  width: 85%;
   max-width: 350px;
   text-align: center;
   margin: 4% auto;
