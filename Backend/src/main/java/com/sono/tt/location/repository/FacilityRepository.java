@@ -15,13 +15,28 @@ public interface FacilityRepository {
 
     @NonNull
     Optional<Facility> findById(@NonNull @NotBlank String id);
+    @NonNull
+    Optional<Facility> findById(@NonNull @NotBlank String latitude, @NonNull @NotBlank String longitude);
 
     @NonNull
-    String save(@NonNull @NotBlank Location location,
-                @NonNull @NotBlank User user,
+    String save(@NonNull @NotBlank String facilityName,
+                @NonNull @NotBlank String latitude,
+                @NonNull @NotBlank String longitude,
+                @NonNull @NotBlank String IsAvm,
+                @NonNull @NotBlank String userId,
                 @NonNull @NotBlank String Timestamp,
-                @NonNull @NotBlank String Note,
-                @NonNull @NotBlank String AdditionalComment);
+                @NonNull @NotBlank String AdditionalComment,
+                @NonNull @NotBlank String rating,
+                @NonNull @NotBlank List<String> comments,
+                @NonNull @NotBlank String hasToilet,
+                @NonNull @NotBlank String hasDisabled,
+                @NonNull @NotBlank String hasBabycare,
+                @NonNull @NotBlank String hasMosque
+                );
 
-    String save(Facility facility);
+    @NonNull
+    String save(@NonNull Facility facility);
+
+    //String save(Facility facility);
+
 }
