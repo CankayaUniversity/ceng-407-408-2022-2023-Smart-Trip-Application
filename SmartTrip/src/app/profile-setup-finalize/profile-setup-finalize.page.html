@@ -9,12 +9,14 @@
   </div>
   <div>
     <ion-avatar class="profilepicture">
-        <img src="assets/images/defaultprofilepicture.png">
+        <img [src]="profilePicture">
       <ion-header *ngIf="dataComing" style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;"> {{dataComing}} </ion-header>
     </ion-avatar>
       <img class="profile-picture" src="assets/icon/settingsbutton.svg" alt="Settings button" />
       <ion-icon class="settings-button" name="settings-outline"></ion-icon>
   </div>
+
+
   <div class ="othercontent">
     <div style="display: flex; margin-left:60px; margin-top:180px" >
       <ion-toggle style="margin-top:-114px">
@@ -32,7 +34,8 @@
       <label style="margin-left: 20px; margin-top:-349px; font-family: 'Aller Bold', sans-serif; color:grey">show my real name in comments</label>
     </div>
     <div>
-      <ion-button class="confirm_button" style="margin-left:125px; margin-top:-540px" shape="round" (click)="goToHomePage()">confirm</ion-button>
+      <ion-button class="confirm_button" style="margin-left:50px; margin-top:-502px" shape="round" (click)="changeAvatar()">change avatar</ion-button>
+      <ion-button class="confirm_button" style="margin-left:219px; margin-top:-540px" shape="round" (click)="goToHomePage()">confirm</ion-button>
     </div>
 
   </div>
