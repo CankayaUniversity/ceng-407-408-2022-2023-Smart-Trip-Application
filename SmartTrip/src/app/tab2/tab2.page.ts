@@ -46,14 +46,37 @@ export class Tab2Page {
     };
     this.autocompleteItems = [];
     this.markers = [];
-    this.dataComing = this.route.snapshot.params['data'];
+    this.dataComing = this.route.snapshot.params['dataName'];
   }
 
-  location = {
-    name: '',
+  facility: {
+    facilityName: string,
+    latitude: string,
+    longitude: string,
+    IsAvm:string,
+    userId: string,
+    Timestamp: string,
+    AdditionalComment: string,
+    rating: string,
+    comments: string[],
+    hasToilet: string,
+    hasDisabled: string,
+    hasBabycare: string,
+    hasMosque: string
+  } = {
+    facilityName: '',
     latitude: '',
     longitude: '',
-    isAvm: ''
+    IsAvm:'',
+    userId: '',
+    Timestamp: '',
+    AdditionalComment: '',
+    rating: '',
+    comments: [],
+    hasToilet: '',
+    hasDisabled: '',
+    hasBabycare: '',
+    hasMosque: ''
   };
 
   ionViewDidEnter(){
@@ -142,6 +165,7 @@ export class Tab2Page {
       map: this.map,
       animation: google.maps.Animation.DROP,
       title: place.name,
+
     });
     this.markers.push(marker);
     this.map.setCenter(place.geometry.location);
@@ -165,12 +189,11 @@ export class Tab2Page {
   }
 
   async onTriggerSheetClick(marker: any){
-    this.location.name = marker.title;
-    this.location.latitude = String(marker.getPosition()?.lat());
-    this.location.longitude = String(marker.getPosition()?.lng());
-    this.location.isAvm = "0";
+    this.facility.facilityName = marker.title;
+    this.facility.latitude = String(marker.getPosition()?.lat());
+    this.facility.longitude = String(marker.getPosition()?.lng());
 
-    console.log(this.location.name,this.location.latitude, this.location.longitude, this.location.isAvm);
+    console.log(this.facility.facilityName,this.facility.latitude, this.facility.longitude, this.facility.IsAvm);
 
 
     const modal = await this.modalController.create(
@@ -180,27 +203,28 @@ export class Tab2Page {
         breakpoints: [0, 0.8],
         cssClass: 'facilityReview',
         componentProps:{
-          dataName: this.location.name,
-
+          dataName: this.facility.facilityName,
+          dataLatitude: this.facility.latitude,
+          dataLongitude: this.facility.longitude
         }
       });
 
-    this.http.get(`${environment.serverRoot}/location`).pipe(
+    this.http.get(`${environment.serverRoot}/facility/by_geolocation/`+this.facility.latitude+'/'+this.facility.longitude).pipe(
       take(1)
     ).subscribe(
       (response) => {
         //this.errorMessage = ' ';
-        const locations = Object.values(response);
+        const facilities = Object.values(response);
 
-        const foundLocation = locations.find((location) => location.latitude === this.location.latitude && location.longitude === this.location.longitude);
+        const foundFacility = facilities.find((facility) => facility.latitude === this.facility.latitude && facility.longitude === this.facility.longitude);
 
-        if (foundLocation) {
+        if (foundFacility) {
 
-          console.log(this.location.latitude, this.location.longitude,": this facility is in dataset");
+          console.log(this.facility.latitude, this.facility.longitude,": this facility is in dataset");
         }
 
         else {
-            this.http.post(`${environment.serverRoot}/location`, this.location).pipe(
+            this.http.post(`${environment.serverRoot}/facility`, this.facility).pipe(
               take(1)
             ).subscribe(
               (response) => {
