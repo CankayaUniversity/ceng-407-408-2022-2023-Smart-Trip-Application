@@ -46,7 +46,7 @@ export class Tab2Page {
     };
     this.autocompleteItems = [];
     this.markers = [];
-    this.dataComing = this.route.snapshot.params['dataName'];
+    this.dataComing = this.route.snapshot.params['data'];
   }
 
   facility: {
