@@ -4,7 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { WriteReviewPage } from "../write-review/write-review.page";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-facility-review',
@@ -19,22 +18,51 @@ export class FacilityReviewPage implements OnInit {
   rating3: number;
   public form: FormGroup;
   rating : number;
-  dataComing: any;
+  reviews: { username: string; comment: string; icon: string }[] = [
+    {
+      username: "kullanici1",
+      comment: "Tuvalet kağıdı ve sabun vardı.",
+      icon: "assets/images/defaultprofilepicture.png"
+    },
+    {
+      username: "kullanici2",
+      comment: "Her şey iyiydi",
+      icon: "assets/images/defaultprofilepicture.png"
+    },
+    {
+      username: "kullanici3",
+      comment: "Her şey temassızdı.",
+      icon: "assets/images/defaultprofilepicture.png"
+    },
+    {
+      username: "kullanici4",
+      comment: "Gitmenizi öneririm.",
+      icon: "assets/images/defaultprofilepicture.png"
+    },
+    {
+      username: "kullanici5",
+      comment: "Her şey iyiydi.",
+      icon: "assets/images/defaultprofilepicture.png"
+    },
+    {
+      username: "kullanici6",
+      comment: "Hijyene çok dikkat edilmiş.",
+      icon: "assets/images/defaultprofilepicture.png"
+    }
+  ];
 
   constructor(
     private fb: FormBuilder,
     private modalController: ModalController,
     public navCtrl: NavController,
-    private route: ActivatedRoute,
     public http: HttpClient
   ) {
-    this.rating = 5;
+    this.rating = 4;
     this.rating3 = 0;
     this.form = this.fb.group({
       rating1: ['', Validators.required],
       rating2: [this.rating]
     });
-    //this.dataComing = this.route.snapshot.params['dataLocation'];
   }
 
   ngOnInit() {

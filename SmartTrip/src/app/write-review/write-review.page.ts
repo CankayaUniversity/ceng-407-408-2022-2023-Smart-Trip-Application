@@ -24,14 +24,16 @@ export class WriteReviewPage implements OnInit {
               public navCtrl: NavController,
               public http: HttpClient) {
     this.items =
-      ['Tuvalet kağıdı ve sabun vardı.',
+      [ 'Hijyene çok dikkat edilmiş.',
+        'Tuvalet kağıdı ve sabun vardı.',
+        'Gitmenizi öneririm.',
         'Her şey iyiydi.',
         'Sıcak soğuk su ayarı iyiydi.',
         'Her şey temassızdı.',
         'Daha iyi olabilirdi.',
         'İdare eder.',
         'Kötü kokuyordu.',
-        'Bok kokuyordu.'
+        'Kesinlikle gitmeyin!'
       ];
     this.rating3 = 0;
   }

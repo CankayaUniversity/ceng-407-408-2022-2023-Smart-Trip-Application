@@ -28,7 +28,7 @@ public class DefaultFacilityRepository extends DynamoRepository<Facility> implem
     private static final String ATTRIBUTE_FACILITYNAME = "facilityName";
     private static final String ATTRIBUTE_LATITUDE = "latitude";
     private static final String ATTRIBUTE_LONGITUDE = "longitude";
-    private static final String ATTRIBUTE_ISAVM = "isAvm";
+    private static final String ATTRIBUTE_ISAVM = "IsAvm";
     private static final String ATTRIBUTE_USERID = "userId";
     private static final String ATTRIBUTE_TIMESTAMP = "Timestamp";
     private static final String ATTRIBUTE_ADDITIONALCOMMENT = "AdditionalComment";
@@ -102,9 +102,27 @@ public class DefaultFacilityRepository extends DynamoRepository<Facility> implem
     }
 
     @Override
+    @NonNull
+    public Optional<Facility> findById(@NonNull @NotBlank String latitude, @NonNull @NotBlank String longitude) {
+        // Retrieve facilities using your preferred method (e.g., querying a database, calling an API, etc.)
+        List<Facility> facilities = findAll();
+
+        // Iterate through the facilities to find a match based on latitude and longitude
+        for (Facility facility : facilities) {
+            if (facility.getLatitude().equals(latitude) && facility.getLongitude().equals(longitude)) {
+                return Optional.of(facility);
+            }
+        }
+
+        return Optional.empty(); // Return an empty Optional if no facility matches the given latitude and longitude
+    }
+/*
+
+    @Override
     public Optional<Facility> findById(String latitude, String longitude) {
         return Optional.empty();
     }
+*/
 
     @Override
     @NonNull

@@ -29,8 +29,6 @@ public class Facility implements Identified {
 
     public Facility(@NonNull String id, String facilityName,String latitude, String longitude, String IsAvm, String userId, String Timestamp, String AdditionalComment,
                     String rating, List<String> comments, String hasToilet, String hasDisabled, String hasBabycare, String hasMosque) {
-        //this.id = location;
-        //this.location = location;
         this.id = id;
         this.facilityName = facilityName;
         this.latitude = latitude;
