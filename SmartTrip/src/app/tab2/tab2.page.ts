@@ -167,6 +167,7 @@ export class Tab2Page {
       title: place.name,
 
     });
+
     this.markers.push(marker);
     this.map.setCenter(place.geometry.location);
     this.zoomToFacility(marker);
@@ -192,10 +193,18 @@ export class Tab2Page {
     this.facility.facilityName = marker.title;
     this.facility.latitude = String(marker.getPosition()?.lat());
     this.facility.longitude = String(marker.getPosition()?.lng());
+    this.facility.IsAvm=  "0";
+    this.facility.userId=  "123";
+    this.facility.Timestamp= String(Date.now());
+    this.facility.AdditionalComment = "hi";
+    this.facility.rating =  "0";
+    this.facility.comments = ["hello"];
+    this.facility.hasToilet=  "0";
+    this.facility.hasDisabled=  "0";
+    this.facility.hasBabycare=  "0";
+    this.facility.hasMosque =  "0";
 
-    console.log(this.facility.facilityName,this.facility.latitude, this.facility.longitude, this.facility.IsAvm);
-
-
+    console.log(this.facility.facilityName,this.facility.latitude, this.facility.longitude, this.facility.IsAvm, this.facility.userId,this.facility.Timestamp, this.facility.AdditionalComment, this.facility.rating, this.facility.comments, this.facility.hasToilet, this.facility.hasDisabled, this.facility.hasBabycare, this.facility.hasMosque);
     const modal = await this.modalController.create(
       {
         component: FacilityReviewPage,
@@ -213,7 +222,7 @@ export class Tab2Page {
       take(1)
     ).subscribe(
       (response) => {
-        //this.errorMessage = ' ';
+
         const facilities = Object.values(response);
 
         const foundFacility = facilities.find((facility) => facility.latitude === this.facility.latitude && facility.longitude === this.facility.longitude);
@@ -224,7 +233,7 @@ export class Tab2Page {
         }
 
         else {
-            this.http.post(`${environment.serverRoot}/facility`, this.facility).pipe(
+          this.http.post(`${environment.serverRoot}/facility`, this.facility).pipe(
               take(1)
             ).subscribe(
               (response) => {

@@ -3,7 +3,6 @@ package com.sono.tt.location.controller;
 
 import com.sono.tt.location.model.Facility;
 import com.sono.tt.location.repository.FacilityRepository;
-import com.sono.tt.location.repository.LocationRepository;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
@@ -18,23 +17,6 @@ import java.util.Optional;
 @ExecuteOn(TaskExecutors.IO)
 @Controller("/facility") // <1>
 public class FacilityController {
-    public class GeoLocation {
-        private String latitude;
-        private String longitude;
-
-        GeoLocation(String latitude, String longitude) {
-            this.latitude = latitude;
-            this.longitude = latitude;
-        }
-
-        public String getLatitude() {
-            return latitude;
-        }
-
-        public String getLongitude() {
-            return longitude;
-        }
-    }
     private final FacilityRepository facilityRepository;
 
     public FacilityController(FacilityRepository facilityRepository) {
@@ -47,9 +29,22 @@ public class FacilityController {
     }
 
     @Post
-    public HttpResponse<?> save(@Body @NonNull Facility facility) {
-        String id = facilityRepository.save(facility);
-        return HttpResponse.created(UriBuilder.of("/facility").path(id).build()); // <2>
+    public HttpResponse<?> save(@Body("facilityName") @NonNull String facilityName,
+                                @Body("latitude") @NonNull String latitude,
+                                @Body("longitude") @NonNull String longitude,
+                                @Body("IsAvm") @NonNull String IsAvm,
+                                @Body("userId") @NonNull String userId,
+                                @Body("Timestamp") @NonNull String Timestamp,
+                                @Body("AdditionalComment") @NonNull String AdditionalComment,
+                                @Body("rating") @NonNull String rating,
+                                @Body("comments") @NonNull List<String> comments,
+                                @Body("hasToilet") @NonNull String hasToilet,
+                                @Body("hasDisabled") @NonNull String hasDisabled,
+                                @Body("hasBabycare") @NonNull String hasBabycare,
+                                @Body("hasMosque") @NonNull String hasMosque
+    ) {
+        String id = facilityRepository.save(facilityName,latitude,longitude,IsAvm,userId,Timestamp,AdditionalComment,rating,comments,hasToilet,hasDisabled,hasBabycare,hasMosque);
+        return HttpResponse.created(UriBuilder.of("/facility").path(id).build());
     }
 
     @Get("/{id}")
@@ -58,20 +53,29 @@ public class FacilityController {
     }
 
     @Get("/by_geolocation/{latitude}/{longitude}")
-    public Optional<Facility> show(@PathVariable @NonNull @NotBlank String latitude,@PathVariable @NonNull @NotBlank String longitude) {
- /*       Optional<Facility> facility = facilityRepository.findById(latitude, longitude);
-        if (facility != null)
-           return facilityRepository.findById(facility.get().getId());
-        Location locatıon = new location;*/
-
-
-        GeoLocation geoLocation = new GeoLocation(latitude, longitude);
-        Optional<Facility> facility = facilityRepository.findById(geoLocation.getLatitude() + "_" + geoLocation.getLongitude());
-
-        return facilityRepository.findById(facility.get().getId());
+    public Facility show(@PathVariable @NonNull @NotBlank String latitude, @PathVariable @NonNull @NotBlank String longitude) {
+        Optional<Facility> facility = facilityRepository.findById(latitude, longitude);
+        if (facility.isPresent()) {
+            return facility.get();
+        } else {
+            Facility newFacility = new Facility(null, null,latitude, longitude, null, null, null, null,
+                    null, null, null, null,  null, null);
+            //newFacility.setFacilityName(); // Varsayılan bir tesis adı belirleyin
+            return newFacility;
+        }
     }
 
-
-
+/*    @Get("/by_geolocation/{latitude}/{longitude}")
+    public Optional<Facility> show(@PathVariable @NonNull @NotBlank String latitude, @PathVariable @NonNull @NotBlank String longitude) {
+        Optional<Facility> facility = facilityRepository.findById(latitude, longitude);
+        if (facility.isPresent()) {
+            return facilityRepository.findById(facility.get().getId());
+        } else {
+            Facility newFacility = new Facility("1", null,latitude, longitude, null, null, null, null,
+                    null, null, null, null,  null, null);
+            //newFacility.setFacilityName(); // Varsayılan bir tesis adı belirleyin
+            return facilityRepository.findById(newFacility.getId());
+        }
+    }*/
 }
 

@@ -1,8 +1,6 @@
 package com.sono.tt.location.repository;
 
 import com.sono.tt.location.model.Facility;
-import com.sono.tt.location.model.Location;
-import com.sono.tt.location.model.User;
 import io.micronaut.core.annotation.NonNull;
 
 import javax.validation.constraints.NotBlank;

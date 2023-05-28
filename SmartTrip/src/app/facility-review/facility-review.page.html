@@ -16,7 +16,7 @@
       <img src="assets/images/opet.png" >
     </div>
 
-    <ion-header *ngIf="facilityName" style="margin-top:38px;margin-left: 160px; color:white;font-size: 25px;"> {{ facilityName }} </ion-header>
+    <ion-header *ngIf="facilityName" style="margin-top:38px;margin-left: 160px; color:white;font-size: 25px; width: auto;"> {{ facilityName }} </ion-header>
     <!--<ion-header style="margin-top:8px;margin-left: 137px; color:white;font-size: 15px;">Yayalar, 06740 Çamlıdere/Ankara </ion-header> -->
     <div>
       <form [formGroup]="form">
@@ -37,35 +37,17 @@
   </div>
   </div>
 
-  <div class="scrollable-container" style="position: absolute; top: 46%; transform: translateY(-50%) ;overflow-y: scroll">
-    <ion-list>
-      <ion-item>
-        <h2 style="font-size: 15px">Lavaboları temiz, market bölümü gayet çeşitliydi.</h2>
-      </ion-item>
-      <ion-item>
-        <h2 style="font-size: 15px">Bu konumda yer alan Opet gerçekten çok temiz.</h2>
-      </ion-item>
-      <ion-item>
-        <h2 style="font-size: 15px">İyiydi.</h2>
-      </ion-item>
-      <ion-item>
-        <h2 style="font-size: 15px">Çalışanlar güler yüzlü ve tuvaletleri tertemiz.</h2>
-      </ion-item>
-      <ion-item>
-        <h2 style="font-size: 15px">Hizmet kalitesi artmış.</h2>
-      </ion-item>
-      <ion-item>
-        <h2 style="font-size: 15px">Genel olarak iyi.</h2>
-      </ion-item>
-      <ion-item>
-        <h2 style="font-size: 15px">Temiz.</h2>
-      </ion-item>
-      <ion-item>
-        <h2 style="font-size: 15px">Başarılı.</h2>
-      </ion-item>
-      <ion-item>
-        <h2 style="font-size: 15px">Lavaboları gerçekten çok temizdi.</h2>
-      </ion-item>
+  <div class="scrollable-container" style="position: fixed; transform: translateY(-50%); overflow-y: scroll">
+    <ion-list style="/*background-color: transparent;*/ align-items: center">
+          <ion-item *ngFor="let review of reviews">
+            <ion-avatar slot="start">
+              <img [src]="review.icon">
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ review.username }}</h2>
+              <p>{{ review.comment }}</p>
+            </ion-label>
+          </ion-item>
     </ion-list>
   </div>
 
