@@ -3,6 +3,7 @@ micronaut:
     name: location
   server:
     cors:
+      enabled: true
   security:
     authentication: bearer
     token:
