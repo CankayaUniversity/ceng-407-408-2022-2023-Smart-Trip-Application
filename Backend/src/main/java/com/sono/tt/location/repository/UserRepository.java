@@ -14,6 +14,9 @@ public interface UserRepository {
     @NonNull
     Optional<User> findById(@NonNull @NotBlank String id);
 
+    @NonNull
+    Optional<User> findByEmail(@NonNull @NotBlank String email);
+
     void delete(@NonNull @NotBlank String id);
 
     @NonNull
