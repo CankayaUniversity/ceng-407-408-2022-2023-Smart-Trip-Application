@@ -21,6 +21,8 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut:micronaut-http-server-netty")
     implementation("io.micronaut.aws:micronaut-aws-apigateway")
+    implementation("io.micronaut.reactor:micronaut-reactor")
+    implementation("io.micronaut.security:micronaut-security-jwt")
 
     testImplementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.test:micronaut-test-junit5")

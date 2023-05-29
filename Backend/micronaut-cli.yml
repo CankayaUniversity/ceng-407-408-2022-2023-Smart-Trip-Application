@@ -3,4 +3,4 @@ defaultPackage: example.micronaut
 testFramework: junit
 sourceLanguage: java
 buildTool: gradle
-features: [amazon-api-gateway, annotation-api, app-name, aws-lambda, gradle, jackson-databind, java-application, junit, logback, micronaut-build, readme, shade, spring-boot-java, x86, yaml]
+features: [amazon-api-gateway, annotation-api, app-name, aws-lambda, gradle, jackson-databind, java-application, junit, logback, micronaut-build, readme, security-annotations, security-jwt, shade, spring-boot-java, x86, yaml]
