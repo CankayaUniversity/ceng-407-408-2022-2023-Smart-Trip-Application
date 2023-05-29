@@ -31,11 +31,7 @@ import software.amazon.awssdk.services.dynamodb.model.ScalarAttributeType;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Requires(condition = CIAwsRegionProviderChainCondition.class)
 @Requires(condition = CIAwsCredentialsProviderChainCondition.class)
@@ -49,7 +45,10 @@ public class DynamoRepository<T extends Identified> {
     protected static final String ATTRIBUTE_SK = "sk";
     protected static final String ATTRIBUTE_GSI_1_PK = "GSI1PK";
     protected static final String ATTRIBUTE_GSI_1_SK = "GSI1SK";
+    protected static final String ATTRIBUTE_GSI_2_PK = "GSI2PK";
+    protected static final String ATTRIBUTE_GSI_2_SK = "GSI2SK";
     protected static final String INDEX_GSI_1 = "GSI1";
+    protected static final String INDEX_GSI_2 = "GSI2";
 
     protected final DynamoDbClient dynamoDbClient;
     protected final DynamoConfiguration dynamoConfiguration;
@@ -132,6 +131,22 @@ public class DynamoRepository<T extends Identified> {
         }
     }
 
+    @NonNull
+    protected QueryRequest findByGsi2(@NonNull String gsi2pk, @NonNull String gsi2sk) {
+        return QueryRequest.builder()
+                .tableName(dynamoConfiguration.getTableName())
+                .indexName(INDEX_GSI_2)
+                .scanIndexForward(true)
+                .limit(1)
+                .keyConditionExpression("#pk = :pk and #sk = :sk")
+                .expressionAttributeNames(Map.of("#pk", ATTRIBUTE_GSI_2_PK, "#sk", ATTRIBUTE_GSI_2_SK))
+                .expressionAttributeValues(Map.of(
+                        ":pk", AttributeValue.builder()                              .s(gsi2pk)                                .build(),
+                        ":sk",AttributeValue.builder()                              .s(gsi2sk)                                .build()
+                ))
+                .build();
+    }
+
     protected void delete(@NonNull @NotNull Class<?> cls, @NonNull @NotBlank String id) {
         AttributeValue pk = id(cls, id);
         DeleteItemResponse deleteItemResponse = dynamoDbClient.deleteItem(DeleteItemRequest.builder()
@@ -202,7 +217,7 @@ public class DynamoRepository<T extends Identified> {
     protected static AttributeValue id(@NonNull Class<?> cls,
                                      @NonNull String id) {
         return AttributeValue.builder()
-                .s(String.join(HASH, cls.getSimpleName().toUpperCase(), id))
+                .s(String.join(HASH, cls.getSimpleName().toUpperCase(Locale.ENGLISH), id))
                 .build();
     }
 
