@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const locations = await firstValueFrom(
-      this.http.get(`${environment.serverRoot}/locations`)
+      this.http.get(`${environment.serverRoot}/facility`)
     );
     console.log(locations);
   }

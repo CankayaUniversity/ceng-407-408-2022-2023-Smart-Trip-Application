@@ -112,7 +112,7 @@ public class DefaultUserRepository extends DynamoRepository<User> implements Use
         result.put(ATTRIBUTE_EMAIL, AttributeValue.builder().s(user.getEmail()).build());
         result.put(ATTRIBUTE_PASSWORD, AttributeValue.builder().s(user.getPassword()).build());
         result.put(ATTRIBUTE_GSI_2_PK, AttributeValue.builder().s("User").build());
-        result.put(ATTRIBUTE_GSI_1_SK, AttributeValue.builder().s(user.getEmail()).build());
+        result.put(ATTRIBUTE_GSI_2_SK, AttributeValue.builder().s(user.getEmail()).build());
         return result;
     }
 

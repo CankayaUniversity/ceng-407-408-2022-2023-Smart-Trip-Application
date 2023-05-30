@@ -71,6 +71,7 @@ export class WriteReviewPage implements OnInit {
     });
   }
   setComment(item: string) {
+
     this.comment = item;
   }
 

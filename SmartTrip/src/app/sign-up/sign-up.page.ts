@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {take} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,8 @@ import {ActivatedRoute} from "@angular/router";
 export class SignUpPage implements OnInit {
 
   constructor(public navCtrl: NavController,
-              public http: HttpClient) { }
+              public http: HttpClient,
+              private userService: UserService) { }
   user = {
     username: '',
     email: '',
@@ -32,6 +34,7 @@ export class SignUpPage implements OnInit {
   goToSignInPage(){
     this.navCtrl.navigateForward('tab1');
   }
+
   signUp() {
     this.http.get(`${environment.serverRoot}/user`).pipe(
       take(1)
@@ -60,7 +63,7 @@ export class SignUpPage implements OnInit {
             ).subscribe(
               (response) => {
                 console.log("Response:", JSON.stringify(response, undefined, '  '));
-                this.navCtrl.navigateForward(['profile-setup', { data: this.user.username }]);
+                this.navCtrl.navigateForward(['profile-setup']);
               },
               (error) => {
                 console.log("Error:", error);

@@ -164,7 +164,7 @@ public class DefaultFacilityRepository extends DynamoRepository<Facility> implem
                 item.get(ATTRIBUTE_TIMESTAMP).s(),
                 item.get(ATTRIBUTE_ADDITIONALCOMMENT).s(),
                 item.get(ATTRIBUTE_RATING).s(),
-                item.get(ATTRIBUTE_COMMENTS).ns(),
+                item.get(ATTRIBUTE_COMMENTS).ss(),
                 item.get(ATTRIBUTE_HASTOILET).s(),
                 item.get(ATTRIBUTE_HASDISABLED).s(),
                 item.get(ATTRIBUTE_BABYCARE).s(),
@@ -185,7 +185,7 @@ public class DefaultFacilityRepository extends DynamoRepository<Facility> implem
         result.put(ATTRIBUTE_TIMESTAMP, AttributeValue.builder().s(facility.getTimestamp()).build());
         result.put(ATTRIBUTE_RATING, AttributeValue.builder().s(facility.getRating()).build());
         result.put(ATTRIBUTE_ADDITIONALCOMMENT, AttributeValue.builder().s(facility.getAdditionalComment()).build());
-        result.put(ATTRIBUTE_COMMENTS, AttributeValue.builder().ns(facility.getComments()).build());
+        result.put(ATTRIBUTE_COMMENTS, AttributeValue.builder().ss(facility.getComments()).build());
         result.put(ATTRIBUTE_HASTOILET, AttributeValue.builder().s(facility.getHasToilet()).build());
         result.put(ATTRIBUTE_HASDISABLED, AttributeValue.builder().s(facility.getHasToilet()).build());
         result.put(ATTRIBUTE_BABYCARE, AttributeValue.builder().s(facility.getHasToilet()).build());

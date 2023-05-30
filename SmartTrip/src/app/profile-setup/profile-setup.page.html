@@ -9,7 +9,7 @@
   <div>
     <ion-avatar class="profilepicture">
       <img [src]="profilePicture">
-      <ion-header *ngIf="dataComing" style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;"> {{dataComing}} </ion-header>
+      <ion-header *ngIf="user" style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;"> {{user.username}} </ion-header>
     </ion-avatar>
   </div>
 
