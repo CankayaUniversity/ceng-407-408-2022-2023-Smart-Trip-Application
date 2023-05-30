@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { HttpClient, HttpParams  } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { take } from 'rxjs';
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-tab1',
@@ -11,7 +12,7 @@ import { take } from 'rxjs';
 })
 export class Tab1Page {
 
-  constructor(public navCtrl: NavController,  public http: HttpClient) {}
+  constructor(public navCtrl: NavController,  public http: HttpClient, private userService: UserService) {}
 
   user = {
     email: '',
@@ -19,8 +20,6 @@ export class Tab1Page {
   };
 
   errorMessage: string = '';
-  private usernameData: any;
-
   ngOnInit() {}
 
   goToOpenPage(){
@@ -32,36 +31,24 @@ export class Tab1Page {
   }
 
   signIn() {
-      this.http.get(`${environment.serverRoot}/user`).pipe(
-        take(1)
+      this.http.post<{access_token: string}>(`${environment.serverRoot}/login`, {
+        username: this.user.email,
+        password: this.user.password,
+      }).pipe(
+        take(1),
       ).subscribe(
         response => {
-          //console.log('Response:', JSON.stringify(response, undefined, '  '));
+          console.log(response);
+          const accessToken = response.access_token;
+          this.userService.setAccessToken(accessToken);
 
-          const users = Object.values(response);
-          let foundUser = null;
-
-          for (const user of users) {
-            if (user.email === this.user.email && user.password === this.user.password) {
-              foundUser = user;
-              this.usernameData = foundUser.username;
-              break;
-            }
-          }
-
-          if (foundUser) {
-            // Login successful
-            console.log('Login successful');
-            this.navCtrl.navigateForward(['tab2', {data:this.usernameData}]);
-          } else {
-            // Invalid credentials
-            console.log('Invalid username or password');
-            this.errorMessage = 'Invalid username or password';
-          }
+          // Login successful
+          console.log('Login successful');
+          this.navCtrl.navigateForward(['tab2']);
         },
         error => {
           console.log('Error:', error);
-          this.errorMessage = 'An error occurred';
+          this.errorMessage = 'Invalid username or password';
         }
       );
     }

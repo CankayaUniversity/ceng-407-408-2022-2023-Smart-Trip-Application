@@ -10,6 +10,8 @@ import io.micronaut.http.annotation.*;
 import io.micronaut.http.uri.UriBuilder;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @ExecuteOn(TaskExecutors.IO) // <1>
 @Controller("/user") // <2>
+@Secured(SecurityRule.IS_AUTHENTICATED)
 public class UsersController {
 
     private final UserRepository userRepository;
@@ -31,6 +34,7 @@ public class UsersController {
     }
 
     @Post // <5>
+    @Secured(SecurityRule.IS_ANONYMOUS)
     public HttpResponse<?> save(@Body("username") @NonNull @NotBlank String username, // <6>
                              @Body("email") @NonNull @NotBlank String email,
                              @Body("password") @NonNull @NotBlank String password) {

@@ -9,6 +9,8 @@ import io.micronaut.http.annotation.*;
 import io.micronaut.http.uri.UriBuilder;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 @ExecuteOn(TaskExecutors.IO)
 @Controller("/facility") // <1>
+@Secured(SecurityRule.IS_AUTHENTICATED)
 public class FacilityController {
     private final FacilityRepository facilityRepository;
 

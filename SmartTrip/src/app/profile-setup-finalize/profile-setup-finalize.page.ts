@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NavController} from "@ionic/angular";
 import {ActivatedRoute} from "@angular/router";
+import {User, UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-profile-setup-finalize',
@@ -8,7 +9,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./profile-setup-finalize.page.scss'],
 })
 export class ProfileSetupFinalizePage implements OnInit {
-  dataComing: any;
+  user:User;
   public profilePics: string[] = [
     "assets/images/BALL_AVATAR.png",
     "assets/images/BUTTERFLY_AVATAR.png",
@@ -17,6 +18,9 @@ export class ProfileSetupFinalizePage implements OnInit {
     "assets/images/PANDA_AVATAR.png"
   ];
   public profilePicture: string;
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, private userService: UserService) {
+    this.user = this.userService.getUser();
+  }
   ngOnInit(): void {
     this.profilePicture = localStorage.getItem('avatarUrl') || this.getRandomAvatar();
     localStorage.setItem('avatarUrl', this.profilePicture);
@@ -25,9 +29,6 @@ export class ProfileSetupFinalizePage implements OnInit {
     const randomIndex = Math.floor(Math.random() * this.profilePics.length);
     return this.profilePics[randomIndex];
   }
-  constructor(public navCtrl: NavController, private route: ActivatedRoute) {
-    this.dataComing = this.route.snapshot.params['data'];
-  }
   changeAvatar(): void {
     localStorage.removeItem('avatarUrl');
     this.profilePicture = this.getRandomAvatar();
@@ -35,7 +36,7 @@ export class ProfileSetupFinalizePage implements OnInit {
   }
 
   goToHomePage(){
-    this.navCtrl.navigateForward(['tab2', {data:this.dataComing}]);
+    this.navCtrl.navigateForward(['tab2']);
   }
 
 }

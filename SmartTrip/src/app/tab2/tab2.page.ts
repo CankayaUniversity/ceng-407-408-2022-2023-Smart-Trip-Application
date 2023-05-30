@@ -27,7 +27,6 @@ export class Tab2Page {
   autocompleteItems: any;
   nearbyItems: any = new Array<any>();
   toggled: boolean;
-  dataComing: any;
 
   constructor(public zone: NgZone,
               public geolocation: Geolocation,
@@ -46,7 +45,6 @@ export class Tab2Page {
     };
     this.autocompleteItems = [];
     this.markers = [];
-    this.dataComing = this.route.snapshot.params['data'];
   }
 
   facility: {
@@ -302,7 +300,7 @@ export class Tab2Page {
 
   }
   goToProfileSetupPage(){
-    this.navCtrl.navigateForward(['profile-setup-finalize', {data:this.dataComing}]);
+    this.navCtrl.navigateForward(['profile-setup-finalize']);
   }
 
   public toilet = 'assets/icon/toilet.png';

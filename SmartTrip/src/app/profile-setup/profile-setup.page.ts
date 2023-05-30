@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NavController} from "@ionic/angular";
 import { ActivatedRoute } from "@angular/router";
+import {User, UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-profile-setup',
@@ -8,7 +9,8 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./profile-setup.page.scss'],
 })
 export class ProfileSetupPage implements OnInit {
-  dataComing : any;
+  user : User;
+  public profilePicture: string;
   public profilePics: string[] = [
     "assets/images/BALL_AVATAR.png",
     "assets/images/BUTTERFLY_AVATAR.png",
@@ -16,7 +18,10 @@ export class ProfileSetupPage implements OnInit {
     "assets/images/DOG_AVATAR.png",
     "assets/images/PANDA_AVATAR.png"
   ];
-  public profilePicture: string;
+
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, private userService: UserService) {
+    this.user = this.userService.getUser();
+  }
   ngOnInit(): void {
     this.profilePicture = localStorage.getItem('avatarUrl') || this.getRandomAvatar();
     localStorage.setItem('avatarUrl', this.profilePicture);
@@ -26,17 +31,13 @@ export class ProfileSetupPage implements OnInit {
     return this.profilePics[randomIndex];
   }
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute) {
-    this.dataComing = this.route.snapshot.params['data'];
-  }
-
 
   goToSignUpPage(){
     this.navCtrl.navigateForward('sign-up');
   }
 
   goToHomePage(){
-    this.navCtrl.navigateForward(['tab2', {data:this.dataComing}]);
+    this.navCtrl.navigateForward(['tab2']);
   }
 
 }
