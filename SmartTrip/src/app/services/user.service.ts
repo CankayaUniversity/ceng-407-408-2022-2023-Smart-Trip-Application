@@ -45,4 +45,7 @@ export class UserService {
     return this.user;
  }
 
+  clearAccessToken(): void {
+    window.localStorage.removeItem('access_token');
+  }
 }
