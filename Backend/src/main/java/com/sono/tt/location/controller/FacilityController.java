@@ -61,10 +61,7 @@ public class FacilityController {
         if (facility.isPresent()) {
             return facility.get();
         } else {
-            Facility newFacility = new Facility(null, null,latitude, longitude, null, null, null, null,
-                    null, null, null, null,  null, null);
-            //newFacility.setFacilityName(); // Varsayılan bir tesis adı belirleyin
-            return newFacility;
+            return null;
         }
     }
 
@@ -74,10 +71,10 @@ public class FacilityController {
         if (facility.isPresent()) {
             return facilityRepository.findById(facility.get().getId());
         } else {
-            Facility newFacility = new Facility("1", null,latitude, longitude, null, null, null, null,
+            Facility newFacility = new Facility(null, null,latitude, longitude, null, null, null, null,
                     null, null, null, null,  null, null);
             //newFacility.setFacilityName(); // Varsayılan bir tesis adı belirleyin
-            return facilityRepository.findById(newFacility.getId());
+            return newFacility;
         }
     }*/
 }
