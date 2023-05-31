@@ -36,50 +36,23 @@ export class SignUpPage implements OnInit {
   }
 
   signUp() {
-    this.http.get(`${environment.serverRoot}/user`).pipe(
-      take(1)
+    this.http.post(`${environment.serverRoot}/user`, {
+      username: this.user.username,
+      email: this.user.email,
+      password: this.user.password,
+    }).pipe(
+      take(1),
     ).subscribe(
-      (response) => {
-        this.errorMessage = ' ';
-        const users = Object.values(response);
+      response => {
+        console.log(response);
 
-        const foundUserMail = users.find((user) => user.email === this.user.email);
-        const foundUserName = users.find((user) => user.username === this.user.username);
-
-        if (foundUserMail) {
-          // Sign up error
-          this.errorMessage = 'Email is already registered!';
-        }
-        else if(foundUserName) {
-          // Sign up error
-          this.errorMessage = 'Username is already registered!';
-        }
-        else {
-          // mail successful
-          if(this.toggleValue){
-            this.toggleError = false;
-            this.http.post(`${environment.serverRoot}/user`, this.user).pipe(
-              take(1)
-            ).subscribe(
-              (response) => {
-                console.log("Response:", JSON.stringify(response, undefined, '  '));
-                this.navCtrl.navigateForward(['profile-setup']);
-              },
-              (error) => {
-                console.log("Error:", error);
-                this.errorMessage = 'Please fill in the required fields!';
-              }
-            );
-          } else {
-            this.errorMessage = ' ';
-            this.toggleError = true;
-            return;
-          }
-        }
+        // Signup successful
+        console.log('Signup successful');
+        this.navCtrl.navigateForward(['tab1']);
       },
-      (error) => {
+      error => {
         console.log('Error:', error);
-        this.errorMessage = 'An error occurred';
+        this.errorMessage = 'Registration failed';
       }
     );
   }
