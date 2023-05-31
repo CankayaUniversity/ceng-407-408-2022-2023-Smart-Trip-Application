@@ -15,10 +15,13 @@
       <img class="profile-picture" src="assets/icon/settingsbutton.svg" alt="Settings button" />
       <ion-icon class="settings-button" name="settings-outline"></ion-icon>
   </div>
+  <div>
+    <ion-button class="confirm_button" style="margin-left:130px; margin-top:527px" shape="round" (click)="changeAvatar()">change avatar</ion-button>
+  </div>
 
 
   <div class ="othercontent">
-    <div style="display: flex; margin-left:60px; margin-top:180px" >
+    <div style="display: flex; margin-left:60px; margin-top:110px" >
       <ion-toggle style="margin-top:-114px">
       </ion-toggle>
       <label style="margin-left: 20px; margin-top:-81px; font-family: 'Aller Bold', sans-serif; color:grey">allow access for camera</label>
@@ -34,7 +37,7 @@
       <label style="margin-left: 20px; margin-top:-349px; font-family: 'Aller Bold', sans-serif; color:grey">show my real name in comments</label>
     </div>
     <div>
-      <ion-button class="confirm_button" style="margin-left:43px; margin-top:-552px" shape="round" (click)="changeAvatar()">change avatar</ion-button>
+      <ion-button class="confirm_button" style="margin-left:43px; margin-top:-552px" shape="round" (click)="logOut()">log out</ion-button>
       <ion-button class="confirm_button" style="margin-left:219px; margin-top:-590px" shape="round" (click)="goToHomePage()">confirm</ion-button>
     </div>
 

@@ -39,4 +39,14 @@ export class ProfileSetupFinalizePage implements OnInit {
     this.navCtrl.navigateForward(['tab2']);
   }
 
+  logOut(){
+    // clear access token
+    this.userService.clearAccessToken();
+    // clear avatar image
+    localStorage.removeItem('avatarUrl');
+    //success log out
+    console.log('Logged out');
+    this.navCtrl.navigateRoot(['tabs/tab1']);
+  }
+
 }
