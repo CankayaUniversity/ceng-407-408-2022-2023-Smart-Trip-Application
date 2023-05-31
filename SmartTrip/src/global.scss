@@ -169,3 +169,31 @@ ion-toolbar.ion-color.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searc
   scale: 1.4;
   margin-left: 3px;
 }
+
+ion-toast.custom-toast {
+  --background: #f4f4fa;
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: #4442bb;
+    transform: translateY(-12%) !important;
+  --width: 70%;
+  --left: 50%;
+}
+
+ion-toast.custom-toast::part(message) {
+  font-style: italic;
+}
+
+ion-toast.custom-toast::part(button) {
+  border-left: 1px solid #d2d2d2;
+  color: #58c2fe;
+  font-size: 15px;
+}
+.error-message {
+  position: fixed;
+  z-index: 1;
+  margin-left: 10%;
+  margin-top: 2%;
+  font-family: 'Aller Bold';
+  font-size: 80%;
+  color: #363636;
+}

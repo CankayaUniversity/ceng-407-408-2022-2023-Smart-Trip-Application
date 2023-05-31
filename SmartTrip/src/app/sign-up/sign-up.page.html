@@ -10,19 +10,28 @@
       <ion-input class="input_box" style="margin-top: 200px;"  name="username" type="text" placeholder="username" [(ngModel)] = "user.username" required>
         <ion-icon src="assets/icon/username.svg" name="lock-solid" style="width: 36px; height: 22px;"></ion-icon>
       </ion-input>
+      <div *ngIf="!user.username" class="error-message">
+        Username cannot be empty.
+      </div>
     </div>
     <div>
       <ion-input class="input_box" style="margin-top: 33px;" name="email" type="email" placeholder=" example@email.com" [(ngModel)] = "user.email" required>
         <ion-icon src="assets/icon/envelope-regular.svg" name="envelope-regular" style="width: 36px; height: 22px;"></ion-icon>
       </ion-input>
+      <div *ngIf="!user.email" class="error-message">
+        Email cannot be empty.
+      </div>
     </div>
     <div>
-      <ion-input class="input_box" style="margin-top: 33px;" name="password" type="password" placeholder=" password" [(ngModel)] = "user.password" required>
+      <ion-input class="input_box" style="margin-top: 33px;" name="password" type="password" placeholder=" password" [(ngModel)] = "user.password" required >
         <ion-icon src="assets/icon/lock-solid.svg" name="lock-solid" style="width: 36px; height: 22px;"></ion-icon>
       </ion-input>
+      <div *ngIf="!user.password" class="error-message">
+        Password cannot be empty.
+      </div>
     </div>
     <div>
-      <h1 style="font-family: 'Aller Display', sans-serif; color: white; margin-top: 20px; text-align: center; font-size: 25px; position: relative">or</h1>
+      <h1 style="font-family: 'Aller Display', sans-serif; color: white; margin-top: 35px; text-align: center; font-size: 25px; position: relative">or</h1>
     </div>
     <div>
       <ion-button style="--ion-color-primary: #ff0000; width: 345px; margin-left: 32px; margin-top: 10px;" shape="round">sign up with google
@@ -34,9 +43,9 @@
       <label style="margin-left: 20px; margin-top:-5px; font-family: 'Aller Bold', sans-serif; color: #363636">i agree to the Terms of Service <br> and Privacy Policy</label>
     </div>
     <div class="error-message" *ngIf="toggleError" style="color: red;font-weight: bold;text-align: center;margin-top: 17px;margin-bottom: -22px;">Please accept the Terms of Service and Privacy Policy!</div>
-    <div class="error-message" *ngIf="errorMessage" style="color: red;font-weight: bold;text-align: center;margin-top: 23px;margin-bottom: -32px;">{{ errorMessage }}</div>
+    <div  *ngIf="errorMessage" style="color: red;font-weight: bold;font-family: 'Aller Bold', sans-serif; font-size:90%;text-align: center !important;margin-top: 23px;margin-bottom: -32px;">{{ errorMessage }}</div>
     <div class="button-wrapper">
-      <ion-button class="second_button" style="margin-left:8px; margin-top:-113px" shape="round" (click)="signUp()">finalize</ion-button>
+      <ion-button class="second_button" style="margin-left:15px; margin-top:-113px" shape="round" (click)="signUp()">finalize</ion-button>
       <div>
         <ion-header style="margin-top:10px; color:grey; text-align: center; font-family: 'Aller Bold', sans-serif "> already have an account? </ion-header>
         <ion-header style="margin-top:10px; color:#443DB8; text-align: center; font-family: 'Aller Bold', sans-serif " (click)="goToSignInPage()"> log in </ion-header>

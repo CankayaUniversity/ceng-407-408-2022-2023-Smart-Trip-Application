@@ -9,6 +9,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {take} from "rxjs";
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -27,6 +28,9 @@ export class Tab2Page {
   autocompleteItems: any;
   nearbyItems: any = new Array<any>();
   toggled: boolean;
+  toast: HTMLIonToastElement;
+  toastVisible: boolean = false;
+  toastTimeout: any;
 
   constructor(public zone: NgZone,
               public geolocation: Geolocation,
@@ -34,7 +38,8 @@ export class Tab2Page {
               public modalController: ModalController,
               public navCtrl: NavController,
               private route: ActivatedRoute,
-              public http: HttpClient) {
+              public http: HttpClient,
+              private toastController: ToastController) {
     this.toggled= true;
     this.geocoder = new google.maps.Geocoder;
     let elem = document.createElement("div")
@@ -45,7 +50,53 @@ export class Tab2Page {
     };
     this.autocompleteItems = [];
     this.markers = [];
+
   }
+
+  async presentToast() {
+    if (this.toastVisible) {
+      return; // Exit the function if a toast is already visible
+    }
+
+    this.toastVisible = true;
+
+    this.toast = await this.toastController.create({
+      message: 'Please select the facility you want to go to first.',
+      duration: 2000,
+      cssClass: 'custom-toast',
+      buttons: [
+        {
+          text: 'Dismiss',
+          role: 'cancel',
+          handler: () => {
+            this.toastVisible = false; // Reset the flag when toast is closed
+          }
+        },
+      ],
+    });
+    await this.toast.present();
+
+    this.toastTimeout = setTimeout(() => {
+      this.toastVisible = false; // Reset the flag when toast duration expires
+    }, this.toast.duration);
+  }
+
+  ngOnDestroy() {
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout); // Clear the timeout when the component is destroyed
+    }
+  }
+
+  openNavigation() {
+    if(this.facility.latitude == "" && this.facility.longitude == ""){
+      this.presentToast();
+    }else{
+      const url = `https://www.google.com/maps/dir/?api=1&destination=${this.facility.latitude},${this.facility.longitude}`;
+      window.open(url, '_system');
+    }
+
+  }
+
 
   facility: {
     facilityName: string,
@@ -89,11 +140,13 @@ export class Tab2Page {
       mapId:'558f75b3b5a5e8bd'
     };
     this.map = new google.maps.Map(document.getElementById('map')!, mapOptions);
-    //this.addListeners();
+    this.tryGeolocation();
   }
 
-  /*  tryGeolocation(){
-      this.geolocation.getCurrentPosition().then((resp) => {
+  tryGeolocation() {
+    this.geolocation
+      .getCurrentPosition()
+      .then((resp) => {
         let pos = {
           lat: resp.coords.latitude,
           lng: resp.coords.longitude
@@ -102,16 +155,20 @@ export class Tab2Page {
           position: pos,
           map: this.map,
           title: 'I am here!',
-
+          icon: {
+            url: 'assets/icon/current.png', // Set the path to your icon image
+            scaledSize: new google.maps.Size(50, 50) // Set the desired size of the icon
+          }
         });
 
         this.markers.push(marker);
         this.map.setCenter(pos);
-        this.initMap(marker);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.log('Error getting location', error);
       });
-    }*/
+  }
+
 
   updateSearchResults() {
     if (this.autocomplete.input === '') {
@@ -187,113 +244,106 @@ export class Tab2Page {
 
   }
 
-  async onTriggerSheetClick(marker: any){
+  async onTriggerSheetClick(marker: any) {
     this.facility.facilityName = marker.title;
     this.facility.latitude = String(marker.getPosition()?.lat());
     this.facility.longitude = String(marker.getPosition()?.lng());
-    this.facility.IsAvm=  "0";
-    this.facility.userId=  "123";
-    this.facility.Timestamp= String(Date.now());
-    this.facility.AdditionalComment = "hi";
-    this.facility.rating =  "0";
-    this.facility.comments = ["hello"];
-    this.facility.hasToilet=  "0";
-    this.facility.hasDisabled=  "0";
-    this.facility.hasBabycare=  "0";
-    this.facility.hasMosque =  "0";
+    this.facility.IsAvm = "0";
+    this.facility.userId = "0";
+    this.facility.Timestamp = String(Date.now());
+    this.facility.AdditionalComment = "0";
+    this.facility.rating = "0";
+    this.facility.comments = [""];
+    this.facility.hasToilet = "0";
+    this.facility.hasDisabled = "0";
+    this.facility.hasBabycare = "0";
+    this.facility.hasMosque = "0";
 
-    console.log(this.facility.facilityName,this.facility.latitude, this.facility.longitude, this.facility.IsAvm, this.facility.userId,this.facility.Timestamp, this.facility.AdditionalComment, this.facility.rating, this.facility.comments, this.facility.hasToilet, this.facility.hasDisabled, this.facility.hasBabycare, this.facility.hasMosque);
+    console.log(this.facility.facilityName, this.facility.latitude, this.facility.longitude, this.facility.IsAvm, this.facility.userId, this.facility.Timestamp, this.facility.AdditionalComment, this.facility.rating, this.facility.comments, this.facility.hasToilet, this.facility.hasDisabled, this.facility.hasBabycare, this.facility.hasMosque);
     const modal = await this.modalController.create(
       {
         component: FacilityReviewPage,
         initialBreakpoint: 0.8,
         breakpoints: [0, 0.8],
         cssClass: 'facilityReview',
-        componentProps:{
+        componentProps: {
           dataName: this.facility.facilityName,
           dataLatitude: this.facility.latitude,
           dataLongitude: this.facility.longitude
         }
       });
 
-    this.http.get(`${environment.serverRoot}/facility/by_geolocation/`+this.facility.latitude+'/'+this.facility.longitude).pipe(
-      take(1)
-    ).subscribe(
-      (response) => {
+    this.http
+      .get(`${environment.serverRoot}/facility/by_geolocation/` + this.facility.latitude + '/' + this.facility.longitude)
+      .pipe(take(1))
+      .subscribe(
+        (response) => {
+          const found = response;
 
-        const facilities = Object.values(response);
-
-        const foundFacility = facilities.find((facility) => facility.latitude === this.facility.latitude && facility.longitude === this.facility.longitude);
-
-        if (foundFacility) {
-
-          console.log(this.facility.latitude, this.facility.longitude,": this facility is in dataset");
-        }
-
-        else {
-          this.http.post(`${environment.serverRoot}/facility`, this.facility).pipe(
-              take(1)
-            ).subscribe(
+          if (found) {
+            console.log(this.facility.latitude, this.facility.longitude, ": this facility is already in the dataset");
+          }
+        },
+        (error) => {
+          console.log('Error:', error);
+          this.http
+            .post(`${environment.serverRoot}/facility`, this.facility)
+            .pipe(take(1))
+            .subscribe(
               (response) => {
-                console.log("Response:", JSON.stringify(response, undefined, '  '));
+                console.log(response);
               },
               (error) => {
                 console.log("Error:", error);
-                //this.errorMessage = 'Please fill in the required fields!';
+                // Handle error accordingly
               }
             );
         }
-      },
-      (error) => {
-        console.log('Error:', error);
-        //this.errorMessage = 'An error occurred';
-      }
-    );
+      );
     await modal.present();
-    //const { data, role } = await modal.onWillDismiss();
   }
 
-  /*
-    async addMarker(lat: any, lng: any){
-      if(this.markerId) this.removeMarker();
-      this.onTriggerSheetClick();
-      this.markerId = await this.map.addMarker({
-        coordinate:{
-          lat:lat,
-          lng:lng,
-        },
-        draggable:true
-      });
-    }
+    /*
+      async addMarker(lat: any, lng: any){
+        if(this.markerId) this.removeMarker();
+        this.onTriggerSheetClick();
+        this.markerId = await this.map.addMarker({
+          coordinate:{
+            lat:lat,
+            lng:lng,
+          },
+          draggable:true
+        });
+      }
 
-    async removeMarker(id?: string) {
-      await this.map.removeMarker(id ? id : this.markerId);
-    }
+      async removeMarker(id?: string) {
+        await this.map.removeMarker(id ? id : this.markerId);
+      }
 
-    async addListeners() {
-      // Handle marker click
-      await this.map.setOnMarkerClickListener((event:any) => {
-        console.log('setOnMarkerClickListener', event);
-        this.removeMarker(event.markerId);
-      });
+      async addListeners() {
+        // Handle marker click
+        await this.map.setOnMarkerClickListener((event:any) => {
+          console.log('setOnMarkerClickListener', event);
+          this.removeMarker(event.markerId);
+        });
 
-      await this.map.setOnMapClickListener((event:any) => {
-        console.log('setOnMapClickListener', event);
-        //this.onTriggerSheetClick();
-        this.addMarker(event.latitude, event.longitude);
-      });
-  /!*
-      await this.newMap.setOnMyLocationButtonClickListener((event) => {
-        console.log('setOnMyLocationButtonClickListener', event);
-        this.addMarker(event.mapId, event.mapId);
-      });
-  *!/
-      await this.map.setOnMyLocationClickListener((event:any) => {
-        console.log('setOnMyLocationClickListener', event);
-        this.addMarker(event.latitude, event.longitude);
-      });
-    }
-  */
+        await this.map.setOnMapClickListener((event:any) => {
+          console.log('setOnMapClickListener', event);
+          //this.onTriggerSheetClick();
+          this.addMarker(event.latitude, event.longitude);
+        });
+    /!*
+        await this.newMap.setOnMyLocationButtonClickListener((event) => {
+          console.log('setOnMyLocationButtonClickListener', event);
+          this.addMarker(event.mapId, event.mapId);
+        });
+    *!/
+        await this.map.setOnMyLocationClickListener((event:any) => {
+          console.log('setOnMyLocationClickListener', event);
+          this.addMarker(event.latitude, event.longitude);
+        });
+      }
+    */
 
   openEnd() {
     this.menu.close();
