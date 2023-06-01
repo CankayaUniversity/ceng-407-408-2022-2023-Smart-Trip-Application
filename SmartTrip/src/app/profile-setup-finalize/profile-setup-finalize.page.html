@@ -1,6 +1,4 @@
-
-<!-- Profile Finalize Page -->
-<ion-content scroll-y="false" >
+<ion-content scroll-y="false">
   <div class="background5 ion-justify-content-center">
     <div style="text-align: center; color: white; font-family:'Aller Display', sans-serif;">
       <p style="font-size: 38px; margin-bottom: -13px; margin-top: 102px;">profile</p>
@@ -9,38 +7,23 @@
   </div>
   <div>
     <ion-avatar class="profilepicture">
-        <img [src]="profilePicture">
-      <ion-header *ngIf="user" style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;"> {{user.username}} </ion-header>
+      <img [src]="profilePicture">
+      <ion-header *ngIf="user" style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;">{{user.username}}</ion-header>
     </ion-avatar>
-      <img class="profile-picture" src="assets/icon/settingsbutton.svg" alt="Settings button" />
-      <ion-icon class="settings-button" name="settings-outline"></ion-icon>
+    <img class="profile-picture" src="assets/icon/settingsbutton.svg" alt="Settings button" />
+    <ion-icon class="settings-button" name="settings-outline"></ion-icon>
   </div>
+
+
   <div>
-    <ion-button class="confirm_button" style="margin-left:130px; margin-top:527px" shape="round" (click)="changeAvatar()">change avatar</ion-button>
-  </div>
-
-
-  <div class ="othercontent">
-    <div style="display: flex; margin-left:60px; margin-top:110px" >
-      <ion-toggle style="margin-top:-114px">
-      </ion-toggle>
-      <label style="margin-left: 20px; margin-top:-81px; font-family: 'Aller Bold', sans-serif; color:grey">allow access for camera</label>
-    </div>
-    <div style="display: flex; margin-left:60px; margin-top:180px" >
-      <ion-toggle style="margin-top:-305px">
-      </ion-toggle>
-      <label style="margin-left: 20px; margin-top:-214px; font-family: 'Aller Bold', sans-serif; color:grey">allow permission for your location</label>
-    </div>
-    <div style="display: flex; margin-left:60px; margin-top:180px" >
-      <ion-toggle style="margin-top:-498px">
-      </ion-toggle>
-      <label style="margin-left: 20px; margin-top:-349px; font-family: 'Aller Bold', sans-serif; color:grey">show my real name in comments</label>
+    <div>
+      <ion-button class="confirm_button" style="margin-left:130px; margin-top:560px" shape="round" (click)="goToHomePage()">confirm</ion-button>
     </div>
     <div>
-      <ion-button class="confirm_button" style="margin-left:43px; margin-top:-552px" shape="round" (click)="logOut()">log out</ion-button>
-      <ion-button class="confirm_button" style="margin-left:219px; margin-top:-590px" shape="round" (click)="goToHomePage()">confirm</ion-button>
+      <ion-button class="confirm_button" style="margin-left:130px; margin-top:44px" shape="round" (click)="changeAvatar()">change avatar</ion-button>
     </div>
-
+    <div>
+      <ion-button class="confirm_button" style="margin-left:130px; margin-top:34px" shape="round" (click)="logOut()">log out</ion-button>
+    </div>
   </div>
-
 </ion-content>

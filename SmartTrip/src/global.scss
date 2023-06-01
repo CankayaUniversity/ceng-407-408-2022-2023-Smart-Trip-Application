@@ -51,6 +51,11 @@
   filter: drop-shadow(0px 10px 10px rgba(57, 166, 255, 0.5));
 }
 
+.third_button {
+  --ion-color-primary: #0A036AFF;
+
+}
+
 .confirm_button{
   --ion-color-primary: #39A6FF;
   filter: drop-shadow(0px 10px 10px rgba(57, 166, 255, 0.5));

@@ -1,16 +1,16 @@
 <ion-content fullscreen scroll-y="false">
   <ion-toolbar class="searchBar" slot="fixed" color="translucent" >
     <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
-    <ion-list [hidden]="autocompleteItems.length == 0">
+    <ion-list [hidden]="autocompleteItems.length == 0" style="max-height: 55vh; overflow-y: scroll;">
       <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
         {{ item.description }}
       </ion-item>
     </ion-list>
-    <ion-list *ngIf="nearbyItems.length > 0 && toggled">
+    <ion-list *ngIf="nearbyItems.length > 0 && toggled" style="max-height: 55vh; overflow-y: scroll;">
       <ion-item *ngFor="let place of nearbyItems" tappable (click)="selectFacility(place); showDefaultBar();">
         <h2>{{place.name}}</h2>
         <p>{{place.vicinity}}</p>
-        <p>Rating {{place.rating}}</p>
+
       </ion-item>
     </ion-list>
   </ion-toolbar>
@@ -18,8 +18,6 @@
       <ion-searchbar search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
     </ion-toolbar>-->
   <div id='map'></div>
-
-
   <div>
     <ion-toolbar class="bottomMenu" slot="fixed" color="translucent">
       <ion-grid>
@@ -53,14 +51,15 @@
     <ion-menu contentId="main-content">
       <ion-content class="filterMenu" scroll-y="false">
         <div class="toilet" style="position: fixed;" >
-          <img src="{{toilet}}" (click)="selectToilet();" style="margin-left: 10%">
-          <img src="{{disabled}}" (click)="selectDisabled();" style="margin-left: 35%">
-          <img src="{{babycare}}" (click)="selectBabycare();" style="margin-left: 55%">
-          <img src="{{mosque}}" (click)="selectMosque();" style="margin-left: 75%">
+          <img src="{{toilet}}" (click)="selectToilet();" style="margin-left: 10%; margin-top: 2%">
+          <img src="{{disabled}}" (click)="selectDisabled();" style="margin-left: 35% ;margin-top: 2%">
+          <img src="{{babycare}}" (click)="selectBabycare();" style="margin-left: 55% ;margin-top: 2%">
+          <img src="{{mosque}}" (click)="selectMosque();" style="margin-left: 75% ;margin-top: 2%">
         </div>
         <div>
-          <ion-button class="first_button" style="margin-left: 30px; margin-top: 110px; " shape="round" (click)="openEnd()">back</ion-button>
-          <ion-button class="second_button" style="margin-left: 10px; margin-top: 110px;" shape="round">filter</ion-button>
+          <ion-button class="third_button" style="position: absolute; top: 73px; left: 90px; height: 35px ; width: 197px;" shape="round" (click)="searchNearbyGasStations()">find near facilities by me </ion-button>
+          <ion-button class="first_button" style="margin-left: 30px; margin-top: 126px; "shape="round" (click)="openEnd()">back</ion-button>
+          <ion-button class="second_button" style="margin-left: 10px; margin-top: 126px;" shape="round">filter</ion-button>
         </div>
       </ion-content>
     </ion-menu>
