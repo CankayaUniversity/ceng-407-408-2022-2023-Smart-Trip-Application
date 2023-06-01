@@ -2,6 +2,7 @@
 Smart Trip Application
 
 ## Getting Started
+## User Manual
 ### Technology
 * Ionic Framework – A framework for building native apps using Ionic Angular
 * Node.js – for the frontend
