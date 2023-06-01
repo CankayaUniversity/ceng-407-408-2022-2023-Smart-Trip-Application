@@ -194,11 +194,22 @@ export class Tab2Page {
         this.autocompleteItems = [];
         this.GooglePlaces.nearbySearch({
           location: results[0].geometry.location,
-          radius: '500',
+          radius: '1000',
           types: ['gas_station'],
         }, (near_places:any) => {
           this.zone.run(() => {
-            this.nearbyItems = [];
+            for (var i = 0; i < near_places.length; i++) {
+              this.nearbyItems.push(near_places[i]);
+            }
+          });
+        })
+        // Search for shopping malls
+        this.GooglePlaces.nearbySearch({
+          location: results[0].geometry.location,
+          radius: '1000',
+          types: ['shopping_mall'],
+        }, (near_places:any) => {
+          this.zone.run(() => {
             for (var i = 0; i < near_places.length; i++) {
               this.nearbyItems.push(near_places[i]);
             }
@@ -207,6 +218,41 @@ export class Tab2Page {
       }
     })
   }
+
+  searchNearbyGasStations() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      let pos = {
+        lat: resp.coords.latitude,
+        lng: resp.coords.longitude
+      };
+      this.GooglePlaces.nearbySearch({
+        location: pos,
+        radius: '1000',
+        types: ['gas_station','shopping_mall'],
+      }, (near_places:any) => {
+        this.zone.run(() => {
+          this.nearbyItems = [];
+          for (var i = 0; i < near_places.length; i++) {
+            this.nearbyItems.push(near_places[i]);
+            this.addMarker(near_places[i]);
+          }
+        });
+      })
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+
+  addMarker(place:any){
+    let marker = new google.maps.Marker({
+      position: place.geometry.location,
+      map: this.map,
+      title: place.name,
+    });
+
+    this.markers.push(marker);
+  }
+
   clearMarkers(){
     for (var i = 0; i < this.markers.length; i++) {
       console.log(this.markers[i])
