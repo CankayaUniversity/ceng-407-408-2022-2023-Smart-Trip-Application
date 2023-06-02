@@ -37,8 +37,9 @@ public class UsersController {
     @Secured(SecurityRule.IS_ANONYMOUS)
     public HttpResponse<?> save(@Body("username") @NonNull @NotBlank String username, // <6>
                              @Body("email") @NonNull @NotBlank String email,
-                             @Body("password") @NonNull @NotBlank String password) {
-        String id = userRepository.save(username, email, password);
+                             @Body("password") @NonNull @NotBlank String password,
+                             @Body("icon") @NonNull @NotBlank String icon) {
+        String id = userRepository.save(username, email, password, icon);
         return HttpResponse.created(UriBuilder.of("/user").path(id).build());
     }
 
