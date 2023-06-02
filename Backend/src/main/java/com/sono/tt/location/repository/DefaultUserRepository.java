@@ -27,6 +27,7 @@ public class DefaultUserRepository extends DynamoRepository<User> implements Use
     private static final String ATTRIBUTE_USERNAME = "name";
     private static final String ATTRIBUTE_EMAIL = "email";
     private static final String ATTRIBUTE_PASSWORD = "password";
+    private static final String ATTRIBUTE_ICON = "icon";
 
     private final IdGenerator idGenerator;
     public DefaultUserRepository(DynamoDbClient dynamoDbClient,
@@ -39,9 +40,9 @@ public class DefaultUserRepository extends DynamoRepository<User> implements Use
     @Override
     @NonNull
     public String save(@NonNull @NotBlank String username,
-                       @NonNull @NotBlank String email, @NonNull @NotBlank String password) {
+                       @NonNull @NotBlank String email, @NonNull @NotBlank String password, @NonNull @NotBlank String icon) {
         String id = idGenerator.generate();
-        save(new User(id, username, email, password));
+        save(new User(id, username, email, password, icon));
         return id;
     }
 
@@ -100,7 +101,8 @@ public class DefaultUserRepository extends DynamoRepository<User> implements Use
         return new User(item.get(ATTRIBUTE_ID).s(),
                 item.get(ATTRIBUTE_USERNAME).s(),
                 item.get(ATTRIBUTE_EMAIL).s(),
-                item.get(ATTRIBUTE_PASSWORD).s());
+                item.get(ATTRIBUTE_PASSWORD).s(),
+                item.get(ATTRIBUTE_ICON).s());
     }
 
     @Override
@@ -113,6 +115,7 @@ public class DefaultUserRepository extends DynamoRepository<User> implements Use
         result.put(ATTRIBUTE_PASSWORD, AttributeValue.builder().s(user.getPassword()).build());
         result.put(ATTRIBUTE_GSI_2_PK, AttributeValue.builder().s("User").build());
         result.put(ATTRIBUTE_GSI_2_SK, AttributeValue.builder().s(user.getEmail()).build());
+        result.put(ATTRIBUTE_ICON, AttributeValue.builder().s(user.getIcon()).build());
         return result;
     }
 

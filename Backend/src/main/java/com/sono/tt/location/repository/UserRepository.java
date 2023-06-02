@@ -22,5 +22,6 @@ public interface UserRepository {
     @NonNull
     String save(@NonNull @NotBlank String username,
                 @NonNull @NotBlank String email,
-                @NonNull @NotBlank String password);
+                @NonNull @NotBlank String password,
+                @NonNull @NotBlank String icon);
 }
