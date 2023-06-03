@@ -3,7 +3,6 @@ package com.sono.tt.location.repository;
 import com.sono.tt.location.DynamoConfiguration;
 import com.sono.tt.location.DynamoRepository;
 import com.sono.tt.location.IdGenerator;
-import com.sono.tt.location.model.Book;
 import com.sono.tt.location.model.Facility;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.CollectionUtils;
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 
 @Singleton // <1>
 public class DefaultFacilityRepository extends DynamoRepository<Facility> implements FacilityRepository {
@@ -59,8 +59,8 @@ public class DefaultFacilityRepository extends DynamoRepository<Facility> implem
                        @NonNull @NotBlank String longitude,
                        @NonNull @NotBlank String isAvm,
                        @NonNull @NotBlank String userId,
-                       @NonNull @NotBlank String Timestamp,
-                       @NonNull @NotBlank String AdditionalComment,
+                       @NonNull @NotBlank String timestamp,
+                       @NonNull @NotBlank String additionalComment,
                        @NonNull @NotBlank String rating,
                        @NonNull @NotBlank List<String> comments,
                        @NonNull @NotBlank String hasToilet,
@@ -68,10 +68,47 @@ public class DefaultFacilityRepository extends DynamoRepository<Facility> implem
                        @NonNull @NotBlank String hasBabycare,
                        @NonNull @NotBlank String hasMosque) {
         String id = idGenerator.generate();
-        save(new Facility(id,facilityName,latitude,longitude,isAvm,userId,Timestamp,AdditionalComment,rating,comments,hasToilet,hasDisabled,hasBabycare,hasMosque));
+        save(new Facility(id, facilityName, latitude, longitude, isAvm, userId, timestamp, additionalComment, rating, comments, hasToilet, hasDisabled, hasBabycare, hasMosque));
         //return location;
         return id;
     }
+    @Override
+    @NonNull
+    public String update(Facility updatedFacility) {
+        String id = updatedFacility.getId();
+        Optional<Facility> facilityOptional = findById(id);
+
+        if (facilityOptional.isPresent()) {
+            Facility existingFacility = facilityOptional.get();
+            existingFacility.setFacilityName(updatedFacility.getFacilityName());
+            existingFacility.setLatitude(updatedFacility.getLatitude());
+            existingFacility.setLongitude(updatedFacility.getLongitude());
+            existingFacility.setIsAvm(updatedFacility.getIsAvm());
+            existingFacility.setUserId(updatedFacility.getUserId());
+            existingFacility.setTimestamp(updatedFacility.getTimestamp());
+            existingFacility.setAdditionalComment(updatedFacility.getAdditionalComment());
+            existingFacility.setRating(updatedFacility.getRating());
+            existingFacility.setComments(updatedFacility.getComments());
+            existingFacility.setHasToilet(updatedFacility.getHasToilet());
+            existingFacility.setHasDisabled(updatedFacility.getHasDisabled());
+            existingFacility.setHasBabycare(updatedFacility.getHasBabycare());
+            existingFacility.setHasMosque(updatedFacility.getHasMosque());
+
+            PutItemResponse itemResponse = dynamoDbClient.putItem(PutItemRequest.builder()
+                    .tableName(dynamoConfiguration.getTableName())
+                    .item(item(existingFacility))
+                    .build());
+
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(itemResponse.toString());
+            }
+
+            return id;
+        } else {
+            return null; // Güncellenmek istenen tesis bulunamadıysa null döndürülebilir.
+        }
+    }
+
 
     public String save(@NonNull @NotNull @Valid Facility facility) {
         PutItemResponse itemResponse = dynamoDbClient.putItem(PutItemRequest.builder()
@@ -81,7 +118,7 @@ public class DefaultFacilityRepository extends DynamoRepository<Facility> implem
         if (LOG.isDebugEnabled()) {
             LOG.debug(itemResponse.toString());
         }
-        return null;
+        return facility.getId();
     }
 
 /*    protected void save(@NonNull @NotNull @Valid Facility facility) {
@@ -137,7 +174,7 @@ public class DefaultFacilityRepository extends DynamoRepository<Facility> implem
             }
             result.addAll(parseInResponse(response));
             beforeId = lastEvaluatedId(response, Facility.class).orElse(null);
-        } while(beforeId != null); // <2>
+        } while (beforeId != null); // <2>
         return result;
     }
 
@@ -187,10 +224,9 @@ public class DefaultFacilityRepository extends DynamoRepository<Facility> implem
         result.put(ATTRIBUTE_ADDITIONALCOMMENT, AttributeValue.builder().s(facility.getAdditionalComment()).build());
         result.put(ATTRIBUTE_COMMENTS, AttributeValue.builder().ss(facility.getComments()).build());
         result.put(ATTRIBUTE_HASTOILET, AttributeValue.builder().s(facility.getHasToilet()).build());
-        result.put(ATTRIBUTE_HASDISABLED, AttributeValue.builder().s(facility.getHasToilet()).build());
-        result.put(ATTRIBUTE_BABYCARE, AttributeValue.builder().s(facility.getHasToilet()).build());
-        result.put(ATTRIBUTE_HASMOSQUE, AttributeValue.builder().s(facility.getHasToilet()).build());
+        result.put(ATTRIBUTE_HASDISABLED, AttributeValue.builder().s(facility.getHasDisabled()).build());
+        result.put(ATTRIBUTE_BABYCARE, AttributeValue.builder().s(facility.getHasBabycare()).build());
+        result.put(ATTRIBUTE_HASMOSQUE, AttributeValue.builder().s(facility.getHasMosque()).build());
         return result;
     }
-
 }

@@ -102,10 +102,10 @@ export class Tab2Page {
     facilityName: string,
     latitude: string,
     longitude: string,
-    IsAvm:string,
+    isAvm:string,
     userId: string,
-    Timestamp: string,
-    AdditionalComment: string,
+    timestamp: string,
+    additionalComment: string,
     rating: string,
     comments: string[],
     hasToilet: string,
@@ -116,10 +116,10 @@ export class Tab2Page {
     facilityName: '',
     latitude: '',
     longitude: '',
-    IsAvm:'',
+    isAvm:'',
     userId: '',
-    Timestamp: '',
-    AdditionalComment: '',
+    timestamp: '',
+    additionalComment: '',
     rating: '',
     comments: [],
     hasToilet: '',
@@ -228,7 +228,7 @@ export class Tab2Page {
       this.GooglePlaces.nearbySearch({
         location: pos,
         radius: '1000',
-        types: ['gas_station','shopping_mall'],
+        types: ['shopping_mall'],
       }, (near_places:any) => {
         this.zone.run(() => {
           this.nearbyItems = [];
@@ -251,6 +251,13 @@ export class Tab2Page {
     });
 
     this.markers.push(marker);
+
+    marker.addListener("click", () => {
+      this.onTriggerSheetClick(marker);
+      this.map.setZoom(15);
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      this.map.setCenter(marker.getPosition() as google.maps.LatLng);
+    });
   }
 
   clearMarkers(){
@@ -261,18 +268,21 @@ export class Tab2Page {
     this.markers = [];
   }
   selectFacility(place:any){
+    //this.clearMarkers();
+
     let marker = new google.maps.Marker({
       position: place.geometry.location,
       map: this.map,
       animation: google.maps.Animation.DROP,
       title: place.name,
-
     });
 
     this.markers.push(marker);
+
     this.map.setCenter(place.geometry.location);
     this.zoomToFacility(marker);
   }
+
   showDefaultBar() {
     this.toggled = false;
   }
@@ -290,14 +300,15 @@ export class Tab2Page {
 
   }
 
-  async onTriggerSheetClick(marker: any) {
+
+  onTriggerSheetClick(marker: any) {
     this.facility.facilityName = marker.title;
     this.facility.latitude = String(marker.getPosition()?.lat());
     this.facility.longitude = String(marker.getPosition()?.lng());
-    this.facility.IsAvm = "0";
+    this.facility.isAvm = "0";
     this.facility.userId = "0";
-    this.facility.Timestamp = String(Date.now());
-    this.facility.AdditionalComment = "0";
+    this.facility.timestamp = String(Date.now());
+    this.facility.additionalComment = "0";
     this.facility.rating = "0";
     this.facility.comments = [""];
     this.facility.hasToilet = "0";
@@ -305,8 +316,8 @@ export class Tab2Page {
     this.facility.hasBabycare = "0";
     this.facility.hasMosque = "0";
 
-    console.log(this.facility.facilityName, this.facility.latitude, this.facility.longitude, this.facility.IsAvm, this.facility.userId, this.facility.Timestamp, this.facility.AdditionalComment, this.facility.rating, this.facility.comments, this.facility.hasToilet, this.facility.hasDisabled, this.facility.hasBabycare, this.facility.hasMosque);
-    const modal = await this.modalController.create(
+    console.log(this.facility.facilityName, this.facility.latitude, this.facility.longitude, this.facility.isAvm, this.facility.userId, this.facility.timestamp, this.facility.additionalComment, this.facility.rating, this.facility.comments, this.facility.hasToilet, this.facility.hasDisabled, this.facility.hasBabycare, this.facility.hasMosque);
+    const modal = this.modalController.create(
       {
         component: FacilityReviewPage,
         initialBreakpoint: 0.8,
@@ -346,7 +357,7 @@ export class Tab2Page {
             );
         }
       );
-    await modal.present();
+    modal.then(modalElement => modalElement.present());
   }
 
     /*
