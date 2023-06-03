@@ -76,13 +76,14 @@ export class FacilityReviewPage implements OnInit {
           this.reviews = facility.comments
             .slice(1) // Exclude the first element
             .map((comment) => {
-              const parts: string[] = comment.split("/");
+              const parts: string[] = comment.split("-");
               const username: string = parts[0];
               const commentText: string = parts[1];
+              const iconPart:string = parts[2];
               return {
                 username: username,
                 comment: commentText,
-                icon: "assets/images/defaultprofilepicture.png",
+                icon: iconPart,
               };
             });
 

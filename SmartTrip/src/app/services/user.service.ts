@@ -4,6 +4,7 @@ export interface User {
   id: string;
   username: string;
   email: string;
+  icon:string;
 }
 
 @Injectable({
@@ -34,6 +35,7 @@ export class UserService {
       id: userData.id,
       username: userData.name,
       email: userData.sub,
+      icon : userData.icon || 'assets/images/defaultprofilepicture.png'
     };
  }
 

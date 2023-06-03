@@ -37,11 +37,12 @@ export class SignUpPage implements OnInit {
   }
 
   signUp() {
+    this.user.icon = 'assets/images/defaultprofilepicture.png';
     this.http.post(`${environment.serverRoot}/user`, {
       username: this.user.username,
       email: this.user.email,
       password: this.user.password,
-      icon:"assets/images/defaultprofilepicture.png"
+      icon:this.user.icon
     }).pipe(
       take(1),
     ).subscribe(
