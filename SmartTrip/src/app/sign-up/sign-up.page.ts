@@ -19,7 +19,8 @@ export class SignUpPage implements OnInit {
   user = {
     username: '',
     email: '',
-    password: ''
+    password: '',
+    icon:''
   };
   errorMessage: string = '';
   toggleError: boolean = false;
@@ -40,6 +41,7 @@ export class SignUpPage implements OnInit {
       username: this.user.username,
       email: this.user.email,
       password: this.user.password,
+      icon:"assets/images/defaultprofilepicture.png"
     }).pipe(
       take(1),
     ).subscribe(
