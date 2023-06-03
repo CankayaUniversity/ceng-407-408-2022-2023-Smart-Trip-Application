@@ -11,6 +11,8 @@ import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
+import io.micronaut.http.annotation.Put;
+import io.micronaut.http.annotation.PathVariable;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -35,10 +37,10 @@ public class FacilityController {
     public HttpResponse<?> save(@Body("facilityName") @NonNull String facilityName,
                                 @Body("latitude") @NonNull String latitude,
                                 @Body("longitude") @NonNull String longitude,
-                                @Body("IsAvm") @NonNull String IsAvm,
+                                @Body("isAvm") @NonNull String isAvm,
                                 @Body("userId") @NonNull String userId,
-                                @Body("Timestamp") @NonNull String Timestamp,
-                                @Body("AdditionalComment") @NonNull String AdditionalComment,
+                                @Body("timestamp") @NonNull String timestamp,
+                                @Body("additionalComment") @NonNull String additionalComment,
                                 @Body("rating") @NonNull String rating,
                                 @Body("comments") @NonNull List<String> comments,
                                 @Body("hasToilet") @NonNull String hasToilet,
@@ -46,7 +48,7 @@ public class FacilityController {
                                 @Body("hasBabycare") @NonNull String hasBabycare,
                                 @Body("hasMosque") @NonNull String hasMosque
     ) {
-        String id = facilityRepository.save(facilityName,latitude,longitude,IsAvm,userId,Timestamp,AdditionalComment,rating,comments,hasToilet,hasDisabled,hasBabycare,hasMosque);
+        String id = facilityRepository.save(facilityName,latitude,longitude,isAvm,userId,timestamp,additionalComment,rating,comments,hasToilet,hasDisabled,hasBabycare,hasMosque);
         return HttpResponse.created(UriBuilder.of("/facility").path(id).build());
     }
 
@@ -77,5 +79,19 @@ public class FacilityController {
             return newFacility;
         }
     }*/
+    @Put
+    public HttpResponse<?> updateFacility(Facility updatedFacility) {
+        if (updatedFacility != null) {
+            String updatedId = facilityRepository.update(updatedFacility);
+            if (updatedId != null) {
+                return HttpResponse.ok(updatedId);
+            } else {
+                return HttpResponse.serverError();
+            }
+        } else {
+            return HttpResponse.notFound();
+        }
+    }
+
 }
 

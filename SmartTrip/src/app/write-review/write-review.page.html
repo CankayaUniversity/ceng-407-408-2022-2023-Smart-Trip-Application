@@ -23,12 +23,14 @@
       </ion-item>
     </ion-card>
     <div>
-      <div class="cont">
-        <div class="stars">
-          <ngx-star-rating [(ngModel)]="rating3" [id]="'rating3'" ></ngx-star-rating >
-          <!--<div>{{ rating3 }}</div>-->
+      <form [formGroup]="form">
+        <div class="cont">
+          <div class="stars">
+            <ngx-star-rating formControlName="userRating" [id]="'rating3'" ></ngx-star-rating>
+          </div>
+          <!--<div>Rating(Disabled): {{form.value.rating2}}</div>-->
         </div>
-      </div>
+      </form>
     </div>
     <div class="toilet" style="position: fixed; margin-top: 30px;">
       <img src="{{toilet}}" (click)="selectToilet();" style="margin-left: 10%">

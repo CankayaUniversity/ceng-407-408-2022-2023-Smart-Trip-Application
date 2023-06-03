@@ -2,26 +2,11 @@
 <ion-content scroll-y="false">
   <div>
   <div class="background6 ion-justify-content-center">
-    <div style="position: absolute; display: flex ;top: 3% ; scale: 85%; margin-left: 7px">
-      <img src="assets/images/trophy.png" >
-      </div>
-    <div style="position: absolute; display: flex ;top: 4% ; scale: 85%; margin-left: 53px">
-      <img src="assets/images/crown.png" >
-
-    </div>
-    <div style="position: absolute; display: flex ;top: 4% ; scale: 85%; margin-left: 100px">
-      <img src="assets/images/award.png" >
-    </div>
-    <div style="position: absolute; display: flex ;top: 9% ; scale: 90% ; margin-left: 8px">
-      <img src="assets/images/opet.png" >
-    </div>
-
-    <ion-header *ngIf="facilityName" style="margin-top:38px;margin-left: 160px; color:white;font-size: 25px; width: auto;"> {{ facilityName }} </ion-header>
-    <!--<ion-header style="margin-top:8px;margin-left: 137px; color:white;font-size: 15px;">Yayalar, 06740 Çamlıdere/Ankara </ion-header> -->
+    <ion-header *ngIf="facilityName" style="margin-top: 10%; display: flex; justify-content: center; color:white;font-size: 28px; font-family: 'Aller Bold', sans-serif; width: auto;"> {{ facilityName }} </ion-header>
     <div>
       <form [formGroup]="form">
         <div class="cont">
-          <div class="stars">
+          <div class="stars" style="display: flex; justify-content: center; margin-left: 15%; margin-top: -9%;">
             <ngx-star-rating formControlName="rating2" [id]="'rating2'" [disabled] ="true"></ngx-star-rating>
           </div>
           <!--<div>Rating(Disabled): {{form.value.rating2}}</div>-->
@@ -29,11 +14,11 @@
       </form>
     </div>
   </div>
-  <div style="position: absolute; display: flex ; top: 17% ;transform: translateY(-50%); scale: 86%">
-    <img src="assets/icon/toiletWhite.png" style="margin-left: 90% ; margin-top: 42%">
-    <img src="assets/icon/disabledWhite.png" style="margin-left: 17%; margin-top: 43%">
-    <img src="assets/icon/babycare.png" style="margin-left: 17%; margin-top: 44%">
-    <img src="assets/icon/mosqueWhite.png" style="margin-left: 12% ; margin-top:  40%">
+  <div style="position: absolute; display: flex ; margin-left: -15%; top: 16% ;transform: translateY(-50%); scale: 86%">
+    <img src="{{toilet}}" style="margin-left: 76% ; margin-top: 42%">
+    <img src="{{disabled}}" style="margin-left: 22%; margin-top: 43%">
+    <img src="{{babycare}}" style="margin-left: 22%; margin-top: 44%">
+    <img src="{{mosque}}"  style="margin-left: 22% ; margin-top:  40%">
   </div>
   </div>
 

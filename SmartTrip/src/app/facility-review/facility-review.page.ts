@@ -3,7 +3,26 @@ import { NavController } from "@ionic/angular";
 import { ModalController } from '@ionic/angular';
 import { WriteReviewPage } from "../write-review/write-review.page";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment";
+import { take } from "rxjs";
+
+interface Facility {
+  id: string;
+  facilityName: string;
+  latitude: string;
+  longitude: string;
+  isAvm: string;
+  userId: string;
+  timestamp: string;
+  additionalComment: string;
+  rating: string;
+  comments: string[];
+  hasToilet: string;
+  hasDisabled: string;
+  hasBabycare: string;
+  hasMosque: string;
+}
 
 @Component({
   selector: 'app-facility-review',
@@ -15,41 +34,10 @@ export class FacilityReviewPage implements OnInit {
   dataName: string;
   dataLatitude: string;
   dataLongitude: string;
-  rating3: number;
   public form: FormGroup;
-  rating : number;
-  reviews: { username: string; comment: string; icon: string }[] = [
-    {
-      username: "kullanici1",
-      comment: "Tuvalet kağıdı ve sabun vardı.",
-      icon: "assets/images/defaultprofilepicture.png"
-    },
-    {
-      username: "kullanici2",
-      comment: "Her şey iyiydi",
-      icon: "assets/images/defaultprofilepicture.png"
-    },
-    {
-      username: "kullanici3",
-      comment: "Her şey temassızdı.",
-      icon: "assets/images/defaultprofilepicture.png"
-    },
-    {
-      username: "kullanici4",
-      comment: "Gitmenizi öneririm.",
-      icon: "assets/images/defaultprofilepicture.png"
-    },
-    {
-      username: "kullanici5",
-      comment: "Her şey iyiydi.",
-      icon: "assets/images/defaultprofilepicture.png"
-    },
-    {
-      username: "kullanici6",
-      comment: "Hijyene çok dikkat edilmiş.",
-      icon: "assets/images/defaultprofilepicture.png"
-    }
-  ];
+  rating: number;
+
+  reviews: { username: string; comment: string; icon: string }[];
 
   constructor(
     private fb: FormBuilder,
@@ -57,37 +45,108 @@ export class FacilityReviewPage implements OnInit {
     public navCtrl: NavController,
     public http: HttpClient
   ) {
-    this.rating = 4;
-    this.rating3 = 0;
-    this.form = this.fb.group({
-      rating1: ['', Validators.required],
-      rating2: [this.rating]
-    });
+    this.rating = 0;
   }
 
   ngOnInit() {
     this.facilityName = this.dataName;
+
+    this.form = this.fb.group({
+      rating2: [this.rating] // Convert facility.rating to a number
+    });
+  }
+
+  ionViewWillEnter() {
+    this.http
+      .get(`${environment.serverRoot}/facility/by_geolocation/` + this.dataLatitude + '/' + this.dataLongitude)
+      .pipe(take(1))
+      .subscribe(
+        (response) => {
+          const facility = JSON.parse(JSON.stringify(response)) as Facility;
+          const rate = Math.round(Number(facility.rating) / facility.comments.length);
+
+          if (rate > 5) {
+            this.rating = 5;
+          } else {
+            this.rating = rate;
+          }
+          console.log(rate);
+          this.form.patchValue({ rating2: this.rating }); // Update the form control value
+
+          this.reviews = facility.comments
+            .slice(1) // Exclude the first element
+            .map((comment) => {
+              const parts: string[] = comment.split("/");
+              const username: string = parts[0];
+              const commentText: string = parts[1];
+              return {
+                username: username,
+                comment: commentText,
+                icon: "assets/images/defaultprofilepicture.png",
+              };
+            });
+
+            this.changeRequirements(facility);
+
+        },
+        (error) => {
+          console.log('Error:', error);
+        }
+      );
+  }
+  toilet : string = 'assets/icon/toilet.png';
+  disabled : string = 'assets/icon/disabled.png';
+  babycare : string = 'assets/icon/babycare.png';
+  mosque : string = 'assets/icon/mosque.png';
+
+
+  changeRequirements(facility:any){
+    const rate = (facility.comments.length - 1) / 2;
+    if(Number(facility.hasToilet) >= rate ){
+      this.toilet='assets/icon/toiletWhite.png';
+    }
+    else{
+      this.toilet = 'assets/icon/toilet.png';
+    }
+    if(Number(facility.hasDisabled) >= rate){
+      this.disabled ='assets/icon/disabledWhite.png';
+    }
+    else{
+      this.disabled = 'assets/icon/disabled.png';
+    }
+    if(Number(facility.hasBabycare) >= rate){
+      this.babycare ='assets/icon/babycareWhite.png'
+    }
+    else{
+      this.babycare ='assets/icon/babycare.png'
+    }
+    if(Number(facility.hasMosque) >= rate){
+      this.mosque = 'assets/icon/mosqueWhite.png'
+    }
+    else{
+      this.mosque = 'assets/icon/mosque.png'
+    }
   }
 
   cancel() {
     return this.modalController.dismiss(null, 'cancel');
   }
 
-  async onTriggerReviewClick(){
-    const modal = await this.modalController.create(
-      {
-        component: WriteReviewPage,
-        initialBreakpoint: 0.9,
-        breakpoints: [0, 0.8],
-        cssClass: 'writeReview',
-        componentProps:{
-          dataLat: this.dataLatitude,
-          dataLng: this.dataLongitude,
-        }
-      });
+  async onTriggerReviewClick() {
+    const modal = await this.modalController.create({
+      component: WriteReviewPage,
+      initialBreakpoint: 0.9,
+      breakpoints: [0, 0.8],
+      cssClass: 'writeReview',
+      componentProps: {
+        dataLat: this.dataLatitude,
+        dataLng: this.dataLongitude,
+      },
+    });
     modal.present();
     return this.modalController.dismiss(null, 'cancel');
     const { data, role } = await modal.onWillDismiss();
   }
+
 
 }

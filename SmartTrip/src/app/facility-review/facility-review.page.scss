@@ -42,13 +42,12 @@ div.stars {
 }
 
 ::ng-deep label.star{
-  padding: 0 5px !important;
+  padding: 0 10px !important; /* Increase the padding to adjust the spacing */
   font-size: 30px !important;
   color: #ddd !important;
   &::before{
     content: "\f005" !important;
   }
 }
-
 
 

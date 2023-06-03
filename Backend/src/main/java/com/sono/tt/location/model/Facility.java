@@ -16,10 +16,10 @@ public class Facility implements Identified {
     private String facilityName;
     private String latitude;
     private String longitude;
-    private String IsAvm;
+    private String isAvm;
     private String userId;
-    private String Timestamp;
-    private String AdditionalComment;
+    private String timestamp;
+    private String additionalComment;
     private String rating;
     private List<String> comments;
     private String hasToilet;
@@ -27,16 +27,16 @@ public class Facility implements Identified {
     private String hasBabycare;
     private String hasMosque;
 
-    public Facility(@NonNull String id, String facilityName,String latitude, String longitude, String IsAvm, String userId, String Timestamp, String AdditionalComment,
+    public Facility(@NonNull String id, String facilityName,String latitude, String longitude, String isAvm, String userId, String timestamp, String additionalComment,
                     String rating, List<String> comments, String hasToilet, String hasDisabled, String hasBabycare, String hasMosque) {
         this.id = id;
         this.facilityName = facilityName;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.IsAvm = IsAvm;
+        this.isAvm = isAvm;
         this.userId = userId;
-        this.Timestamp = Timestamp;
-        this.AdditionalComment = AdditionalComment;
+        this.timestamp = timestamp;
+        this.additionalComment = additionalComment;
         this.rating = rating;
         this.comments = comments;
         this.hasToilet = hasToilet;
@@ -75,11 +75,11 @@ public class Facility implements Identified {
     }
 
     public String getIsAvm() {
-        return IsAvm;
+        return isAvm;
     }
 
     public void setIsAvm(String isAvm) {
-        IsAvm = isAvm;
+        this.isAvm = isAvm;
     }
 
     public String getUserId() {
@@ -91,19 +91,19 @@ public class Facility implements Identified {
     }
 
     public String getTimestamp() {
-        return Timestamp;
+        return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
-        Timestamp = timestamp;
+    public void setTimestamp(String Timestamp) {
+        this.timestamp = Timestamp;
     }
 
     public String getAdditionalComment() {
-        return AdditionalComment;
+        return additionalComment;
     }
 
     public void setAdditionalComment(String additionalComment) {
-        AdditionalComment = additionalComment;
+        this.additionalComment = additionalComment;
     }
 
     public String getRating() {
