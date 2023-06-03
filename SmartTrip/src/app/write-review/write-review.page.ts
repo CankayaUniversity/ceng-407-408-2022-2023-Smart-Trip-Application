@@ -72,6 +72,7 @@ export class WriteReviewPage implements OnInit {
     });
   }
   username: string;
+  icon:string;
   ngOnInit() {
     //this.facility.comments.push(this.dataLat);
     this.dataLatitude = this.dataLat;
@@ -80,7 +81,8 @@ export class WriteReviewPage implements OnInit {
     // Access the username from the UserService
     const user: User = this.userService.getUser();
     this.username = user.username;
-
+    this.icon = user.icon;
+    console.log(this.icon);
     console.log(this.dataLatitude, this.dataLongitude);
   }
 
@@ -103,7 +105,7 @@ export class WriteReviewPage implements OnInit {
         (response) => {
           const facility = JSON.parse(JSON.stringify(response)) as Facility;
           console.log(facility);
-          this.commentWithUsername = this.username + "/" + this.comment;
+          this.commentWithUsername = this.username + "-" + this.comment + "-" + this.icon;
           facility.comments.push(this.commentWithUsername);
           const currentRating = Number(facility.rating) + Number(this.form.value.userRating);
           facility.rating = currentRating.toString(); // Convert the sum of ratings to a string

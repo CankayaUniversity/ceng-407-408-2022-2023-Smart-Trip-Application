@@ -22,8 +22,10 @@ export class ProfileSetupFinalizePage implements OnInit {
     this.user = this.userService.getUser();
   }
   ngOnInit(): void {
-    this.profilePicture = localStorage.getItem('avatarUrl') || this.getRandomAvatar();
-    localStorage.setItem('avatarUrl', this.profilePicture);
+    this.profilePicture =  this.user.icon;
+
+    /*this.profilePicture = localStorage.getItem('avatarUrl') || this.getRandomAvatar();
+    localStorage.setItem('avatarUrl', this.profilePicture);*/
   }
   getRandomAvatar(): string {
     const randomIndex = Math.floor(Math.random() * this.profilePics.length);
@@ -33,6 +35,8 @@ export class ProfileSetupFinalizePage implements OnInit {
     localStorage.removeItem('avatarUrl');
     this.profilePicture = this.getRandomAvatar();
     localStorage.setItem('avatarUrl', this.profilePicture);
+    this.user.icon = this.profilePicture;
+    console.log(this.user.icon);
   }
 
   goToHomePage(){
