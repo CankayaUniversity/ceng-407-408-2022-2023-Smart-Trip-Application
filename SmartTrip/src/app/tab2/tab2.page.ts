@@ -263,6 +263,9 @@ export class Tab2Page {
   }
 
   addMarker(place:any){
+
+    this.removeMarkersAtSameLocation(place.geometry.location);
+
     let marker = new google.maps.Marker({
       position: place.geometry.location,
       map: this.map,
@@ -277,6 +280,20 @@ export class Tab2Page {
       marker.setAnimation(google.maps.Animation.BOUNCE);
       this.map.setCenter(marker.getPosition() as google.maps.LatLng);
     });
+  }
+
+  removeMarkersAtSameLocation(location: any) {
+    // Aynı konumda başka markerları bulun ve kaldırın
+    for (let i = 0; i < this.markers.length; i++) {
+      if (
+        this.markers[i].getPosition().lat() === location.lat() &&
+        this.markers[i].getPosition().lng() === location.lng()
+      ) {
+        this.markers[i].setMap(null);
+        this.markers.splice(i, 1);
+        i--; // Dizi boyutu azaldığı için dizinin sonraki elemanını kontrol etmek için i'yi azaltın
+      }
+    }
   }
 
   clearMarkers(){
@@ -454,43 +471,54 @@ export class Tab2Page {
     this.navCtrl.navigateForward(['profile-setup-finalize']);
   }
 
+  hasToilet: boolean = false;
+  hasDisabled: boolean= false;
+  hasBabycare: boolean= false;
+  hasMosque: boolean= false;
+
   public toilet = 'assets/icon/toilet.png';
   public disabled = 'assets/icon/disabled.png';
   public babycare = 'assets/icon/babycare.png';
   public mosque = 'assets/icon/mosque.png';
-  selectToilet(){
-    if(this.toilet=='assets/icon/toilet.png')
-    {
-      this.toilet='assets/icon/toiletWhite.png';
-    }else{
+  selectToilet() {
+    this.hasToilet = !this.hasToilet;
+
+    if (this.toilet == 'assets/icon/toilet.png') {
+      this.toilet = 'assets/icon/toiletWhite.png';
+    } else {
       this.toilet = 'assets/icon/toilet.png';
     }
   }
-  selectDisabled(){
-    if(this.disabled=='assets/icon/disabled.png')
-    {
-      this.disabled='assets/icon/disabledWhite.png';
-    }else{
+  selectDisabled() {
+    this.hasDisabled = !this.hasDisabled;
+
+    if (this.disabled == 'assets/icon/disabled.png') {
+      this.disabled = 'assets/icon/disabledWhite.png';
+    } else {
       this.disabled = 'assets/icon/disabled.png';
     }
   }
-  selectBabycare(){
-    if(this.babycare=='assets/icon/babycare.png')
-    {
-      this.babycare='assets/icon/babycareWhite.png';
-    }else{
+
+  selectBabycare() {
+    this.hasBabycare = !this.hasBabycare;
+
+    if (this.babycare == 'assets/icon/babycare.png') {
+      this.babycare = 'assets/icon/babycareWhite.png';
+    } else {
       this.babycare = 'assets/icon/babycare.png';
     }
   }
 
-  selectMosque(){
-    if(this.mosque=='assets/icon/mosque.png')
-    {
-      this.mosque='assets/icon/mosqueWhite.png';
-    }else{
+  selectMosque() {
+    this.hasMosque = !this.hasMosque;
+
+    if (this.mosque == 'assets/icon/mosque.png') {
+      this.mosque = 'assets/icon/mosqueWhite.png';
+    } else {
       this.mosque = 'assets/icon/mosque.png';
     }
   }
+
   filter() {
     this.http
       .get(`${environment.serverRoot}/facility/`)
@@ -498,14 +526,23 @@ export class Tab2Page {
       .subscribe(
         (response: any) => {
           const facilities = response as Facility[];
-          this.facilities = facilities.map((facility: Facility) => ({
+          this.facilities = facilities.filter((facility: Facility) => {
+            if (
+              (this.hasToilet && Number(facility.hasToilet) < (facility.comments.length - 1) / 2)||
+              (this.hasDisabled && Number(facility.hasDisabled) < (facility.comments.length - 1) / 2)||
+              (this.hasBabycare && Number(facility.hasBabycare) < (facility.comments.length - 1) / 2 )||
+              (this.hasMosque && Number(facility.hasMosque) < (facility.comments.length - 1) / 2)
+            ) {
+              return false;
+            }
+            return true;
+          }).map((facility: Facility) => ({
             facilityName: facility.facilityName,
-            rating: Math.round((Number(facility.rating)/Number(facility.comments.length))).toString(),
-            lat :facility.latitude,
-            lng:facility.longitude
+            rating: Math.round(Number(facility.rating) / Number(facility.comments.length)).toString(),
+            lat: facility.latitude,
+            lng: facility.longitude
           }));
         },
-
         (error) => {
           console.log('Error:', error);
         }
