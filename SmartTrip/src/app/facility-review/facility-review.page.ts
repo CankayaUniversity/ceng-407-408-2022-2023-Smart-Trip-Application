@@ -63,9 +63,9 @@ export class FacilityReviewPage implements OnInit {
       .subscribe(
         (response) => {
           const facility = JSON.parse(JSON.stringify(response)) as Facility;
-          const rate = Math.round(Number(facility.rating) / facility.comments.length);
+          const rate = Math.ceil(Number(facility.rating) / facility.comments.length);
 
-          if (rate > 5) {
+          if (rate >= 5) {
             this.rating = 5;
           } else {
             this.rating = rate;
@@ -137,7 +137,7 @@ export class FacilityReviewPage implements OnInit {
     const modal = await this.modalController.create({
       component: WriteReviewPage,
       initialBreakpoint: 0.9,
-      breakpoints: [0, 0.8],
+      breakpoints: [0, 0.9],
       cssClass: 'writeReview',
       componentProps: {
         dataLat: this.dataLatitude,
