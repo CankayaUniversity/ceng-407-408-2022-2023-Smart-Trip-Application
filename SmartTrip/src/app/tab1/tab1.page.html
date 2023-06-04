@@ -10,7 +10,7 @@
   </div>
 
     <div>
-      <ion-input class="input_box" style="margin-top: 283px;"  name="email" type="email" placeholder=" email" [(ngModel)]="user.email" required>
+      <ion-input class="input_box" style="margin-top: 300px;"  name="email" type="email" placeholder=" email" [(ngModel)]="user.email" required>
         <ion-icon src="assets/icon/envelope-regular.svg" name="envelope-regular" style="width: 36px; height: 22px;"></ion-icon>
       </ion-input>
       <div *ngIf="!user.email" class="error-message">
@@ -24,7 +24,7 @@
       <div *ngIf="!user.password" class="error-message">
         Password cannot be empty.
       </div>
-      <ion-header style="margin-top:60px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif " (click)="goToPasswordPage()" shape="round">forgot your password? </ion-header>
+
     </div>
 
   </form>
@@ -39,11 +39,11 @@
   <div class="button-wrapper">
     <div class="button text-end ">
       <h1 style="color: white; "></h1>
-      <ion-button class="first_button" style="margin-left: 38px; margin-top: 10px ;" (click)="goToOpenPage()" shape="round">back</ion-button>
+      <ion-button class="first_button" style="margin-left: 38px; margin-top: 8px ;" (click)="goToOpenPage()" shape="round">back</ion-button>
     </div>
     <div class="button  ion-text-right">
       <h1 style="color: white; "></h1>
-      <ion-button class="second_button" style="margin-left:224px; margin-top:-90px" (click)="signIn()"shape="round">login</ion-button>
+      <ion-button class="second_button" style="margin-left:224px; margin-top:-93px" (click)="signIn()"shape="round">login</ion-button>
     </div>
   </div>
 </ion-content>
