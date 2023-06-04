@@ -56,6 +56,33 @@ ion-content .filterMenu{
 
 }
 
+ion-content .secondMenu {
+  --background:  fixed;
+  --background-size: cover;
+}
+
+ion-menu.sideMenu::part(container) {
+  height: 100%;
+  width: 320px;
+  position: absolute;
+  border-radius: 20px 0px 0px 20px;
+  box-shadow: 0px 0px 10px rgba(57, 91, 114, 0.61);
+  margin-top: 0px !important;
+  background: url("~src/assets/images/background2.svg") no-repeat center center fixed; /* Use the variable for the background image */
+  background-size: 300%;
+}
+.secondMenu ion-list.filteredItems {
+  background-color: transparent;
+  margin-top: 10%;
+}
+
+.secondMenu ion-item {
+  margin-bottom: 10px;
+  --background: transparent;
+  --ion-item-background-color: transparent;
+}
+
+
 .toilet{
   img{
     margin-top: 25px;

@@ -109,7 +109,7 @@ export class WriteReviewPage implements OnInit {
           facility.comments.push(this.commentWithUsername);
           const currentRating = Number(facility.rating) + Number(this.form.value.userRating);
           facility.rating = currentRating.toString(); // Convert the sum of ratings to a string
-
+console.log(facility.rating);
           facility.hasToilet = (Number(facility.hasToilet) + this.tlt).toString();
           console.log(facility.hasToilet);
           facility.hasDisabled = (Number(facility.hasDisabled) + this.dis).toString();
