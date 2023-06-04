@@ -59,9 +59,28 @@
         <div>
           <ion-button class="third_button" style="position: absolute; top: 73px; left: 90px; height: 35px ; width: 197px;" shape="round" (click)="searchNearbyGasStations()">find facilities near me </ion-button>
           <ion-button class="first_button" style="margin-left: 30px; margin-top: 126px; "shape="round" (click)="openEnd()">back</ion-button>
-          <ion-button class="second_button" style="margin-left: 10px; margin-top: 126px;" shape="round">filter</ion-button>
+          <ion-button class="second_button" style="margin-left: 10px; margin-top: 126px;" shape="round" (click)="filter()">filter</ion-button>
         </div>
+
       </ion-content>
     </ion-menu>
+
+    <!-- İkinci menü -->
+    <ion-menu contentId="main-content" side="end" menuId="filterMenu" class="sideMenu">
+      <ion-content class="secondMenu" scroll-y="false" >
+        <ion-list class="filteredItems">
+<!--          <ion-list-header>
+            Facility Names
+          </ion-list-header>-->
+          <ion-item *ngFor="let facility of facilities" (click)="selectFilteredFacility(facility)">
+            <ion-label style="font-family: 'Aller Bold', sans-serif;">
+              <h2>{{ facility.facilityName }}</h2>
+              <p>Rating: {{ facility.rating }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
   </div>
 </ion-content>

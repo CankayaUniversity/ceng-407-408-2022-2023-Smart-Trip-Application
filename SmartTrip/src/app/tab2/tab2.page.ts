@@ -11,6 +11,22 @@ import {HttpClient} from "@angular/common/http";
 import {take} from "rxjs";
 import { ToastController } from '@ionic/angular';
 
+interface Facility {
+  id: string;
+  facilityName: string;
+  latitude: string;
+  longitude: string;
+  isAvm: string;
+  userId: string;
+  timestamp: string;
+  additionalComment: string;
+  rating: string;
+  comments: string[];
+  hasToilet: string;
+  hasDisabled: string;
+  hasBabycare: string;
+  hasMosque: string;
+}
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -31,6 +47,7 @@ export class Tab2Page {
   toast: HTMLIonToastElement;
   toastVisible: boolean = false;
   toastTimeout: any;
+  facilities: { rating: string; facilityName: string, lat: string, lng: string }[];
 
   constructor(public zone: NgZone,
               public geolocation: Geolocation,
@@ -39,7 +56,8 @@ export class Tab2Page {
               public navCtrl: NavController,
               private route: ActivatedRoute,
               public http: HttpClient,
-              private toastController: ToastController) {
+              private toastController: ToastController,
+              private menuController: MenuController,) {
     this.toggled= true;
     this.geocoder = new google.maps.Geocoder;
     let elem = document.createElement("div")
@@ -96,6 +114,7 @@ export class Tab2Page {
     }
 
   }
+
 
 
   facility: {
@@ -286,6 +305,36 @@ export class Tab2Page {
   showDefaultBar() {
     this.toggled = false;
   }
+  selectFilteredFacility(facility: any) {
+    // Create a new marker using the facility's coordinates
+    let marker = new google.maps.Marker({
+      position: {
+        lat: parseFloat(facility.lat),
+        lng: parseFloat(facility.lng)
+      },
+      map: this.map,
+      title: facility.facilityName,
+      animation: google.maps.Animation.DROP,
+    });
+
+
+    // Add the marker to the markers array
+    this.markers.push(marker);
+
+    // Set the map center to the marker's position
+    this.map.setCenter(marker.getPosition() as google.maps.LatLng);
+
+    marker.addListener("click", () => {
+      this.onTriggerSheetClick(marker);
+      this.map.setZoom(15);
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      this.map.setCenter(marker.getPosition() as google.maps.LatLng);
+    });
+
+    // Zoom in to the marker's position
+    this.map.setZoom(15);
+    this.openEnd();
+  }
 
 
   zoomToFacility(marker:any) {
@@ -296,11 +345,6 @@ export class Tab2Page {
       this.map.setCenter(marker.position as google.maps.LatLng);
     });
   }
-  ngAfterViewInit(){
-
-  }
-
-
   onTriggerSheetClick(marker: any) {
     this.facility.facilityName = marker.title;
     this.facility.latitude = String(marker.getPosition()?.lat());
@@ -438,6 +482,7 @@ export class Tab2Page {
       this.babycare = 'assets/icon/babycare.png';
     }
   }
+
   selectMosque(){
     if(this.mosque=='assets/icon/mosque.png')
     {
@@ -446,4 +491,27 @@ export class Tab2Page {
       this.mosque = 'assets/icon/mosque.png';
     }
   }
+  filter() {
+    this.http
+      .get(`${environment.serverRoot}/facility/`)
+      .pipe(take(1))
+      .subscribe(
+        (response: any) => {
+          const facilities = response as Facility[];
+          this.facilities = facilities.map((facility: Facility) => ({
+            facilityName: facility.facilityName,
+            rating: Math.round((Number(facility.rating)/Number(facility.comments.length))).toString(),
+            lat :facility.latitude,
+            lng:facility.longitude
+          }));
+        },
+
+        (error) => {
+          console.log('Error:', error);
+        }
+      );
+    this.menuController.enable(true, 'filterMenu');
+    this.menuController.open('filterMenu');
+  }
+
 }
