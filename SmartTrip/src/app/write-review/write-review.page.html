@@ -18,8 +18,10 @@
 
     <ion-card class="commentCard">
       <ion-item style="--border-style: none; display: flex; justify-content: center; align-items: center;">
-        <ion-icon src="assets/icon/comment.svg" name="comment" slot="start" style=" font-size: 26px;"></ion-icon>
-        <ion-textarea [(ngModel)]="comment" class="commentArea" style="color: rgb(126, 126, 127);" readonly></ion-textarea>
+        <ion-icon src="assets/icon/comment.svg" name="comment" slot="start" style="font-size: 26px;"></ion-icon>
+        <ion-textarea [(ngModel)]="comment" class="commentArea" style="color: rgb(126, 126, 127);"></ion-textarea>
+        <p *ngIf="commentError && !comment" style="margin-left: 0%" class="error-message">You have not commented yet.</p>
+
       </ion-item>
     </ion-card>
     <div>
@@ -41,7 +43,7 @@
   </div>
 
   <div>
-    <ion-button class="first_button" style="filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4)); margin-top: 640px; margin-left: 20px;" shape="round" (click)="cancel()">cancel</ion-button>
+    <ion-button class="first_button" style="filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4)); margin-top: 640px; margin-left: 20px;" shape="round" (click)="cancel()" >cancel</ion-button>
     <ion-button class="second_button" style="filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4)); margin-top: 640px; margin-left: 30px; " shape="round" (click)="onTriggerSheetClick()">rate</ion-button>
   </div>
 </ion-content>

@@ -2,11 +2,11 @@
 <ion-content scroll-y="false">
   <div>
   <div class="background6 ion-justify-content-center">
-    <ion-header *ngIf="facilityName" style="margin-top: 10%; display: flex; justify-content: center; color:white;font-size: 28px; font-family: 'Aller Bold', sans-serif; width: auto;"> {{ facilityName }} </ion-header>
+    <ion-header *ngIf="facilityName" style="margin-top: 10%; display: flex; justify-content: center; color:white;font-size: 25px; font-family: 'Aller Bold', sans-serif; width: auto;"> {{ facilityName }} </ion-header>
     <div>
       <form [formGroup]="form">
         <div class="cont">
-          <div class="stars" style="display: flex; justify-content: center; margin-left: 15%; margin-top: -9%;">
+          <div class="stars" style="margin-left: 10%; margin-top: -11%;">
             <ngx-star-rating formControlName="rating2" [id]="'rating2'" [disabled] ="true"></ngx-star-rating>
           </div>
           <!--<div>Rating(Disabled): {{form.value.rating2}}</div>-->

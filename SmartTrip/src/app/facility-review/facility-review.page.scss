@@ -25,29 +25,33 @@ ion-button{
   }
 }
 .cont {
-  width: 93%;
-  max-width: 350px;
   text-align: center;
-  margin: 4% auto;
-  padding: 30px 0;
+  margin: 2% auto;
+  padding: 45px 0;
   filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4));
-  position: fixed;
+  position: relative; /* Change to relative positioning */
+  align-items: center; /* Vertically align items */
+  justify-content: center;
+  overflow: hidden; /* Prevent overflow */
+
 }
 
 div.stars {
   width: 270px;
   margin-left: 75px;
-  margin-top: -35px;
   position: fixed;
+  z-index: 1; /* Adjust the top position as needed */
+  margin-top: 0; /* Remove the margin-top */
+
 }
 
 ::ng-deep label.star{
-  padding: 0 10px !important; /* Increase the padding to adjust the spacing */
+  position: relative !important; /* Add relative positioning */
+  z-index: 2 !important; /* Ensure the stars appear above other elements */
+  padding: 0 10px !important; /* Adjust the padding as needed */
   font-size: 30px !important;
   color: #ddd !important;
-  &::before{
+  &::before {
     content: "\f005" !important;
   }
 }
-
-
