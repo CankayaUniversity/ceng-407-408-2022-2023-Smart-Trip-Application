@@ -31,7 +31,11 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss",
+              "node_modules/ngx-bar-rating/themes/br-default-theme.scss"
+            ],
             "scripts": []
           },
           "configurations": {

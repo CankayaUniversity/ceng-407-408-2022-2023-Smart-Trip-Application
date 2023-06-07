@@ -26,7 +26,8 @@
       <form [formGroup]="form">
         <div class="cont">
           <div class="stars">
-            <ngx-star-rating formControlName="userRating" [id]="'rating3'" ></ngx-star-rating>
+<!--            <ngx-star-rating formControlName="userRating" [id]="'rating3'" ></ngx-star-rating>-->
+            <bar-rating formControlName="userRating" [id]="'rating3'" [max]="5"></bar-rating>
           </div>
           <!--<div>Rating(Disabled): {{form.value.rating2}}</div>-->
         </div>

@@ -1,15 +1,13 @@
-import {Component, ElementRef, ViewChild, NgZone } from '@angular/core';
-import { GoogleMap } from '@capacitor/google-maps';
-import { environment } from 'src/environments/environment';
-import { ModalController} from "@ionic/angular";
-import { FacilityReviewPage } from "../facility-review/facility-review.page";
-import { NavController } from "@ionic/angular";
-import { MenuController } from "@ionic/angular";
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import {Component, NgZone} from '@angular/core';
+import {environment} from 'src/environments/environment';
+import {MenuController, ModalController, NavController, ToastController} from "@ionic/angular";
+import {FacilityReviewPage} from "../facility-review/facility-review.page";
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {take} from "rxjs";
-import { ToastController } from '@ionic/angular';
+import {Geolocation} from "@capacitor/geolocation";
+
+declare var google: any;
 
 interface Facility {
   id: string;
@@ -27,6 +25,7 @@ interface Facility {
   hasBabycare: string;
   hasMosque: string;
 }
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -34,7 +33,7 @@ interface Facility {
 })
 export class Tab2Page {
 
-  markerId:string;
+  markerId: string;
   map: any;
   markers: any;
   autocomplete: any;
@@ -50,7 +49,6 @@ export class Tab2Page {
   facilities: { rating: string; facilityName: string, lat: string, lng: string }[];
 
   constructor(public zone: NgZone,
-              public geolocation: Geolocation,
               private menu: MenuController,
               public modalController: ModalController,
               public navCtrl: NavController,
@@ -58,7 +56,7 @@ export class Tab2Page {
               public http: HttpClient,
               private toastController: ToastController,
               private menuController: MenuController,) {
-    this.toggled= true;
+    this.toggled = true;
     this.geocoder = new google.maps.Geocoder;
     let elem = document.createElement("div")
     this.GooglePlaces = new google.maps.places.PlacesService(elem);
@@ -106,9 +104,9 @@ export class Tab2Page {
   }
 
   openNavigation() {
-    if(this.facility.latitude == "" && this.facility.longitude == ""){
+    if (this.facility.latitude == "" && this.facility.longitude == "") {
       this.presentToast();
-    }else{
+    } else {
       const url = `https://www.google.com/maps/dir/?api=1&destination=${this.facility.latitude},${this.facility.longitude}`;
       window.open(url, '_system');
     }
@@ -116,12 +114,11 @@ export class Tab2Page {
   }
 
 
-
   facility: {
     facilityName: string,
     latitude: string,
     longitude: string,
-    isAvm:string,
+    isAvm: string,
     userId: string,
     timestamp: string,
     additionalComment: string,
@@ -135,7 +132,7 @@ export class Tab2Page {
     facilityName: '',
     latitude: '',
     longitude: '',
-    isAvm:'',
+    isAvm: '',
     userId: '',
     timestamp: '',
     additionalComment: '',
@@ -147,7 +144,7 @@ export class Tab2Page {
     hasMosque: ''
   };
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     // let infoWindow = new google.maps.InfoWindow({map: map});
     //Set latitude and longitude of some place
     //this.tryGeolocation();
@@ -156,15 +153,14 @@ export class Tab2Page {
       center: {lat: 39.8336837, lng: 32.5844109},
       streetViewControl: false,
       disableDefaultUI: true,
-      mapId:'558f75b3b5a5e8bd'
+      mapId: '558f75b3b5a5e8bd'
     };
     this.map = new google.maps.Map(document.getElementById('map')!, mapOptions);
     this.tryGeolocation();
   }
 
   tryGeolocation() {
-    this.geolocation
-      .getCurrentPosition()
+    Geolocation.getCurrentPosition()
       .then((resp) => {
         let pos = {
           lat: resp.coords.latitude,
@@ -194,7 +190,7 @@ export class Tab2Page {
       this.autocompleteItems = [];
       return;
     }
-    this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input },
+    this.GoogleAutocomplete.getPlacePredictions({input: this.autocomplete.input},
       (predictions: any[], status: any) => {
         this.autocompleteItems = [];
         this.zone.run(() => {
@@ -204,18 +200,19 @@ export class Tab2Page {
         });
       });
   }
-  selectSearchResult(item: { place_id: any; }){
+
+  selectSearchResult(item: { place_id: any; }) {
     this.toggled = true;
     this.clearMarkers();
     this.autocompleteItems = [];
-    this.geocoder.geocode({'placeId': item.place_id}, (results:any, status: string) => {
-      if(status === 'OK' && results[0]){
+    this.geocoder.geocode({'placeId': item.place_id}, (results: any, status: string) => {
+      if (status === 'OK' && results[0]) {
         this.autocompleteItems = [];
         this.GooglePlaces.nearbySearch({
           location: results[0].geometry.location,
           radius: '1000',
           types: ['gas_station'],
-        }, (near_places:any) => {
+        }, (near_places: any) => {
           this.zone.run(() => {
             for (var i = 0; i < near_places.length; i++) {
               this.nearbyItems.push(near_places[i]);
@@ -227,7 +224,7 @@ export class Tab2Page {
           location: results[0].geometry.location,
           radius: '1000',
           types: ['shopping_mall'],
-        }, (near_places:any) => {
+        }, (near_places: any) => {
           this.zone.run(() => {
             for (var i = 0; i < near_places.length; i++) {
               this.nearbyItems.push(near_places[i]);
@@ -239,7 +236,7 @@ export class Tab2Page {
   }
 
   searchNearbyGasStations() {
-    this.geolocation.getCurrentPosition().then((resp) => {
+    Geolocation.getCurrentPosition().then((resp) => {
       let pos = {
         lat: resp.coords.latitude,
         lng: resp.coords.longitude
@@ -248,7 +245,7 @@ export class Tab2Page {
         location: pos,
         radius: '1000',
         types: ['shopping_mall'],
-      }, (near_places:any) => {
+      }, (near_places: any) => {
         this.zone.run(() => {
           this.nearbyItems = [];
           for (var i = 0; i < near_places.length; i++) {
@@ -262,7 +259,7 @@ export class Tab2Page {
     });
   }
 
-  addMarker(place:any){
+  addMarker(place: any) {
 
     this.removeMarkersAtSameLocation(place.geometry.location);
 
@@ -278,7 +275,7 @@ export class Tab2Page {
       this.onTriggerSheetClick(marker);
       this.map.setZoom(15);
       marker.setAnimation(google.maps.Animation.BOUNCE);
-      this.map.setCenter(marker.getPosition() as google.maps.LatLng);
+      this.map.setCenter(marker.getPosition() as any);
     });
   }
 
@@ -296,14 +293,15 @@ export class Tab2Page {
     }
   }
 
-  clearMarkers(){
+  clearMarkers() {
     for (var i = 0; i < this.markers.length; i++) {
       console.log(this.markers[i])
       this.markers[i].setMap(null);
     }
     this.markers = [];
   }
-  selectFacility(place:any){
+
+  selectFacility(place: any) {
     //this.clearMarkers();
 
     let marker = new google.maps.Marker({
@@ -322,6 +320,7 @@ export class Tab2Page {
   showDefaultBar() {
     this.toggled = false;
   }
+
   selectFilteredFacility(facility: any) {
     // Create a new marker using the facility's coordinates
     let marker = new google.maps.Marker({
@@ -339,13 +338,13 @@ export class Tab2Page {
     this.markers.push(marker);
 
     // Set the map center to the marker's position
-    this.map.setCenter(marker.getPosition() as google.maps.LatLng);
+    this.map.setCenter(marker.getPosition() as any);
 
     marker.addListener("click", () => {
       this.onTriggerSheetClick(marker);
       this.map.setZoom(15);
       marker.setAnimation(google.maps.Animation.BOUNCE);
-      this.map.setCenter(marker.getPosition() as google.maps.LatLng);
+      this.map.setCenter(marker.getPosition() as any);
     });
 
     // Zoom in to the marker's position
@@ -354,14 +353,15 @@ export class Tab2Page {
   }
 
 
-  zoomToFacility(marker:any) {
+  zoomToFacility(marker: any) {
     marker.addListener("click", () => {
       this.onTriggerSheetClick(marker);
       this.map.setZoom(15);
       marker.setAnimation(google.maps.Animation.BOUNCE);
-      this.map.setCenter(marker.position as google.maps.LatLng);
+      this.map.setCenter(marker.position as any);
     });
   }
+
   onTriggerSheetClick(marker: any) {
     this.facility.facilityName = marker.title;
     this.facility.latitude = String(marker.getPosition()?.lat());
@@ -421,65 +421,67 @@ export class Tab2Page {
     modal.then(modalElement => modalElement.present());
   }
 
-    /*
-      async addMarker(lat: any, lng: any){
-        if(this.markerId) this.removeMarker();
-        this.onTriggerSheetClick();
-        this.markerId = await this.map.addMarker({
-          coordinate:{
-            lat:lat,
-            lng:lng,
-          },
-          draggable:true
-        });
-      }
+  /*
+    async addMarker(lat: any, lng: any){
+      if(this.markerId) this.removeMarker();
+      this.onTriggerSheetClick();
+      this.markerId = await this.map.addMarker({
+        coordinate:{
+          lat:lat,
+          lng:lng,
+        },
+        draggable:true
+      });
+    }
 
-      async removeMarker(id?: string) {
-        await this.map.removeMarker(id ? id : this.markerId);
-      }
+    async removeMarker(id?: string) {
+      await this.map.removeMarker(id ? id : this.markerId);
+    }
 
-      async addListeners() {
-        // Handle marker click
-        await this.map.setOnMarkerClickListener((event:any) => {
-          console.log('setOnMarkerClickListener', event);
-          this.removeMarker(event.markerId);
-        });
+    async addListeners() {
+      // Handle marker click
+      await this.map.setOnMarkerClickListener((event:any) => {
+        console.log('setOnMarkerClickListener', event);
+        this.removeMarker(event.markerId);
+      });
 
-        await this.map.setOnMapClickListener((event:any) => {
-          console.log('setOnMapClickListener', event);
-          //this.onTriggerSheetClick();
-          this.addMarker(event.latitude, event.longitude);
-        });
-    /!*
-        await this.newMap.setOnMyLocationButtonClickListener((event) => {
-          console.log('setOnMyLocationButtonClickListener', event);
-          this.addMarker(event.mapId, event.mapId);
-        });
-    *!/
-        await this.map.setOnMyLocationClickListener((event:any) => {
-          console.log('setOnMyLocationClickListener', event);
-          this.addMarker(event.latitude, event.longitude);
-        });
-      }
-    */
+      await this.map.setOnMapClickListener((event:any) => {
+        console.log('setOnMapClickListener', event);
+        //this.onTriggerSheetClick();
+        this.addMarker(event.latitude, event.longitude);
+      });
+  /!*
+      await this.newMap.setOnMyLocationButtonClickListener((event) => {
+        console.log('setOnMyLocationButtonClickListener', event);
+        this.addMarker(event.mapId, event.mapId);
+      });
+  *!/
+      await this.map.setOnMyLocationClickListener((event:any) => {
+        console.log('setOnMyLocationClickListener', event);
+        this.addMarker(event.latitude, event.longitude);
+      });
+    }
+  */
 
   openEnd() {
     this.menu.close();
 
   }
-  goToProfileSetupPage(){
+
+  goToProfileSetupPage() {
     this.navCtrl.navigateForward(['profile-setup-finalize']);
   }
 
   hasToilet: boolean = false;
-  hasDisabled: boolean= false;
-  hasBabycare: boolean= false;
-  hasMosque: boolean= false;
+  hasDisabled: boolean = false;
+  hasBabycare: boolean = false;
+  hasMosque: boolean = false;
 
   public toilet = 'assets/icon/toilet.png';
   public disabled = 'assets/icon/disabled.png';
   public babycare = 'assets/icon/babycare.png';
   public mosque = 'assets/icon/mosque.png';
+
   selectToilet() {
     this.hasToilet = !this.hasToilet;
 
@@ -489,6 +491,7 @@ export class Tab2Page {
       this.toilet = 'assets/icon/toilet.png';
     }
   }
+
   selectDisabled() {
     this.hasDisabled = !this.hasDisabled;
 
@@ -528,9 +531,9 @@ export class Tab2Page {
           const facilities = response as Facility[];
           this.facilities = facilities.filter((facility: Facility) => {
             if (
-              (this.hasToilet && Number(facility.hasToilet) < (facility.comments.length - 1) / 2)||
-              (this.hasDisabled && Number(facility.hasDisabled) < (facility.comments.length - 1) / 2)||
-              (this.hasBabycare && Number(facility.hasBabycare) < (facility.comments.length - 1) / 2 )||
+              (this.hasToilet && Number(facility.hasToilet) < (facility.comments.length - 1) / 2) ||
+              (this.hasDisabled && Number(facility.hasDisabled) < (facility.comments.length - 1) / 2) ||
+              (this.hasBabycare && Number(facility.hasBabycare) < (facility.comments.length - 1) / 2) ||
               (this.hasMosque && Number(facility.hasMosque) < (facility.comments.length - 1) / 2)
             ) {
               return false;

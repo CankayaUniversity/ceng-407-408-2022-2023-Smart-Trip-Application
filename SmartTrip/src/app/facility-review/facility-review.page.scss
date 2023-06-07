@@ -50,4 +50,13 @@ div.stars {
   }
 }
 
+bar-rating ::ng-deep {
+  .br-units{
+    justify-content: center;
+
+    .br-unit {
+      font-size: 48px;
+    }
+  }
+}
 

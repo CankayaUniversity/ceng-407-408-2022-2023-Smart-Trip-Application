@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { WriteReviewPageRoutingModule } from './write-review-routing.module';
 
 import { WriteReviewPage } from './write-review.page';
-import { NgxStarRatingModule } from 'ngx-star-rating';
+import {BarRatingModule} from "ngx-bar-rating";
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
     ReactiveFormsModule,
     IonicModule,
     WriteReviewPageRoutingModule,
-    NgxStarRatingModule
+    BarRatingModule,
   ],
   declarations: [WriteReviewPage]
 })

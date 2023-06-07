@@ -7,7 +7,8 @@
       <form [formGroup]="form">
         <div class="cont">
           <div class="stars" style="display: flex; justify-content: center; margin-left: 15%; margin-top: -9%;">
-            <ngx-star-rating formControlName="rating2" [id]="'rating2'" [disabled] ="true"></ngx-star-rating>
+<!--            <ngx-star-rating formControlName="rating2" [id]="'rating2'" [disabled] ="true"></ngx-star-rating>-->
+            <bar-rating [rate]="form.value.rating2" [id]="'rating2'" [max]="5" [readOnly]="true"></bar-rating>
           </div>
           <!--<div>Rating(Disabled): {{form.value.rating2}}</div>-->
         </div>
