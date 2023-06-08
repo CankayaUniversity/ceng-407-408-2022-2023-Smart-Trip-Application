@@ -4,13 +4,13 @@
   <form #form="ngForm">
   <div class="background1 ion-justify-content-center">
       <div style="text-align: center; color: white; font-family: 'Aller Display', sans-serif;">
-        <p style="font-size: 60px; margin-bottom: 0px; margin-top: 72px;">smart</p>
+        <p style="font-size: 60px; margin-bottom: 0px; margin-top: 100px;">smart</p>
         <p style="font-size: 60px; margin-top: 0px;margin-bottom: 89px">trip</p>
       </div>
   </div>
 
     <div>
-      <ion-input class="input_box" style="margin-top: 300px;"  name="email" type="email" placeholder=" email" [(ngModel)]="user.email" required>
+      <ion-input class="input_box" style="margin-top: 300px; margin-left: 25px"  name="email" type="email" placeholder=" email" [(ngModel)]="user.email" required>
         <ion-icon src="assets/icon/envelope-regular.svg" name="envelope-regular" style="width: 36px; height: 22px;"></ion-icon>
       </ion-input>
       <div *ngIf="!user.email" class="error-message">
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div>
-      <ion-input class="input_box" style="margin-top: 40px;" name="password" type="password" placeholder=" password" [(ngModel)]="user.password" required>
+      <ion-input class="input_box" style="margin-top: 40px; margin-left: 25px" name="password" type="password" placeholder=" password" [(ngModel)]="user.password" required>
         <ion-icon src="assets/icon/lock-solid.svg" name="lock-solid" style="width: 36px; height: 22px;"></ion-icon>
       </ion-input>
       <div *ngIf="!user.password" class="error-message">
@@ -36,14 +36,8 @@
 
   <div class="error-message" *ngIf="errorMessage" style="color: red;font-weight: bold;text-align: center;margin-top: 33px;margin-bottom: -35px;">{{ errorMessage }}</div>
 -->
-  <div class="button-wrapper">
-    <div class="button text-end ">
-      <h1 style="color: white; "></h1>
-      <ion-button class="first_button" style="margin-left: 38px; margin-top: 8px ;" (click)="goToOpenPage()" shape="round">back</ion-button>
-    </div>
-    <div class="button  ion-text-right">
-      <h1 style="color: white; "></h1>
-      <ion-button class="second_button" style="margin-left:224px; margin-top:-93px" (click)="signIn()"shape="round">login</ion-button>
-    </div>
+  <div class="button-wrapper" style="position: fixed; bottom: 30px; width: 100%; display: flex; justify-content: space-evenly; background-color: white; padding: 10px;">
+    <ion-button class="first_button" (click)="goToOpenPage()" shape="round">back</ion-button>
+    <ion-button class="second_button" (click)="signIn()" shape="round">login</ion-button>
   </div>
 </ion-content>

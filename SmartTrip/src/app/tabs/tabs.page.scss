@@ -1,1 +1,15 @@
+.button-wrapper {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.small-text-button {
+  font-size: 14px;
+}
+
+.no-outline {
+  outline: none;
+}
 

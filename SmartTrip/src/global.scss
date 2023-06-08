@@ -37,7 +37,7 @@
 
 .button{
   width: 153px;
-  height: 44px;
+  height: 40px;
   font-family: 'Aller Bold', sans-serif;
 
 }
@@ -64,10 +64,9 @@
 .background1{
   background-image: url(assets/images/background1.svg);
   background-size: cover;
-  background-position: center;
-  height: 74vh;
+  height: 81vh;
   position: fixed;
-  top: 0;
+  top:-33px;
   right: 0;
   left: 0;
 }

@@ -1,7 +1,9 @@
+
 .button-wrapper {
   position: fixed;
-  bottom: 35px;
-  left: 18%;
-  transform: translateX(-50%);
-  z-index: 999;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
 }
