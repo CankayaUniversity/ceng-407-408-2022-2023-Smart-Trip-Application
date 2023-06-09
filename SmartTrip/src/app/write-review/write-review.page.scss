@@ -23,6 +23,11 @@
   height: 295px;
   margin-left: 25px;
 }
+
+.list-scrollable {
+  height: 100%;
+  overflow-y: scroll;
+}
 .commentCard{
   width: 320px;
   height: 55px;
@@ -46,10 +51,7 @@
   filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4));
 
 }
-.list-scrollable {
-  height: 100%;
-  overflow-y: scroll;
-}
+
 
 div.stars {
   margin-top: -10px;
@@ -66,5 +68,15 @@ bar-rating ::ng-deep {
     }
   }
 }
+.fixed-modal {
+  position: fixed;
+}
+
+.no-scroll {
+  overflow-y: hidden;
+}
+
+
+
 
 

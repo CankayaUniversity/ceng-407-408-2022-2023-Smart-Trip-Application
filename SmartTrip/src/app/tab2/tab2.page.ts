@@ -274,23 +274,8 @@ export class Tab2Page {
     marker.addListener("click", () => {
       this.onTriggerSheetClick(marker);
       this.map.setZoom(15);
-      marker.setAnimation(google.maps.Animation.BOUNCE);
       this.map.setCenter(marker.getPosition() as any);
     });
-  }
-
-  removeMarkersAtSameLocation(location: any) {
-    // Aynı konumda başka markerları bulun ve kaldırın
-    for (let i = 0; i < this.markers.length; i++) {
-      if (
-        this.markers[i].getPosition().lat() === location.lat() &&
-        this.markers[i].getPosition().lng() === location.lng()
-      ) {
-        this.markers[i].setMap(null);
-        this.markers.splice(i, 1);
-        i--; // Dizi boyutu azaldığı için dizinin sonraki elemanını kontrol etmek için i'yi azaltın
-      }
-    }
   }
 
   clearMarkers() {
@@ -350,6 +335,20 @@ export class Tab2Page {
     // Zoom in to the marker's position
     this.map.setZoom(15);
     this.openEnd();
+  }
+
+  removeMarkersAtSameLocation(location: any) {
+    // Aynı konumda başka markerları bulun ve kaldırın
+    for (let i = 0; i < this.markers.length; i++) {
+      if (
+        this.markers[i].getPosition().lat() === location.lat() &&
+        this.markers[i].getPosition().lng() === location.lng()
+      ) {
+        this.markers[i].setMap(null);
+        this.markers.splice(i, 1);
+        i--;
+      }
+    }
   }
 
 

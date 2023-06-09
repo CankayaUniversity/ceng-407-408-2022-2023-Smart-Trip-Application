@@ -36,6 +36,10 @@ export class FacilityReviewPage implements OnInit {
   dataLongitude: string;
   public form: FormGroup;
   rating: number;
+  toilet : string = 'assets/icon/toilet.png';
+  disabled : string = 'assets/icon/disabled.png';
+  babycare : string = 'assets/icon/babycare.png';
+  mosque : string = 'assets/icon/mosque.png';
 
   reviews: { username: string; comment: string; icon: string }[];
 
@@ -63,9 +67,12 @@ export class FacilityReviewPage implements OnInit {
       .subscribe(
         (response) => {
           const facility = JSON.parse(JSON.stringify(response)) as Facility;
-          const rate = Math.ceil(Number(facility.rating) / facility.comments.length);
-
-          if (rate >= 5) {
+          let rate = 0;
+          if(Number(facility.rating) > 0 ){
+            rate = Math.ceil(Number(facility.rating) / facility.comments.length);
+          }
+          console.log(rate);
+          if (rate > 5) {
             this.rating = 5;
           } else {
             this.rating = rate;
@@ -95,38 +102,13 @@ export class FacilityReviewPage implements OnInit {
         }
       );
   }
-  toilet : string = 'assets/icon/toilet.png';
-  disabled : string = 'assets/icon/disabled.png';
-  babycare : string = 'assets/icon/babycare.png';
-  mosque : string = 'assets/icon/mosque.png';
-
 
   changeRequirements(facility:any){
     const rate = (facility.comments.length - 1) / 2;
-    if(Number(facility.hasToilet) >= rate ){
-      this.toilet='assets/icon/toiletWhite.png';
-    }
-    else{
-      this.toilet = 'assets/icon/toilet.png';
-    }
-    if(Number(facility.hasDisabled) >= rate){
-      this.disabled ='assets/icon/disabledWhite.png';
-    }
-    else{
-      this.disabled = 'assets/icon/disabled.png';
-    }
-    if(Number(facility.hasBabycare) >= rate){
-      this.babycare ='assets/icon/babycareWhite.png'
-    }
-    else{
-      this.babycare ='assets/icon/babycare.png'
-    }
-    if(Number(facility.hasMosque) >= rate){
-      this.mosque = 'assets/icon/mosqueWhite.png'
-    }
-    else{
-      this.mosque = 'assets/icon/mosque.png'
-    }
+    this.toilet = (Number(facility.hasToilet) > rate) ? 'assets/icon/toiletWhite.png' : 'assets/icon/toilet.png';
+    this.disabled = (Number(facility.hasDisabled) > rate) ? 'assets/icon/disabledWhite.png' : 'assets/icon/disabled.png';
+    this.babycare = (Number(facility.hasBabycare) > rate) ? 'assets/icon/babycareWhite.png' : 'assets/icon/babycare.png';
+    this.mosque = (Number(facility.hasMosque) > rate) ? 'assets/icon/mosqueWhite.png' : 'assets/icon/mosque.png';
   }
 
   cancel() {

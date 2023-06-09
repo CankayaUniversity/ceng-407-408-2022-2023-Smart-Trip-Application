@@ -1,12 +1,12 @@
 <ion-content fullscreen scroll-y="false">
-  <ion-toolbar class="searchBar" slot="fixed" color="translucent" >
+  <ion-toolbar class="searchBar" slot="fixed"  color="translucent" style="position: fixed; top: 0; left: 0; right: 0;">
     <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
-    <ion-list [hidden]="autocompleteItems.length == 0" style="max-height: 50vh; overflow-y: scroll;">
+    <ion-list [hidden]="autocompleteItems.length == 0" style="max-height: 50vh; overflow-y: scroll; margin-top: auto;">
       <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
         {{ item.description }}
       </ion-item>
     </ion-list>
-    <ion-list *ngIf="nearbyItems.length > 0 && toggled" style="max-height: 55vh; overflow-y: scroll;">
+    <ion-list *ngIf="nearbyItems.length > 0 && toggled" style="max-height: 55vh; overflow-y: scroll; margin-top: auto;">
       <ion-item *ngFor="let place of nearbyItems" tappable (click)="selectFacility(place); showDefaultBar();">
         <h2>{{place.name}}</h2>
         <p>{{place.vicinity}}</p>
@@ -14,9 +14,6 @@
       </ion-item>
     </ion-list>
   </ion-toolbar>
-  <!--  <ion-toolbar class="searchBar" slot="fixed" color="translucent" >
-      <ion-searchbar search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
-    </ion-toolbar>-->
   <div id='map'></div>
   <div>
     <ion-toolbar class="bottomMenu" slot="fixed" color="translucent">
@@ -73,9 +70,9 @@
             Facility Names
           </ion-list-header>-->
           <ion-item *ngFor="let facility of facilities" (click)="selectFilteredFacility(facility)">
-            <ion-label style="font-family: 'Aller Bold', sans-serif;">
+            <ion-label style="color: white; font-family: 'Aller Bold', sans-serif;">
               <h2>{{ facility.facilityName }}</h2>
-              <p>Rating: {{ facility.rating }}</p>
+              <p style="color: black;">Rating: {{ facility.rating }}</p>
             </ion-label>
           </ion-item>
         </ion-list>
