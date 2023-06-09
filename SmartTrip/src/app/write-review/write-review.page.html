@@ -5,7 +5,7 @@
     </div>
 
     <div class="scrollable-container scrollable" style="position: relative; top: 23%; transform: translateY(-50%); overflow-y: scroll">
-      <ion-list class="list-scrollable" style="background-color: transparent; align-items: center" (scroll)="preventModalScroll($event)">
+      <ion-list class="list-scrollable" style="background-color: transparent; align-items: center">
         <ion-row>
           <ion-col size="10" *ngFor="let item of items">
             <ion-button class="commentButton" shape="round" (click)="setComment(item)">

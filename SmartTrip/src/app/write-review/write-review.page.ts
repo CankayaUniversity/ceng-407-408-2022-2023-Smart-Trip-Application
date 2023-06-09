@@ -202,17 +202,4 @@ export class WriteReviewPage implements OnInit {
     }
   }
 
-  preventModalScroll(event: { preventDefault: () => void; }) {
-    event.preventDefault(); // Prevent scrolling
-console.log('deneme');
-    // Select the modal element based on its class name or ID
-    const modalElement = document.querySelector('.modal');
-
-    if (modalElement) {
-      // Add CSS classes to prevent scrolling
-      modalElement.classList.add('fixed-modal');
-      modalElement.classList.add('no-scroll');
-    }
-  }
-
 }
