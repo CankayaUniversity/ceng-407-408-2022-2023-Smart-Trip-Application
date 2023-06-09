@@ -34,3 +34,6 @@ $ npm install --save @ionic-native/geolocation –force
 
 $ ./gradlew shadowJar
 ```
+
+### Note
+* You can access the APK file from the release file in the paket-degisiklikleri branch and for the backend connection, you need to add your ip address to the serverRoot: 'http://YOUR_IP_ADDRESS:8080' in the environment.prod.ts file.
