@@ -1,12 +1,12 @@
 
-<ion-content scroll-y="false">
+<ion-content class="fixed-content">
   <div>
   <div class="background6 ion-justify-content-center">
-    <ion-header *ngIf="facilityName" style="margin-top: 10%; display: flex; justify-content: center; color:white;font-size: 28px; font-family: 'Aller Bold', sans-serif; width: auto;"> {{ facilityName }} </ion-header>
+    <ion-header *ngIf="facilityName" style="margin-top: 8%; display: flex; justify-content: center; color:white;font-size: 28px; font-family: 'Aller Bold', sans-serif; width: auto;"> {{ facilityName }} </ion-header>
     <div>
       <form [formGroup]="form">
         <div class="cont">
-          <div class="stars" style="display: flex; justify-content: center; margin-left: 15%; margin-top: -9%;">
+          <div class="stars" style="display: flex; justify-content: center; margin-left: 15%; margin-top: -13%;">
 <!--            <ngx-star-rating formControlName="rating2" [id]="'rating2'" [disabled] ="true"></ngx-star-rating>-->
             <bar-rating [rate]="form.value.rating2" [id]="'rating2'" [max]="5" [readOnly]="true"></bar-rating>
           </div>
@@ -15,16 +15,16 @@
       </form>
     </div>
   </div>
-  <div style="position: absolute; display: flex ; margin-left: -15%; top: 16% ;transform: translateY(-50%); scale: 86%">
-    <img src="{{toilet}}" style="margin-left: 76% ; margin-top: 42%">
+  <div style="position: absolute; display: flex ; margin-left: -14%; top: 16% ;transform: translateY(-50%); scale: 83%">
+    <img src="{{toilet}}" style="margin-left: 50% ; margin-top: 42%">
     <img src="{{disabled}}" style="margin-left: 22%; margin-top: 43%">
     <img src="{{babycare}}" style="margin-left: 22%; margin-top: 44%">
     <img src="{{mosque}}"  style="margin-left: 22% ; margin-top:  40%">
   </div>
   </div>
 
-  <div class="scrollable-container" style="position: fixed; transform: translateY(-50%); overflow-y: scroll">
-    <ion-list style="/*background-color: transparent;*/ align-items: center">
+  <div class="scrollable-container scrollable" style="position: fixed; transform: translateY(-50%); overflow-y: scroll; margin-left: 17px; margin-top: 339px">
+    <ion-list class="list-scrollable" style="/*background-color: transparent;*/ align-items: center">
           <ion-item *ngFor="let review of reviews">
             <ion-avatar slot="start">
               <img [src]="review.icon">
@@ -39,7 +39,7 @@
 
 
   <div>
-    <ion-button class="first_button" style="margin-left: 20px;" shape="round" (click)="cancel()">back</ion-button>
-    <ion-button class="second_button" style="margin-left: 30px; " shape="round" (click)="onTriggerReviewClick()">rate now</ion-button>
+    <ion-button class="first_button" style="margin-left: 18px; margin-top: 520px" shape="round" (click)="cancel()">back</ion-button>
+    <ion-button class="second_button" style="margin-left: 7px;margin-top: 520px " shape="round" (click)="onTriggerReviewClick()">rate now</ion-button>
   </div>
 </ion-content>

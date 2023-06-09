@@ -1,7 +1,7 @@
 <ion-content fullscreen scroll-y="false">
   <ion-toolbar class="searchBar" slot="fixed" color="translucent" >
     <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" search-icon="search-circle"  color="light" placeholder="Search Facility"></ion-searchbar>
-    <ion-list [hidden]="autocompleteItems.length == 0" style="max-height: 55vh; overflow-y: scroll;">
+    <ion-list [hidden]="autocompleteItems.length == 0" style="max-height: 50vh; overflow-y: scroll;">
       <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
         {{ item.description }}
       </ion-item>
@@ -24,7 +24,7 @@
         <ion-row>
           <ion-col>
             <div id="main-content" >
-              <ion-fab-button style="margin-left: 30px" color="secondary">
+              <ion-fab-button style="margin-left: 20px" color="secondary">
                 <ion-menu-button>
                   <ion-icon name="search"></ion-icon>
                 </ion-menu-button>
@@ -32,15 +32,15 @@
             </div>
           </ion-col>
           <ion-col>
-            <ion-fab-button style="margin-left: 15px" color="secondary">
+            <ion-fab-button style="margin-left: 10px" color="secondary">
               <ion-icon style="margin-top: 3px; margin-right: 2px" name="navigate-outline" (click)="openNavigation();"></ion-icon>
             </ion-fab-button>
           </ion-col>
           <ion-col>
-            <ion-fab-button style="margin-right: 120px" color="secondary" (click)="goToProfileSetupPage()">
+            <ion-fab-button style="margin-right: 125px" color="secondary" (click)="goToProfileSetupPage()">
             </ion-fab-button>
             <div style="margin-top: -1rem; margin-left: 2.5rem; scale: 1.2">
-              <ion-icon style="color: white" name="settings"></ion-icon>
+              <ion-icon style="color: white ; margin-left: -8px" name="settings"></ion-icon>
             </div>
           </ion-col>
         </ion-row>
@@ -67,7 +67,7 @@
 
     <!-- İkinci menü -->
     <ion-menu contentId="main-content" side="end" menuId="filterMenu" class="sideMenu">
-      <ion-content class="secondMenu" scroll-y="false" >
+      <ion-content class="secondMenu" scroll-y="true" >
         <ion-list class="filteredItems">
 <!--          <ion-list-header>
             Facility Names

@@ -8,7 +8,7 @@
   <div>
     <ion-avatar class="profilepicture">
       <img [src]="profilePicture">
-      <ion-header *ngIf="user" style="margin-top:10px;margin-left: 3px; color:white; text-align: center; font-family: 'Aller Bold', sans-serif ;font-size: 25px;">{{user.username}}</ion-header>
+      <ion-header *ngIf="user" style="margin-top: -4px; margin-left: 3px; color: white; text-align: center; font-family: 'Aller Bold', sans-serif; font-size: 25px;">{{user.username}}</ion-header>
     </ion-avatar>
     <img class="profile-picture" src="assets/icon/settingsbutton.svg" alt="Settings button" />
     <ion-icon class="settings-button" name="settings-outline"></ion-icon>
@@ -17,13 +17,14 @@
 
   <div>
     <div>
-      <ion-button class="confirm_button" style="margin-left:130px; margin-top:560px" shape="round" (click)="goToHomePage()">confirm</ion-button>
+      <ion-button class="confirm_button" style="margin-left:130px; margin-top:525px; text-transform: none;" shape="round" (click)="goToHomePage()">confirm</ion-button>
+
     </div>
     <div>
-      <ion-button class="confirm_button" style="margin-left:130px; margin-top:40px" shape="round" (click)="changeAvatar()">change avatar</ion-button>
+      <ion-button class="confirm_button" style="margin-left:130px; margin-top:35px;text-transform: none;" shape="round" (click)="changeAvatar()">change avatar</ion-button>
     </div>
     <div>
-      <ion-button class="confirm_button" style="margin-left:130px; margin-top:40px" shape="round" (click)="logOut()">log out</ion-button>
+      <ion-button class="confirm_button" style="margin-left:130px; margin-top:32px;text-transform: none;" shape="round" (click)="logOut()">log out</ion-button>
     </div>
   </div>
 </ion-content>

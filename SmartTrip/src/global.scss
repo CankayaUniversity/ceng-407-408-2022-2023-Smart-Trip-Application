@@ -45,20 +45,31 @@
 .first_button{
   --ion-color-primary: #443db8;
   filter: drop-shadow(0px 10px 10px rgba(92, 87, 199, 0.5));
+  text-transform: none;
+  font-weight: bold;
+  font-size: 16px;
 }
+
 .second_button{
   --ion-color-primary: #39A6FF;
   filter: drop-shadow(0px 10px 10px rgba(57, 166, 255, 0.5));
+  text-transform: none;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .third_button {
   --ion-color-primary: rgba(10, 3, 106, 0.51);
+  text-transform: none;
+  font-weight: bold;
+  font-size: 16px;
 
 }
 
 .confirm_button{
   --ion-color-primary: #39A6FF;
   filter: drop-shadow(0px 10px 10px rgba(57, 166, 255, 0.5));
+
 }
 
 .background1{
@@ -108,7 +119,7 @@
   background-image: url(assets/images/background1.svg);
   background-size: cover;
   background-position: bottom;
-  height: 62vh;
+  height: 70vh;
   position: fixed;
   top: 0;
   right: 0;

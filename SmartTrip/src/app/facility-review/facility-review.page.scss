@@ -34,6 +34,11 @@ ion-button{
   position: fixed;
 }
 
+.list-scrollable {
+  height: 100%;
+  overflow-y: scroll;
+}
+
 div.stars {
   width: 270px;
   margin-left: 75px;
@@ -55,8 +60,18 @@ bar-rating ::ng-deep {
     justify-content: center;
 
     .br-unit {
-      font-size: 48px;
+      font-size: 40px;
+      margin-right: 5px; /* Yıldızlar arasındaki sağ boşluk */
+
     }
   }
 }
 
+.fixed-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+}

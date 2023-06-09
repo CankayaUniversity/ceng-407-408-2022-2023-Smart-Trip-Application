@@ -381,8 +381,8 @@ export class Tab2Page {
     const modal = this.modalController.create(
       {
         component: FacilityReviewPage,
-        initialBreakpoint: 0.8,
-        breakpoints: [0, 0.8],
+        initialBreakpoint: 0.85,
+        breakpoints: [0, 0.85],
         cssClass: 'facilityReview',
         componentProps: {
           dataName: this.facility.facilityName,

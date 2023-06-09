@@ -52,4 +52,5 @@ export class Tab1Page {
         }
       );
     }
+
 }
